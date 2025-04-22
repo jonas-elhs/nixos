@@ -1,11 +1,11 @@
 * {
-    font-family: FireCode Nerd Font Mono, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    min-height: 0;
+  font-family: FiraCode Nerd Font Propo, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  min-height: 0;
 }
 
 window#waybar {
-    background: transparent;
+  background: transparent;
 }
 
 #clock,
@@ -17,19 +17,19 @@ window#waybar {
 #wireplumber,
 #custom-power {
   border-radius: 10px;
-  background: #3f3f3f;
+  background: rgba(63, 63, 63, 0.8);
   padding: 0px 10px;
-  margin-top: 20px;
   margin-left: 5px;
   margin-right: 5px;
   color: white;
 }
 
 #clock.time {
-  margin-left: 20px;
+  margin-left: 0px;
 }
 #custom-power {
-  margin-right: 20px;
+  margin-right: 0px;
+  padding: 0px 12px;
 }
 
 #connections label,
@@ -45,6 +45,10 @@ window#waybar {
   border-radius: 10px;
   border-style: none;
 }
+#workspaces button.active {
+  background: red;
+  padding: 0px 30px;
+}
 #workspaces button:hover {
   background: white;
   border-color: rgba(0, 0, 0, 0);
@@ -52,9 +56,5 @@ window#waybar {
   box-shadow: none;
 }
 #workspaces button label {
-  font-size: 10px;
-}
-#workspaces button.active {
-  background: red;
-  padding: 0px 25px;
+  font-size: 12px;
 }
