@@ -3,8 +3,10 @@
   home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
 
-  home.file.".config/waybar".source = "/home/ilzayn/nixos/dotfiles/waybar";
-  home.file.".config/hypr".source = "/home/ilzayn/nixos/dotfiles/hypr";
+  home.file.".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/waybar;
+  home.file.".config/hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr;
+
+  services.hyprpaper.enable = true;
 
   kitty.enable = true;
   starship.enable = true;
