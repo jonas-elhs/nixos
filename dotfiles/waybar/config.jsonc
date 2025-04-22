@@ -1,0 +1,145 @@
+// -*- mode: jsonc -*-
+{
+  "layer": "top",
+  "position": "top",
+
+  /* MODULE ORDER */
+  "modules-left": [
+    "clock#time",
+    "clock#weekday",
+    "clock#date",
+  ],
+
+  "modules-center": [
+    "hyprland/workspaces",
+  ],
+
+  "modules-right": [
+    "group/connections",
+//    "network",
+//    "bluetooth",
+
+//    "cpu",
+//    "memory",
+    "group/hardware",
+
+    //"keyboard-state",
+    "privacy",
+    "wireplumber",
+    "custom/power",
+  ],
+
+
+  /* GROUPS */
+  "group/connections": {
+    "orientation": "inherit",
+    "modules": [
+      "network",
+      "bluetooth",
+    ],
+  },
+
+  "group/hardware": {
+    "orientation": "inherit",
+    "modules": [
+      "cpu",
+      "memory",
+    ],
+  },
+
+
+  /* MODULES */
+  "clock#time": {
+    "format": "{:%H:%M}",
+    "tooltip": false,
+  },
+  "clock#weekday": {
+    "format": "{:%A}",
+    "tooltip": false,
+  },
+  "clock#date": {
+    "format": "{:%d. %B %Y}",
+    "tooltip": false,
+  },
+
+  "hyprland/workspaces": {
+    "format": "",
+    "persistent-workspaces": {
+      "*": 5
+    },
+  },
+
+  "network": {
+    "format-wifi": "",
+    "format-ethernet": "",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+  },
+  "bluetooth": {
+    "format": "󰂲",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
+    "format-connected": "󰂯",
+  },
+
+  "cpu": {
+    "format": "   {usage}%",
+    "tooltip": false,
+  },
+  "memory": {
+    "format": "   {}%",
+  },
+
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 20,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ]
+  },
+
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "wireplumber": {
+    "format": "   {volume}%",
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout",
+  }
+}
