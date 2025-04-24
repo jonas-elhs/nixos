@@ -15,6 +15,10 @@
     extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -29,6 +33,7 @@
     wl-clipboard
     cliphist
     walker
+    hyprpaper
 
     home-manager
     waybar
@@ -39,9 +44,6 @@
   ];
 
 
-
-
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -50,19 +52,20 @@
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    pulse.enable = true;
-  };
+    audio.enable = true;
+    wireplumber.enable = true;
 
-  #users.users.ilzayn = {
-  #  isNormalUser = true;
-  #  extraGroups = [ "wheel" ];
-  #  initialPassword = "ilzayn";
-  #};
+    pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "24.11";
 }
-
