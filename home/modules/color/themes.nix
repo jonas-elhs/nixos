@@ -3,7 +3,7 @@
     nordic = {
       # black
       base00 = "#191D24";
-      base08 = "#3B4252";
+      base08 = "#242933";
 
       # red
       base01 = "#BF616A";
@@ -21,7 +21,7 @@
       base04 = "#81A1C1";
       base0C = "#88C0D0";
 
-      # magenta
+      # purple
       base05 = "#B48EAD";
       base0D = "#C895BF";
 
@@ -32,6 +32,6 @@
       # white
       base07 = "#D8DEE9";
       base0F = "#E5E9F0";
-    }
+    };
   };
 }

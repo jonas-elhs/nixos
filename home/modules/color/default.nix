@@ -1,6 +1,6 @@
 { pkgs, lib, ... }: {
   imports = [
-    ./color.nix
+    ./colors.nix
     ./themes.nix
   ];
 }

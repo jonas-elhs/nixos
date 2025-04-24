@@ -95,23 +95,23 @@
   };
 
   config = let
-    theme = config.theme.themes.${config.theme.name};
+    user_theme = config.theme.themes.${config.theme.name};
   in {
-    config.theme.base00 = theme.base00;
-    config.theme.base01 = theme.base01;
-    config.theme.base02 = theme.base02;
-    config.theme.base03 = theme.base03;
-    config.theme.base04 = theme.base04;
-    config.theme.base05 = theme.base05;
-    config.theme.base06 = theme.base06;
-    config.theme.base07 = theme.base07;
-    config.theme.base08 = theme.base08;
-    config.theme.base09 = theme.base09;
-    config.theme.base0A = theme.base0A;
-    config.theme.base0B = theme.base0B;
-    config.theme.base0C = theme.base0C;
-    config.theme.base0D = theme.base0D;
-    config.theme.base0E = theme.base0E;
-    config.theme.base0F = theme.base0F;
+    theme.base00 = user_theme.base00;
+    theme.base01 = user_theme.base01;
+    theme.base02 = user_theme.base02;
+    theme.base03 = user_theme.base03;
+    theme.base04 = user_theme.base04;
+    theme.base05 = user_theme.base05;
+    theme.base06 = user_theme.base06;
+    theme.base07 = user_theme.base07;
+    theme.base08 = user_theme.base08;
+    theme.base09 = user_theme.base09;
+    theme.base0A = user_theme.base0A;
+    theme.base0B = user_theme.base0B;
+    theme.base0C = user_theme.base0C;
+    theme.base0D = user_theme.base0D;
+    theme.base0E = user_theme.base0E;
+    theme.base0F = user_theme.base0F;
   };
 }

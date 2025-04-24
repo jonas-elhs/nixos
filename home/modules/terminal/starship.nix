@@ -26,31 +26,29 @@
           continuation_prompt = "[┃]()";
 
           palettes.nordic = {
-            black = "#191D24";
-            bright-black = "#242933";
-            grey = "#3B4252";
-            bright-grey = "#4C566A";
-            white = "#D8DEE9";
-            bright-white = "#E5E9F0";
-            blue = "#81A1C1";
-            bright-blue = "#88C0D0";
-            cyan = "#8FBCBB";
-            bright-cyan = "#93CCDC";
-            red = "#BF616A";
-            bright-red = "#D06F79";
-            orange = "#D08770";
-            bright-orange = "#D79784";
-            yellow = "#EBCB8B";
-            bright-yellow = "#F0D399";
-            green = "#A3BE8C";
-            bright-green = "#B1D196";
-            purple = "#B48EAD";
-            bright-purple = "#C895BF";
+            black = config.theme.base00;
+            bright-black = config.theme.base08;
+               grey = "#3B4252";
+##             bright-grey = "#4C566A";
+            red = config.theme.base01;
+            bright-red = config.theme.base09;
+            green = config.theme.base02;
+            bright-green = config.theme.base0A;
+            yellow = config.theme.base03;
+            bright-yellow = config.theme.base0B;
+            blue = config.theme.base04;
+            bright-blue = config.theme.base0C;
+            purple = config.theme.base05;
+            bright-purple = config.theme.base0D;
+            cyan = config.theme.base06;
+            bright-cyan = config.theme.base0E;
+            white = config.theme.base07;
+            bright-white = config.theme.base0F;
           };
 
           hostname = {
             format = lib.concatStrings [
-              "[](fg:bright-orange)[](fg:bright-black bg:bright-orange)[](fg:bright-orange bg:grey)"
+              "[](fg:bright-red)[](fg:bright-black bg:bright-red)[](fg:bright-red bg:grey)"
               "[ $hostname ]($style)[](fg:grey)"
             ];
             style = "fg:white bg:grey";
