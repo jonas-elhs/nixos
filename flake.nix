@@ -43,13 +43,14 @@
     # Function to every user in every host mapped to their configuration | [{ name = "user1@host1"; value = configuration; } { ... } { name = "user1@host2"; value = configuration }]
     getUserConfigurationsInEveryHost = (f: lib.flatten (lib.mapAttrsToList (getUserConfigurationsInHost) (forEachHost f)));
     # Function to every user in every host mapped to their configuration | { "user1@host1" = configuration "..." = ... "user1@host2" = configuration }
-    getHomeConfigurations = (f: builtins.listToAttrs (getUserConfigurationsInEveryHost f));
+    getHomeConfigurations = (f: builtins.listToAttrs (getUserConfigurationsInEveryHost f));    
   in {
 
     nixosConfigurations = forEachHost (host:
       nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs host; };
         modules = [
+
           ./hosts/${host}/configuration.nix
           ./modules
 
@@ -65,6 +66,7 @@
               };
             })
           ))
+
         ];
       }
     );
