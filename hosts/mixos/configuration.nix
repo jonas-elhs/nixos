@@ -28,6 +28,7 @@
     wlogout
     wl-clipboard
     cliphist
+    walker
 
     home-manager
     waybar
