@@ -19,15 +19,15 @@
 
   /* MODULES */
   "clock#time": {
-    "format": "{:%H:%M}",
+    "format": " {:%H:%M}",
     "tooltip": false,
   },
   "clock#weekday": {
-    "format": "{:%A}",
+    "format": " {:%A}",
     "tooltip": false,
   },
   "clock#date": {
-    "format": "{:%d. %B %Y}",
+    "format": "󰸗 {:%d. %B %Y}",
     "tooltip": false,
   },
 
@@ -45,11 +45,11 @@
     "format-disconnected": "Disconnected ⚠",
   },
   "bluetooth": {
-    "format": "󰂲",
-    "format-disabled": "󰂲",
+    "format-disabled": "",
     "format-off": "󰂲",
     "format-on": "󰂯",
     "format-connected": "󰂯",
+    "on-click": "bluetooth-toggle",
   },
 
   "cpu": {
@@ -105,6 +105,7 @@
 
   "wireplumber": {
     "format": " {volume}%",
+    "format-muted": ""
   },
 
   "custom/power": {
