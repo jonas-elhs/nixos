@@ -44,6 +44,9 @@
     getUserConfigurationsInEveryHost = (f: lib.flatten (lib.mapAttrsToList (getUserConfigurationsInHost) (forEachHost f)));
     # Function to every user in every host mapped to their configuration | { "user1@host1" = configuration "..." = ... "user1@host2" = configuration }
     getHomeConfigurations = (f: builtins.listToAttrs (getUserConfigurationsInEveryHost f));    
+
+    # ---------- SCRIPTS ---------- #
+    scripts = (system: lib.forEach (builtins.attrNames (builtins.readDir ./modules/scripts)) (file-name: (import ./modules/scripts/${file-name} { pkgs = import nixpkgs { inherit system; }; })));
   in {
 
     nixosConfigurations = forEachHost (host:
@@ -66,6 +69,10 @@
               };
             })
           ))
+
+          ({ ... }: {
+            environment.systemPackages = scripts hosts.${host}.system;
+          })
 
         ];
       }
