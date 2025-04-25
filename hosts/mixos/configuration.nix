@@ -37,6 +37,7 @@
     hyprpaper
     waybar
     hyprlock
+    hypridle
 
     git
     tree
