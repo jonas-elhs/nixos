@@ -26,6 +26,7 @@
 
   fonts.packages = with pkgs; [
     font-awesome
+    nerd-fonts.fira-code
   ];
 
   environment.systemPackages = with pkgs; [
@@ -34,13 +35,15 @@
     cliphist
     walker
     hyprpaper
-
-    home-manager
     waybar
+    hyprlock
 
     git
     tree
     firefox
+
+
+    home-manager
   ];
 
 
