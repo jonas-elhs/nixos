@@ -6,6 +6,7 @@
   home.file.".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/waybar;
   home.file.".config/hypr".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr;
   home.file.".config/walker".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/walker;
+  home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
 
   services.hyprpaper.enable = true;
 
