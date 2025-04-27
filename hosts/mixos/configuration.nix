@@ -24,11 +24,18 @@
     enable32Bit = true;
   };
 
+  services.xserver.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+#    wayland.enable = true;
+    package = pkgs.kdePackages.sddm;
+    theme = "/usr/share/sddm/themes/sddm-ilzayn-theme";
+  };
+
   fonts.packages = with pkgs; [
     font-awesome
     nerd-fonts.fira-code
   ];
-
   environment.systemPackages = with pkgs; [
     wlogout
     wl-clipboard
