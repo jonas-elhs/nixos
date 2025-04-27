@@ -3,7 +3,7 @@
     kitty.enable = lib.mkEnableOption "Kitty Terminal";
     kitty.style = lib.mkOption {
       type = lib.types.str; 
-      default = "transparent";
+      default = "default";
       description = "The style of Kitty Terminal";
     };
   };
@@ -12,7 +12,7 @@
     programs.kitty = {
       enable = true;
     } // {
-      transparent = {
+      default = {
         shellIntegration = {
           enableFishIntegration = true;
           mode = "no-rc no-cursor";

@@ -3,7 +3,7 @@
     fish.enable = lib.mkEnableOption "Fish Shell";
     fish.style = lib.mkOption {
       type = lib.types.str; 
-      default = "vi";
+      default = "default";
       description = "The style of Fish Shell";
     };
   };
@@ -12,7 +12,7 @@
     programs.fish = {
       enable = true;
     } // {
-      vi = {
+      default = {
         interactiveShellInit = ''
           fish_vi_key_bindings default
 

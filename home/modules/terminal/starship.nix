@@ -3,7 +3,7 @@
     starship.enable = lib.mkEnableOption "Starship Prompt";
     starship.style = lib.mkOption {
       type = lib.types.str; 
-      default = "round-split";
+      default = "default";
       description = "The style of Starship Prompt";
     };
   };
@@ -13,7 +13,7 @@
       enable = true;
       enableFishIntegration = true;
      } // {
-      round-split = {
+      default = {
         settings = {
           palette = "nordic";
           format = lib.concatStrings [
