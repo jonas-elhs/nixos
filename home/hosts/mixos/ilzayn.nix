@@ -7,7 +7,6 @@
 
   home.file.".config/hypr/hypridle.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hypridle.conf;
   home.file.".config/hypr/hyprland.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hyprland.conf;
-  home.file.".config/hypr/hyprpaper.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hyprpaper.conf;
 
   home.file.".config/walker".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/walker;
 
@@ -16,6 +15,10 @@
   services.hyprpaper.enable = true;
 
   hyprlock.enable = true;
+  hyprpaper = {
+    enable = true;
+    wallpaper = "~/wallpapers/moon.png";
+  };
 
   kitty.enable = true;
   starship.enable = true;

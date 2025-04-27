@@ -41,9 +41,7 @@
     wl-clipboard
     cliphist
     walker
-    hyprpaper
     waybar
-    hyprlock
     hypridle
 
     git
