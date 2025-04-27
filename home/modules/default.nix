@@ -4,5 +4,6 @@
 
     ./color
     ./terminal
+    ./hypr
   ];
 }
