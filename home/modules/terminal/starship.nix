@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: {
   options = {
-    starship.enable = lib.mkEnableOption "Enables Starship";
+    starship.enable = lib.mkEnableOption "Starship Prompt";
     starship.style = lib.mkOption {
       type = lib.types.str; 
       default = "round-split";
-      description = "The style of Starship";
+      description = "The style of Starship Prompt";
     };
   };
 

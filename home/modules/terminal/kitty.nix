@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: {
   options = {
-    kitty.enable = lib.mkEnableOption "Enables Kitty configuration";
+    kitty.enable = lib.mkEnableOption "Kitty Terminal";
     kitty.style = lib.mkOption {
       type = lib.types.str; 
       default = "transparent";
-      description = "The style of Kitty";
+      description = "The style of Kitty Terminal";
     };
   };
 

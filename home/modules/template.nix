@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
   options = {
-    XXX.enable = lib.mkEnableOption "Enables XXX";
+    XXX.enable = lib.mkEnableOption "XXX";
     XXX.style = lib.mkOption {
       type = lib.types.str;
       default = "";

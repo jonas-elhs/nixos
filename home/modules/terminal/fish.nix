@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: {
   options = {
-    fish.enable = lib.mkEnableOption "Enables Fish";
+    fish.enable = lib.mkEnableOption "Fish Shell";
     fish.style = lib.mkOption {
       type = lib.types.str; 
       default = "vi";
-      description = "The style of Fish";
+      description = "The style of Fish Shell";
     };
   };
 
