@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.XXX;
+in {
   options = {
     XXX.enable = lib.mkEnableOption "XXX";
     XXX.style = lib.mkOption {
@@ -8,11 +10,11 @@
     };
   };
 
-  config = lib.mkIf config.XXX.enable {
+  config = lib.mkIf cfg.enable {
     programs.XXX = {
       enable = true;
     } // {
       
-    }.${config.XXX.style};
+    }.${cfg.style};
   };
 }

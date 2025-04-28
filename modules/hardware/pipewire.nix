@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.pipewire;
+in {
   options = {
     pipewire.enable = lib.mkEnableOption "Sound";
     pipewire.pulse.enable = lib.mkEnableOption "PulseAudio";
@@ -6,19 +8,19 @@
     pipewire.jack.enable = lib.mkEnableOption "JACK";
   };
 
-  config = lib.mkIf config.pipewire.enable {
+  config = lib.mkIf cfg.enable {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
       audio.enable = true;
       wireplumber.enable = true;
 
-      pulse.enable = config.pipewire.pulse.enable;
+      pulse.enable = cfg.pulse.enable;
       alsa = {
-        enable = config.pipewire.alsa.enable;
-        support32Bit = config.pipewire.alsa.enable;
+        enable = cfg.alsa.enable;
+        support32Bit = cfg.alsa.enable;
       };
-      jack.enable = config.pipewire.jack.enable;
+      jack.enable = cfg.jack.enable;
     };
   };
 }

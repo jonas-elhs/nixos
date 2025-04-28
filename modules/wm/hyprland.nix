@@ -1,9 +1,11 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.hyprland;
+in{
   options = {
     hyprland.enable = lib.mkEnableOption "Hyprland";
   };
 
-  config = lib.mkIf config.hyprland.enable {
+  config = lib.mkIf cfg.enable {
     programs.hyprland = {
       enable = true;
       withUWSM = true;

@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.fish;
+in {
   options = {
     fish.enable = lib.mkEnableOption "Fish Shell";
     fish.style = lib.mkOption {
@@ -8,7 +10,7 @@
     };
   };
 
-  config = lib.mkIf config.fish.enable {
+  config = lib.mkIf cfg.enable {
     programs.fish = {
       enable = true;
     } // {
@@ -31,7 +33,7 @@
           set -g fish_greeting
         '';
       };
-    }.${config.fish.style};
+    }.${cfg.style};
 
     programs.bash = {
       enable = true;

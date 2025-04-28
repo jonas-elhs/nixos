@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.hyprlock;
+in {
   options = {
     hyprlock.enable = lib.mkEnableOption "Hyprlock";
     hyprlock.style = lib.mkOption {
@@ -8,7 +10,7 @@
     };
   };
 
-  config = lib.mkIf config.hyprlock.enable {
+  config = lib.mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;
     } // {
@@ -73,6 +75,6 @@
           };
         };
       };
-    }.${config.hyprlock.style};
+    }.${cfg.style};
   };
 }

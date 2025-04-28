@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.starship;
+in {
   options = {
     starship.enable = lib.mkEnableOption "Starship Prompt";
     starship.style = lib.mkOption {
@@ -8,7 +10,7 @@
     };
   };
 
-  config = lib.mkIf config.starship.enable {
+  config = lib.mkIf cfg.enable {
     programs.starship = {
       enable = true;
       enableFishIntegration = true;
@@ -124,6 +126,6 @@
           };
         };
       };
-    }.${config.starship.style};
+    }.${cfg.style};
   };
 }

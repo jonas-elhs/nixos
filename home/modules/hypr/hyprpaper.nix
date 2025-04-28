@@ -1,4 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  cfg = config.hyprpaper;
+in {
   options = {
     hyprpaper.enable = lib.mkEnableOption "Hyprpaper";
     hyprpaper.wallpaper = lib.mkOption {
@@ -13,18 +15,18 @@
     };
   };
 
-  config = lib.mkIf config.hyprpaper.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [ hyprpaper ];
     services.hyprpaper = {
       enable = true;
       
       settings = {
-        preload = if config.hyprpaper.wallpaper != ""
-                  then config.hyprpaper.wallpaper
-                  else builtins.attrValues config.hyprpaper.wallpapers;
-        wallpaper = if config.hyprpaper.wallpaper != ""
-                    then ", ${config.hyprpaper.wallpaper}"
-                    else builtins.mapAttrs (monitor: path: "${monitor}, ${path}") config.hyprpaper.wallpapers;
+        preload = if cfg.wallpaper != ""
+                  then cfg.wallpaper
+                  else builtins.attrValues cfg.wallpapers;
+        wallpaper = if cfg.wallpaper != ""
+                    then ", ${cfg.wallpaper}"
+                    else builtins.mapAttrs (monitor: path: "${monitor}, ${path}") cfg.wallpapers;
       };
     };
   };
