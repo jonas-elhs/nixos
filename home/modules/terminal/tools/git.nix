@@ -5,7 +5,7 @@
 
   config = lib.mkIf config.git.enable {
     programs.git = {
-      enable = false;
+      enable = true;
     };
   };
 }
