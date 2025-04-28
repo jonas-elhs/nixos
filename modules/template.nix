@@ -1,11 +1,9 @@
 { config, pkgs, lib, ... }: {
   options = {
-    XXX.enable = lib.mkEnableOption "Enables XXX";
+    XXX.enable = lib.mkEnableOption "XXX";
   };
 
   config = lib.mkIf config.XXX.enable {
-    programs.XXX = {
-      enable = true;
-    };
+    
   };
 }
