@@ -19,15 +19,14 @@ window#waybar {
   border-radius: 10px;
   background: rgba(63, 63, 63, 0.8);
   padding: 0px 10px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 0px 5px;
   color: white;
   border-width: 0px 2px 2px 0px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.5);
 }
 
-#clock.time {
+#clock {
   margin-left: 0px;
 }
 #custom-power {
@@ -55,11 +54,11 @@ window#waybar {
   box-shadow: none;
 }
 #workspaces button.active {
-  background: red;
+  background: green;
   padding: 0px 30px;
 }
 #workspaces button.active:hover {
-  background: red;
+  background: green;
 }
 #workspaces button label {
   font-size: 12px;

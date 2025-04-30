@@ -7,9 +7,7 @@
   "include": [ "~/.config/waybar/modules.jsonc", ],  
 
   "modules-left": [
-    "clock#time",
-    "clock#weekday",
-    "clock#date",
+    "clock",
   ],
 
   "modules-center": [
@@ -20,7 +18,6 @@
     "group/connections",
     "group/hardware",
 
-      "keyboard-state",
       "privacy",
 
     "wireplumber",
