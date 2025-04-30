@@ -5,7 +5,7 @@ in {
     XXX.enable = lib.mkEnableOption "XXX";
     XXX.style = lib.mkOption {
       type = lib.types.str;
-      default = "";
+      default = "default";
       description = "The style of XXX";
     };
   };
@@ -14,7 +14,9 @@ in {
     programs.XXX = {
       enable = true;
     } // {
-      
+      default = {
+        
+      };
     }.${cfg.style};
   };
 }
