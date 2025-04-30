@@ -3,7 +3,6 @@
   home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
 
-  home.file.".config/waybar".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/waybar;
   home.file.".config/hypr/hypridle.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hypridle.conf;
   home.file.".config/hypr/hyprland.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hyprland.conf;
   home.file.".config/walker".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/walker;
@@ -14,7 +13,7 @@
     enable = true;
     wallpaper = "~/wallpapers/moon.png";
   };
-
+  waybar.enable = true;
   kitty.enable = true;
   starship.enable = true;
   fish.enable = true;
