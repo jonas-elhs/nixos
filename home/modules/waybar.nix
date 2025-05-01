@@ -19,7 +19,8 @@ in {
           bar = {
             layer = "top";
             position = "top";
-            margin = "20 20 0 20";
+            margin = "20 0 0 20";
+            exclusive = false;
 
             modules-left = [
               "clock"
@@ -164,18 +165,16 @@ in {
             border-radius: 10px;
             background: rgba(63, 63, 63, 0.8);
             padding: 0px 10px;
-            margin: 0px 5px;
+            margin: 0px 5px 6px 5px;
             color: white;
-            border-width: 0px 2px 2px 0px;
-            border-style: solid;
-            border-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 2px 2px 2px 0px #101010;
           }
 
           #clock {
             margin-left: 0px;
           }
           #custom-power {
-            margin-right: 0px;
+            margin-right: 20px;
             padding: 0px 12px;
           }
 
