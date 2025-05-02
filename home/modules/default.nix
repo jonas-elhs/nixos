@@ -3,7 +3,7 @@
     ./extra-options.nix
     ./waybar.nix
 
-    ./color
+    ./themes
     ./terminal
     ./hypr
   ];
