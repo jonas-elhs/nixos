@@ -31,22 +31,54 @@
     #   };
     # };
 
-    getUsersFromHost = (host: lib.flatten ((lib.forEach (builtins.attrNames (builtins.readDir ./home/hosts/${host})) (userfile: lib.take 1 (lib.splitString "." userfile)))));
-    hosts = builtins.listToAttrs (lib.forEach (getDirNames ./hosts) (host: { name = host; value = { users = getUsersFromHost host; system = (getModuleConfig ./hosts/${host}/configuration.nix).system.architecture; }; }));
+    getUsersFromHost = (host:
+                         lib.flatten (
+                           lib.forEach
+                             (getDirNames ./home/hosts/${host})
+                             (userfile: lib.take 1 (lib.splitString "." userfile))
+                         )
+                       );
+    hosts = builtins.listToAttrs
+              (lib.forEach
+                (getDirNames ./hosts)
+                (host: {
+                  name = host;
+                  value = {
+                    users = getUsersFromHost host;
+                    system = (getModuleConfig ./hosts/${host}/configuration.nix).system.architecture;
+                  };
+                })
+              );
 
     hostNames = builtins.attrNames hosts;
     forEachHost = (f: nixpkgs.lib.genAttrs hostNames f);
 
     # ---------- HOME MANAGER ---------- #
     # Host name and function to every user in that host mapped to their configuration | [{ name = "user1@host1"; value = configuration; } { name = "user2@host1"; value = configuration; }]
-    getUserConfigurationsInHost = (host: f: lib.forEach hosts.${host}.users (user: { name = "${user}@${host}"; value = (f user); } ));
+    getUserConfigurationsInHost = (host: f:
+                                    lib.forEach
+                                      hosts.${host}.users
+                                      (user: {
+                                        name = "${user}@${host}";
+                                        value = (f user);
+                                      })
+                                  );
     # Function to every user in every host mapped to their configuration | [{ name = "user1@host1"; value = configuration; } { ... } { name = "user1@host2"; value = configuration }]
-    getUserConfigurationsInEveryHost = (f: lib.flatten (lib.mapAttrsToList (getUserConfigurationsInHost) (forEachHost f)));
+    getUserConfigurationsInEveryHost = (f:
+                                         lib.flatten (lib.mapAttrsToList
+                                           (getUserConfigurationsInHost)
+                                           (forEachHost f)
+                                         )
+                                       );
     # Function to every user in every host mapped to their configuration | { "user1@host1" = configuration "..." = ... "user1@host2" = configuration }
-    getHomeConfigurations = (f: builtins.listToAttrs (getUserConfigurationsInEveryHost f));    
+    getHomeConfigurations = (f: builtins.listToAttrs (getUserConfigurationsInEveryHost f));
 
     # ---------- SCRIPTS ---------- #
-    scripts = (system: lib.forEach (builtins.attrNames (builtins.readDir ./modules/scripts)) (file-name: (import ./modules/scripts/${file-name} { pkgs = import nixpkgs { inherit system; }; })));
+    scripts = (system:
+                lib.forEach
+                  (getDirNames ./modules/scripts)
+                  (file-name: (import ./modules/scripts/${file-name} { pkgs = import nixpkgs { inherit system; }; }))
+              );
   in {
 
     nixosConfigurations = forEachHost (host:
