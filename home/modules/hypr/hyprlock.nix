@@ -14,10 +14,14 @@ in {
     programs.hyprlock = {
       enable = true;
     } // {
-      default = {
+      default = let
+        font = "FiraCode Nerd Font Propo";
+        text = "rgb(${lib.removePrefix "#" config.theme.colors.foreground})";
+        background = "rgb(${lib.removePrefix "#" config.theme.colors.background})";
+        accent = "rgb(${lib.removePrefix "#" config.theme.colors.accent})";
+        error = "rgb(${lib.removePrefix "#" config.theme.colors.error})";
+      in {
         settings = {
-          "$font" = "FiraCode Nerd Font Propo";
-
           general = {
             hide_cursor = true;
           };
@@ -43,7 +47,8 @@ in {
             {
               text = "$TIME";
               font_size = 90;
-              font_family = "$font";
+              font_family = font;
+              color = text;
               position = "0, 300";
               halign = "center";
               valign = "center";
@@ -51,7 +56,8 @@ in {
             {
               text = "cmd[update:43200000] echo \"$(date +\"%A, %0d. %B %Y\")\"";
               font_size = 25;
-              font_family = "$font";
+              font_family = font;
+              color = text;
               position = "0, 220";
               halign = "center";
               valign = "center";
@@ -66,12 +72,18 @@ in {
             dots_center = true;
             fade_on_empty = false;
             hide_input = false;
-            font_family = "$font";
+            font_family = font;
             placeholder_text = " $USER";
             fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
             position = "0, 100";
             halign = "center";
             valign = "center";
+
+            outer_color = accent;
+            inner_color = text;
+            font_color = "#000000";
+            fail_color = error;
+            check_color = accent;
           };
         };
       };
