@@ -8,6 +8,8 @@
   home.file.".config/walker".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/walker;
   home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
 
+  theme.name = "nordic";
+
   hyprlock.enable = true;
   hyprpaper = {
     enable = true;
