@@ -28,54 +28,46 @@ in {
           continuation_prompt = "[┃]()";
 
           palettes.nordic = {
-            black = config.theme.base00;
-            bright-black = config.theme.base08;
-               grey = "#3B4252";
-##             bright-grey = "#4C566A";
-            red = config.theme.base01;
-            bright-red = config.theme.base09;
-            green = config.theme.base02;
-            bright-green = config.theme.base0A;
-            yellow = config.theme.base03;
-            bright-yellow = config.theme.base0B;
-            blue = config.theme.base04;
-            bright-blue = config.theme.base0C;
-            purple = config.theme.base05;
-            bright-purple = config.theme.base0D;
-            cyan = config.theme.base06;
-            bright-cyan = config.theme.base0E;
-            white = config.theme.base07;
-            bright-white = config.theme.base0F;
+            hostname = config.theme.colors.starship."0";
+            username = config.theme.colors.starship."1";
+            directory = config.theme.colors.starship."2";
+            git_branch = config.theme.colors.starship."3";
+            git_status = config.theme.colors.starship."4";
+
+            icon = config.theme.colors.background;
+            background = config.theme.colors.light_background;
+            foreground = config.theme.colors.foreground;
+            cmd_duration = config.theme.colors.dark_foreground;
           };
 
           hostname = {
             format = lib.concatStrings [
-              "[](fg:bright-red)[](fg:bright-black bg:bright-red)[](fg:bright-red bg:grey)"
-              "[ $hostname ]($style)[](fg:grey)"
+              "[](fg:hostname)[](fg:icon bg:hostname)[](fg:hostname bg:background)"
+              "[ $hostname ]($style)[](fg:background)"
             ];
-            style = "fg:white bg:grey";
+            style = "fg:foreground bg:background";
           };
 
           username = {
             format = lib.concatStrings [
-              "[](fg:yellow)[](fg:bright-black bg:yellow)[](fg:yellow bg:grey)"
-              "[ $user ]($style)[](fg:grey)"
+              "[](fg:username)[](fg:icon bg:username)[](fg:username bg:background)"
+              "[ $user ]($style)[](fg:background)"
             ];
-            style_root = "fg:white bg:grey";
-            style_user = "fg:white bg:grey";
+            style_root = "fg:foreground bg:background";
+            style_user = "fg:foreground bg:background";
             show_always = true;
           };
 
           custom.folder_symbol = {
             command = ''git rev-parse --is-inside-work-tree &>/dev/null && echo "󰊢" || echo ""'';
-            format = "[](fg:green)[$output]($style)[](fg:green bg:grey)";
-            style = "fg:bright-black bg:green";
+            format = "[](fg:directory)[$output]($style)[](fg:directory bg:background)";
+            style = "fg:icon bg:directory";
             when = true;
           };
 
           directory = {
-            format = "[ $path ($read_only )]($style)[](fg:grey)";
-            style = "fg:white bg:grey";
+            format = "[ $path ($read_only )]($style)[](fg:background)";
+            style = "fg:foreground bg:background";
             read_only = "󰌾";
             truncation_symbol = "…/";
           };
@@ -86,19 +78,19 @@ in {
 
           git_branch = {
             format = lib.concatStrings [
-              "([](fg:blue)[](fg:bright-black bg:blue)[](fg:blue bg:grey)"
-              "[ $branch(:$remote_branch) ]($style)[](fg:grey))"
+              "([](fg:git_branch)[](fg:icon bg:git_branch)[](fg:git_branch bg:background)"
+              "[ $branch(:$remote_branch) ]($style)[](fg:background))"
             ];
-            style = "fg:white bg:grey";
+            style = "fg:foreground bg:background";
           };
 
           git_status = {
             format = lib.concatStrings [
-              "([](fg:purple)[](fg:bright-black bg:purple)[](fg:purple bg:grey)"
+              "([](fg:git_status)[](fg:icon bg:git_status)[](fg:git_status bg:background)"
               "[( $staged)( $untracked)( $deleted)( $modified)( $renamed)( $stashed)"
-              "( $conflicted)( $diverged)( $ahead)( $behind) ]($style)[](fg:grey))"
+              "( $conflicted)( $diverged)( $ahead)( $behind) ]($style)[](fg:background))"
             ];
-            style = "fg:white bg:grey";
+            style = "fg:foreground bg:background";
             staged = "";
             untracked = "";
             deleted = "";
@@ -113,16 +105,16 @@ in {
 
           cmd_duration = {
             format = "[$duration]($style)";
-            style = "fg:bright-grey";
+            style = "fg:cmd-duration";
           };
 
           character = {
-            success_symbol = "[➜](fg:white)";
-            error_symbol = "[➜](fg:white)";
-            vimcmd_symbol = "[➜](fg:blue)";
-            vimcmd_replace_symbol = "[➜](fg:orange)";
-            vimcmd_replace_one_symbol = "[➜](fg:red)";
-            vimcmd_visual_symbol = "[➜](fg:green)";
+            success_symbol = "[➜](fg:foreground)";
+            error_symbol = "[➜](fg:foreground)";
+            vimcmd_symbol = "[➜](fg:foreground)";
+            vimcmd_replace_symbol = "[➜](fg:foreground)";
+            vimcmd_replace_one_symbol = "[➜](fg:foreground)";
+            vimcmd_visual_symbol = "[➜](fg:foreground)";
           };
         };
       };
