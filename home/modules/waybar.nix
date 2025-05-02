@@ -14,7 +14,11 @@ in {
     programs.waybar = {
       enable = true;
     } // {
-      default = {
+      default = let
+        accent = config.theme.colors.accent;
+        text = config.theme.colors.foreground;
+        background = config.theme.colors.background;
+      in {
         settings = {
           bar = {
             layer = "top";
@@ -48,7 +52,7 @@ in {
 
             # MODULES #
             clock = {
-              format = "<span color='green'></span> {:%H:%M}";
+              format = "<span color='${accent}'></span> {:%H:%M}";
               tooltip-format = "{:%A, %d. %B %Y}";
             };
 
@@ -60,11 +64,11 @@ in {
             };
 
             network = {
-              format-wifi = "<span color='green'>{icon}</span>";
+              format-wifi = "<span color='${accent}'>{icon}</span>";
               tooltip-format-wifi = "{essid} ({signalStrength}%)";
-              format-ethernet = "<span color='green'></span>";
+              format-ethernet = "<span color='${accent}'></span>";
               tooltip-format-ethernet = "{ifname} ({bandwidthUpBits}  | {bandwidthDownBits} )";
-              format-linked = "<span color='green'> </span>";
+              format-linked = "<span color='${accent}'> </span>";
               tooltip-format-linked = "{ifname}";
               format-disconnected = "";
               format-icons = [
@@ -77,20 +81,20 @@ in {
             };
             bluetooth = {
               format-disabled = "";
-              format-off = "<span color='green'>󰂲</span>";
+              format-off = "<span color='${accent}'>󰂲</span>";
               tooltip-format-off = "Off";
-              format-on = "<span color='green'>󰂯</span>";
-              format-connected = "<span color='green'>󰂯</span>";
+              format-on = "<span color='${accent}'>󰂯</span>";
+              format-connected = "<span color='${accent}'>󰂯</span>";
               tooltip-format = "{num_connections} Devices";
               on-click = "bluetooth-toggle";
             };
 
            cpu = {
-              format = "<span color='green'></span> {usage}%";
+              format = "<span color='${accent}'></span> {usage}%";
               tooltip-format = "{load}";
             };
             memory = {
-              format = "<span color='green'> </span> {percentage}%";
+              format = "<span color='${accent}'></span> {percentage}%";
               tooltip = true;
               tooltip-format = "{used:0.1f} GiB / {total:0.1f} GiB";
             };
@@ -119,10 +123,10 @@ in {
   },*/
 
             wireplumber = {
-              format = "<span color='green'></span> {volume}%";
+              format = "<span color='${accent}'></span> {volume}%";
               format-low = " {volume}%"; # not working
               format-none = " {volume}%"; # not working
-              format-muted = "<span color='green'></span> {volume}%";
+              format-muted = "<span color='${accent}'></span> {volume}%";
               on-click = "audio-toggle";
 
               states = {
@@ -132,7 +136,7 @@ in {
             };
 
             "custom/power" = {
-              format = "<span color='green'>⏻</span>";
+              format = "<span color='${accent}'>⏻</span>";
               on-click = "wlogout";
               tooltip = false;
             };
@@ -146,7 +150,7 @@ in {
             min-height: 0;
             background: transparent;
             border-style: none;
-            color: white;
+            color: ${text};
           }
 
           tooltip {
@@ -163,10 +167,9 @@ in {
           #wireplumber,
           #custom-power {
             border-radius: 10px;
-            background: rgba(63, 63, 63, 0.8);
+            background: alpha(${background}, .9);
             padding: 0px 10px;
             margin: 0px 5px 6px 5px;
-            color: white;
             box-shadow: 2px 2px 2px 0px #101010;
           }
 
@@ -184,7 +187,7 @@ in {
           }
 
           #workspaces button {
-            background: white;
+            background: ${text};
             padding: 0px 0px;
             margin: 10px 5px;
             transition: all 0.2s ease;
@@ -192,17 +195,17 @@ in {
             border-style: none;
           }
           #workspaces button:hover {
-            background: white;
+            background: ${text};
             border-color: rgba(0, 0, 0, 0);
             border-style: none;
             box-shadow: none;
           }
           #workspaces button.active {
-            background: green;
+            background: ${accent};
             padding: 0px 30px;
           }
           #workspaces button.active:hover {
-            background: green;
+            background: ${accent};
           }
           #workspaces button label {
             font-size: 12px;
