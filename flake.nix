@@ -12,6 +12,12 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs: let
+    hostsDir = { host ? "" }:           ./hosts/${host};
+    usersDir = { host, user ? "" }:     ./home/hosts/${host}/${user};
+    scriptsDir = { script ? "" }:       ./modules/scripts/${script};
+    homeModulesDir =                    ./home/modules;
+    nixosModulesDir =                   ./modules;
+
     # ---------- UTILS ---------- #
     lib = nixpkgs.lib;
 
@@ -34,18 +40,18 @@
     getUsersFromHost = (host:
                          lib.flatten (
                            lib.forEach
-                             (getDirNames ./home/hosts/${host})
+                             (getDirNames (usersDir { inherit host; }))
                              (userfile: lib.take 1 (lib.splitString "." userfile))
                          )
                        );
     hosts = builtins.listToAttrs
               (lib.forEach
-                (getDirNames ./hosts)
+                (getDirNames (hostsDir {}))
                 (host: {
                   name = host;
                   value = {
                     users = getUsersFromHost host;
-                    system = (getModuleConfig ./hosts/${host}/configuration.nix).system.architecture;
+                    system = (getModuleConfig ((hostsDir { inherit host; }) + /configuration.nix)).system.architecture;
                   };
                 })
               );
@@ -76,8 +82,8 @@
     # ---------- SCRIPTS ---------- #
     scripts = (system:
                 lib.forEach
-                  (getDirNames ./modules/scripts)
-                  (file-name: (import ./modules/scripts/${file-name} { pkgs = import nixpkgs { inherit system; }; }))
+                  (getDirNames (scriptsDir {}))
+                  (script: (import (scriptsDir { inherit script; }) { pkgs = import nixpkgs { inherit system; }; }))
               );
   in {
 
@@ -86,8 +92,8 @@
         specialArgs = { inherit inputs host; };
         modules = [
 
-          ./hosts/${host}/configuration.nix
-          ./modules
+          ((hostsDir { inherit host; }) + /configuration.nix)
+          nixosModulesDir
 
           ({ config, pkgs, lib, ... }: builtins.listToAttrs (
             lib.forEach hosts.${host}.users (user: {
@@ -95,7 +101,7 @@
               value = {
                 users.${user} = {
                   isNormalUser = true;
-                  extraGroups = (import ./home/hosts/${host}/${user}.nix { config = null; pkgs = null; }).home.groups;
+                  extraGroups = (import ((usersDir { inherit host user; }) + ".nix") { config = null; pkgs = null; }).home.groups;
                   initialPassword = user;
                 };
               };
@@ -103,7 +109,7 @@
           ))
 
           ({ ... }: {
-            environment.systemPackages = scripts hosts.${host}.system;
+            environment.systemPackages = (scripts hosts.${host}.system);
           })
 
         ];
@@ -114,8 +120,8 @@
       home-manager.lib.homeManagerConfiguration {
         pkgs = getPkgs host;
         modules = [
-          ./home/hosts/${host}/${user}.nix
-          ./home/modules
+          ((usersDir { inherit host user; }) + ".nix")
+          homeModulesDir
         ];
         extraSpecialArgs = { inherit inputs; };
       }
