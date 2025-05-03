@@ -3,12 +3,6 @@
     ./hardware-configuration.nix
   ];
 
-  system.architecture = "x86_64-linux";
-  networking.hostName = "mixos";
-  time.timeZone = "Europe/Berlin";
-  i18n.defaultLocale = "en_US.UTF-8";
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   hyprland.enable = true;
   bluetooth.enable = true;
   hardware-acceleration.enable = true;
@@ -18,7 +12,9 @@
     alsa.enable = true;
   };
 
-  # TEMPORARY --- will move to home-manager
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # TEMPORARY --- will move to nixos-modules
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
@@ -49,6 +45,11 @@
     home-manager
   ];
 
+  system.architecture = "x86_64-linux";
+  networking.hostName = "mixos";
+  time.timeZone = "Europe/Berlin";
+  i18n.defaultLocale = "en_US.UTF-8";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.wireless.enable = true;
 
