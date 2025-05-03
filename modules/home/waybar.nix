@@ -167,7 +167,7 @@ in {
           #wireplumber,
           #custom-power {
             border-radius: 10px;
-            background: alpha(${background}, .9);
+            background: alpha(${background}, 0.9);
             padding: 0px 10px;
             margin: 0px 5px 6px 5px;
             box-shadow: 2px 2px 2px 0px #101010;

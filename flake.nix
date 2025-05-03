@@ -16,11 +16,11 @@
     hostsDir =                 ./hosts;
     hostFile = host:           hostsDir + /${host}/configuration.nix;
 
-    usersDir = host:           ./home/hosts/${host};
+    usersDir = host:           ./hosts/${host}/users;
     userFile = host: user:     (usersDir host) + /${user}.nix;
 
-    nixosModulesFile =          ./modules;
-    homeModulesFile =           ./home/modules;
+    nixosModulesFile =          ./modules/nixos;
+    homeModulesFile =           ./modules/home;
 
     scriptsDir =               ./modules/scripts;
     scriptFile = script:       scriptsDir + /${script};
