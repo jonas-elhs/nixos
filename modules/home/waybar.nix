@@ -28,6 +28,7 @@ in {
 
             modules-left = [
               "clock"
+                "user" # REALLY NEEDED???
             ];
             modules-center = [
               "hyprland/workspaces"
@@ -35,7 +36,7 @@ in {
             modules-right = [
               "group/connections"
               "group/hardware"
-              # "privacy"
+                "temperature" # REALLY NEEDED???
               "wireplumber"
               "custom/power"
             ];
@@ -47,13 +48,21 @@ in {
             };
             "group/hardware" = {
               orientation = "inherit";
-              modules = [ "cpu" "memory" ];
+              modules = [ "cpu" "memory" "disk" ];
             };
 
             # MODULES #
             clock = {
               format = "<span color='${accent}'></span> {:%H:%M}";
               tooltip-format = "{:%A, %d. %B %Y}";
+            };
+            user = {
+              format = "<span color='${accent}'></span> {user}";
+            };
+            temperature = {
+              format = "<span color='${accent}'>{icon}</span> {temperatureC}°C";
+              hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
+              format-icons = [ "" "" "" "" "" ];
             };
 
             "hyprland/workspaces" = {
@@ -82,45 +91,26 @@ in {
             bluetooth = {
               format-disabled = "";
               format-off = "<span color='${accent}'>󰂲</span>";
-              tooltip-format-off = "Off";
               format-on = "<span color='${accent}'>󰂯</span>";
               format-connected = "<span color='${accent}'>󰂯</span>";
               tooltip-format = "{num_connections} Devices";
+              tooltip-format-off = "Off";
               on-click = "bluetooth-toggle";
             };
 
-           cpu = {
+            cpu = {
               format = "<span color='${accent}'></span> {usage}%";
               tooltip-format = "{load}";
             };
             memory = {
               format = "<span color='${accent}'></span> {percentage}%";
-              tooltip = true;
               tooltip-format = "{used:0.1f} GiB / {total:0.1f} GiB";
             };
-
-  /*"privacy": {
-    "icon-spacing": 4,
-    "icon-size": 20,
-    "transition-duration": 250,
-    "modules": [
-      {
-        "type": "screenshare",
-        "tooltip": true,
-        "tooltip-icon-size": 24
-      },
-      {
-        "type": "audio-out",
-        "tooltip": true,
-        "tooltip-icon-size": 24
-      },
-      {
-        "type": "audio-in",
-        "tooltip": true,
-        "tooltip-icon-size": 24
-      }
-    ]
-  },*/
+            disk = {
+              format = "<span color='${accent}'></span> {percentage_used}%";
+              tooltip-format = "{specific_used:0.1f} GB / {specific_total:0.1f} GB";
+              unit = "GB";
+            };
 
             wireplumber = {
               format = "<span color='${accent}'></span> {volume}%";
@@ -159,11 +149,11 @@ in {
           }
 
           #clock,
-          #workspaces,
-          #connections,
-          #hardware,
-          #privacy,
           #user,
+          #connections,
+          #workspaces,
+          #hardware,
+          #temperature,
           #wireplumber,
           #custom-power {
             border-radius: 10px;
