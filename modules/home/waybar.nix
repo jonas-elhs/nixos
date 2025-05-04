@@ -28,7 +28,8 @@ in {
 
             modules-left = [
               "clock"
-                "user" # REALLY NEEDED???
+              "user"
+              "mpris"
             ];
             modules-center = [
               "hyprland/workspaces"
@@ -36,7 +37,7 @@ in {
             modules-right = [
               "group/connections"
               "group/hardware"
-                "temperature" # REALLY NEEDED???
+              "temperature"
               "wireplumber"
               "custom/power"
             ];
@@ -70,6 +71,9 @@ in {
               persistent-workspaces = {
                 "*" = 5;
               };
+              on-click = "activate";
+              on-scroll-up = "hyprctl dispatch workspace e+1";
+              on-scroll-down = "hyprctl dispatch workspace e-1";
             };
 
             network = {
