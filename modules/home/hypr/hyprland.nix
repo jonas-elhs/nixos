@@ -14,7 +14,10 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
     } // {
-      default = {
+      default = let
+        active = "rgba(${lib.removePrefix "#" config.theme.colors.accent}ee)";
+        inactive = "rgba(${lib.removePrefix "#" config.theme.colors.inactive}ee)";
+      in {
         settings = {
           # ---------- MONITORS ---------- #
           monitor = [
@@ -49,8 +52,8 @@ in {
             gaps_in = 5;
             gaps_out = 20;
 
-            "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-            "col.inactive_border" = "rgba(494949aa)";
+            "col.active_border" = active;
+            "col.inactive_border" = inactive;
 
             layout = "master";
           };

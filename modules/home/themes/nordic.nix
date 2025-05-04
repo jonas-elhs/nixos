@@ -6,6 +6,7 @@ rec {
   accent = cyan.dim;
   error = red.dim;
   success = green.dim;
+  inactive = gray.bright;
 
   starship = {
     "0" = red.base; "1" = yellow.base; "2" = green.base; "3" = blue.base; "4" = magenta.base;
