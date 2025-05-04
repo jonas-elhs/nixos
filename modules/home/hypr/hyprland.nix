@@ -100,7 +100,7 @@ in {
             # General
             "$prefix, Return, exec, uwsm app -- $terminal"
             "$prefix, B, exec, uwsm app -- $browser"
-            "$prefix, R, exec, $menu"
+            "$prefix, R, exec, $appLauncher"
             "$prefix, E, exec, $fileManager"
 
             "$prefix, Q, killactive,"

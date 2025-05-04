@@ -29,7 +29,6 @@ in {
             modules-left = [
               "clock"
               "user"
-              "mpris"
             ];
             modules-center = [
               "hyprland/workspaces"

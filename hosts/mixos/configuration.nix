@@ -36,7 +36,6 @@
     wl-clipboard
     cliphist
     walker
-    waybar
     hypridle
     firefox
     tree
