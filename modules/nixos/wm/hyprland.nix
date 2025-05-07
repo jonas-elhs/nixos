@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprland;
 in{
-  options = {
-    hyprland.enable = lib.mkEnableOption "Hyprland";
+  options.hyprland = {
+    enable = lib.mkEnableOption "Hyprland";
   };
 
   config = lib.mkIf cfg.enable {

@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprlock;
 in {
-  options = {
-    hyprlock.enable = lib.mkEnableOption "Hyprlock";
-    hyprlock.style = lib.mkOption {
+  options.hyprlock = {
+    enable = lib.mkEnableOption "Hyprlock";
+    style = lib.mkOption {
       type = lib.types.str;
       default = "default";
       description = "The style of Hyprlock";

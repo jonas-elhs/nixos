@@ -1,11 +1,11 @@
 { config, pkgs, lib, ... }: let
   cfg = config.pipewire;
 in {
-  options = {
-    pipewire.enable = lib.mkEnableOption "Sound";
-    pipewire.pulse.enable = lib.mkEnableOption "PulseAudio";
-    pipewire.alsa.enable = lib.mkEnableOption "ALSA";
-    pipewire.jack.enable = lib.mkEnableOption "JACK";
+  options.pipewire = {
+    enable = lib.mkEnableOption "Sound";
+    pulse.enable = lib.mkEnableOption "PulseAudio";
+    alsa.enable = lib.mkEnableOption "ALSA";
+    jack.enable = lib.mkEnableOption "JACK";
   };
 
   config = lib.mkIf cfg.enable {

@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }: let
   cfg = config.kitty;
 in {
-  options = {
-    kitty.enable = lib.mkEnableOption "Kitty Terminal";
-    kitty.style = lib.mkOption {
+  options.kitty = {
+    enable = lib.mkEnableOption "Kitty Terminal";
+    style = lib.mkOption {
       type = lib.types.str; 
       default = "default";
       description = "The style of Kitty Terminal";

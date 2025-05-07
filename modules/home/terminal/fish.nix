@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }: let
   cfg = config.fish;
 in {
-  options = {
-    fish.enable = lib.mkEnableOption "Fish Shell";
-    fish.style = lib.mkOption {
+  options.fish = {
+    enable = lib.mkEnableOption "Fish Shell";
+    style = lib.mkOption {
       type = lib.types.str; 
       default = "default";
       description = "The style of Fish Shell";

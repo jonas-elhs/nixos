@@ -1,14 +1,14 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprpaper;
 in {
-  options = {
-    hyprpaper.enable = lib.mkEnableOption "Hyprpaper";
-    hyprpaper.wallpaper = lib.mkOption {
+  options.hyprpaper = {
+    enable = lib.mkEnableOption "Hyprpaper";
+    wallpaper = lib.mkOption {
       type = lib.types.str;
       default = "";
       description = "The path to the wallpaper for all monitors.";
     };
-    hyprpaper.wallpapers = lib.mkOption {
+    wallpapers = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       default = "";
       description = "The path to the wallpaper for multiple monitors.";

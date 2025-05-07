@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }: let
   cfg = config.starship;
 in {
-  options = {
-    starship.enable = lib.mkEnableOption "Starship Prompt";
-    starship.style = lib.mkOption {
+  options.starship = {
+    enable = lib.mkEnableOption "Starship Prompt";
+    style = lib.mkOption {
       type = lib.types.str; 
       default = "default";
       description = "The style of Starship Prompt";

@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprland;
 in {
-  options = {
-    hyprland.enable = lib.mkEnableOption "Hyprland";
-    hyprland.style = lib.mkOption {
+  options.hyprland = {
+    enable = lib.mkEnableOption "Hyprland";
+    style = lib.mkOption {
       type = lib.types.str;
       default = "default";
       description = "The style of Hyprland";
