@@ -12,6 +12,22 @@
     alsa.enable = true;
   };
 
+  boot-loader = {
+    systemd-boot.enable = true;
+    timeout = 10;
+    extraConfig = ''
+      auto-entries no
+    '';
+    extraEntries = [
+      {
+        name = "windows11";
+        title = "Windows 11";
+        efi = "/EFI/Microsoft/boot/bootmgfw.efi";
+        sortKey = "a_windows";
+      }
+    ];
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # TEMPORARY --- will move to nixos-modules
@@ -49,11 +65,7 @@
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   networking.wireless.enable = true;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   system.stateVersion = "24.11";
 }
