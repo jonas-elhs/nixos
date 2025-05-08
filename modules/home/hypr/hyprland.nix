@@ -12,6 +12,7 @@ in {
       type = lib.types.listOf lib.types.package;
       default = [];
       description = "Plugins to add to hyprland";
+    };
   };
 
   config = lib.mkIf cfg.enable {
