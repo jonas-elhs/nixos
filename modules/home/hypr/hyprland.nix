@@ -8,11 +8,16 @@ in {
       default = "default";
       description = "The style of Hyprland";
     };
+    plugins = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [];
+      description = "Plugins to add to hyprland";
   };
 
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+      plugins = cfg.plugins;
     } // {
       default = let
         active = "rgba(${lib.removePrefix "#" config.theme.colors.accent}ee)";
@@ -151,6 +156,9 @@ in {
           ];
         };
       };
-    }.${cfg.style};
+    }.${cfg.style} // {
+# PLUGINS
+#      settings = ;
+    };
   };
 }
