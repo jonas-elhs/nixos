@@ -9,7 +9,10 @@
 
   theme.name = "nordic";
 
-  hyprland.enable = true;
+  hyprland = {
+    enable = true;
+    persistentWorkspaces = 5;
+  };
   hyprlock.enable = true;
   hyprpaper = {
     enable = true;

@@ -8,6 +8,12 @@ in {
       default = "default";
       description = "The style of Hyprland";
     };
+    persistentWorkspaces = lib.mkOption {
+      type = lib.types.ints.unsigned;
+      default = 0;
+      example = 5;
+      description = "The amount of persistent workspaces to have";
+    };
     plugins = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       default = [];
@@ -25,12 +31,20 @@ in {
         inactive = "rgba(${lib.removePrefix "#" config.theme.colors.inactive}ee)";
       in {
         settings = {
+          plugin = {
+            overview = {
+              showNewWorkspace = false;
+            };
+          };
+
           # ---------- MONITORS ---------- #
           monitor = [
             "HDMI-A-2, 3840x2160@60, 0x0, 1.5"
             # Space for waybar
             ", addreserved, 56, 0, 0, 0"
           ];
+
+          workspace = builtins.genList (n: "${toString (n+1)}, persistent:true") cfg.persistentWorkspaces;
 
           # ---------- PROGRAMS ---------- #
           "$terminal" = "kitty";
