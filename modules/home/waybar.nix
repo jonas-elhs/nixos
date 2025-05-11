@@ -8,6 +8,11 @@ in {
       default = "default";
       description = "The style of Waybar";
     };
+    waybar.gpu_hwmon = lib.mkOption {
+      type = lib.types.int;
+      default = null;
+      description = "The hwmon number of the gpu";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -27,6 +32,7 @@ in {
             exclusive = false;
 
             modules-left = [
+              "group/apps"
               "clock"
               "user"
             ];
@@ -42,16 +48,42 @@ in {
             ];
 
             # GROUPS #
+            "group/apps" = {
+              orientation = "inherit";
+              modules = [ "custom/launcher" "custom/terminal" "custom/browser" ];
+              drawer = {
+                transition-duration = 300;
+                children-class = "app";
+                transition-left-to-right = true;
+              };
+            };
+
             "group/connections" = {
               orientation = "inherit";
               modules = [ "network" "bluetooth" ];
             };
             "group/hardware" = {
               orientation = "inherit";
-              modules = [ "cpu" "memory" "disk" ];
+              modules = [ "cpu" "custom/gpu" "memory" "disk" ];
             };
 
             # MODULES #
+            "custom/launcher" = {
+              format = "<span color='${accent}'></span>";
+              tooltip = false;
+              on-click = "walker";
+            };
+            "custom/terminal" = {
+              format = "<span color='${accent}'></span>";
+              tooltip = false;
+              on-click = "kitty";
+            };
+            "custom/browser" = {
+              format = "<span color='${accent}'></span>";
+              tooltip = false;
+              on-click = "firefox";
+            };
+
             clock = {
               format = "<span color='${accent}'></span> {:%H:%M}";
               tooltip-format = "{:%A, %d. %B %Y}";
@@ -101,6 +133,12 @@ in {
             cpu = {
               format = "<span color='${accent}'></span> {usage}%";
               tooltip-format = "{load}";
+            };
+            "custom/gpu" = {
+              format = "<span color='${accent}'>󰢮</span> {}%";
+              exec = "cat /sys/class/hwmon/hwmon${toString cfg.gpu_hwmon}/device/gpu_busy_percent";
+              tooltip = false;
+              interval = 1;
             };
             memory = {
               format = "<span color='${accent}'></span> {percentage}%";
@@ -155,7 +193,8 @@ in {
           #hardware,
           #temperature,
           #wireplumber,
-          #custom-power {
+          #custom-power,
+          #apps {
             border-radius: 10px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
@@ -169,6 +208,14 @@ in {
           #custom-power {
             margin-right: 20px;
             padding: 0px 12px;
+          }
+          #apps {
+            padding: 0px 12px;
+          }
+
+          .app label {
+            font-size: 15px;
+            margin: 0px 0px 0px 20px;
           }
 
           #connections label,
