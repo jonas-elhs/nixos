@@ -74,12 +74,12 @@ in {
               on-click = "walker";
             };
             "custom/terminal" = {
-              format = "<span color='${accent}'></span>";
+              format = "";
               tooltip = false;
               on-click = "kitty";
             };
             "custom/browser" = {
-              format = "<span color='${accent}'></span>";
+              format = "";
               tooltip = false;
               on-click = "firefox";
             };
@@ -202,17 +202,15 @@ in {
             box-shadow: 2px 2px 2px 0px #101010;
           }
 
-          #clock {
-            margin-left: 0px;
-          }
           #custom-power {
             margin-right: 20px;
             padding: 0px 12px;
           }
+
           #apps {
+            margin-left: 0px;
             padding: 0px 12px;
           }
-
           .app label {
             font-size: 15px;
             margin: 0px 0px 0px 20px;

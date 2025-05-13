@@ -55,6 +55,7 @@
     hypridle
     firefox
     tree
+    fastfetch
     # END TEMPORARY
 
     home-manager
