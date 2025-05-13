@@ -1,0 +1,128 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "padding": {
+      "top": 0,
+    },
+  },
+  "display": {
+    "size": {
+      "binaryPrefix": "si",
+    },
+  },
+  "modules": [
+    "break",
+
+    {
+      "type": "custom",
+      "format": "┌──────────────────────Hardware──────────────────────┐",
+    },
+    {
+      "type": "host",
+    },
+    {
+      "type": "cpu",
+      "format": "{name} ({cores-online} Cores | {freq-base})",
+    },
+    {
+      "type": "gpu",
+      "format": "{vendor} {name} ({core-count} Cores | {frequency} | {dedicated-total})",
+      "driverSpecific": true,
+      "hideType": "integrated",
+    },
+    {
+      "type": "memory",
+      "format": "{total}",
+    },
+    {
+      "type": "disk",
+      "format": "{size-total} - {filesystem}",
+      "showExternal": false,
+    },
+    {
+      "type": "custom",
+      "format": "└────────────────────────────────────────────────────┘",
+    },
+
+    "break",
+
+    {
+      "type": "custom",
+      "format": "┌──────────────────────Software──────────────────────┐",
+    },
+    {
+      "type": "os",
+      "format": "{name} {version-id}",
+    },
+    {
+      "type": "kernel",
+    },
+    {
+      "type": "initsystem",
+    },
+    {
+      "type": "bootmgr",
+    },
+    {
+      "type": "packages",
+    },
+
+    "break",
+
+    {
+      "type": "lm",
+    },
+    {
+      "type": "de",
+    },
+    {
+      "type": "wm",
+    },
+    {
+      "type": "font",
+    },
+    {
+      "type": "terminal",
+    },
+    {
+      "type": "editor",
+    },
+    {
+      "type": "shell",
+    },
+    {
+      "type": "custom",
+      "format": "└────────────────────────────────────────────────────┘",
+    },
+
+    "break",
+
+    {
+      "type": "custom",
+      "format": "┌────────────────────Peripherals─────────────────────┐",
+    },
+    {
+      "type": "display",
+      "format": "{width}x{height} @ {refresh-rate} Hz (as {scaled-width}x{scaled-height})",
+    },
+    {
+      "type": "mouse",
+    },
+    {
+      "type": "keyboard",
+    },
+    {
+      "type": "custom",
+      "format": "└────────────────────────────────────────────────────┘",
+    },
+
+    "break",
+
+    {
+      "type": "colors",
+      "symbol": "block",
+    },
+
+    "break",
+  ]
+}

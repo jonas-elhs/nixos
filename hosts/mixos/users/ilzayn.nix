@@ -18,7 +18,10 @@
     enable = true;
     wallpaper = "~/wallpapers/moon.png";
   };
-  waybar.enable = true;
+  waybar = {
+    enable = true;
+    gpu_hwmon = 5;
+  };
   kitty.enable = true;
   starship.enable = true;
   fish.enable = true;
