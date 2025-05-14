@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, colors, ... }: let
   cfg = config.waybar;
 in {
   options = {
@@ -20,9 +20,9 @@ in {
       enable = true;
     } // {
       default = let
-        accent = config.theme.colors.accent;
-        text = config.theme.colors.foreground;
-        background = config.theme.colors.background;
+        accent = colors.accent;
+        text = colors.foreground;
+        background = colors.background;
       in {
         settings = {
           bar = {
@@ -152,8 +152,8 @@ in {
 
             wireplumber = {
               format = "<span color='${accent}'></span> {volume}%";
-              format-low = " {volume}%"; # not working
-              format-none = " {volume}%"; # not working
+              format-low = "<span color='${accent}'></span> {volume}%"; # not working
+              format-none = "<span color='${accent}'></span> {volume}%"; # not working
               format-muted = "<span color='${accent}'></span> {volume}%";
               on-click = "audio-toggle";
 

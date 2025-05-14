@@ -19,11 +19,17 @@
     usersDir = host:           ./hosts/${host}/users;
     userFile = host: user:     (usersDir host) + /${user}.nix;
 
-    nixosModulesFile =          ./modules/nixos;
-    homeModulesFile =           ./modules/home;
+    nixosModulesDir =          ./modules/nixos;
+    nixosModulesFile =         nixosModulesDir;
+
+    homeModulesDir =           ./modules/home;
+    homeModulesFile =          homeModulesDir;
 
     scriptsDir =               ./modules/scripts;
     scriptFile = script:       scriptsDir + /${script};
+
+    themesDir =                homeModulesDir + /themes;
+    themesFile = theme:        themesDir + /${theme}.nix;
 
     # ---------- UTILS ---------- #
     lib = nixpkgs.lib;
@@ -130,7 +136,10 @@
           (userFile host user)
           homeModulesFile
         ];
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = {
+          inherit inputs;
+          colors = import (themesFile (getModuleConfig (userFile host user)).theme.name);
+        };
       }
     );
 

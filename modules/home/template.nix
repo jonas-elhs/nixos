@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, colors, ... }: let
   cfg = config.XXX;
 in {
   options.XXX = {

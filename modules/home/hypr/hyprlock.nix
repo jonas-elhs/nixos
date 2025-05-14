@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, colors, ... }: let
   cfg = config.hyprlock;
 in {
   options.hyprlock = {
@@ -16,10 +16,10 @@ in {
     } // {
       default = let
         font = "FiraCode Nerd Font Propo";
-        text = "rgb(${lib.removePrefix "#" config.theme.colors.foreground})";
-        background = "rgb(${lib.removePrefix "#" config.theme.colors.background})";
-        accent = "rgb(${lib.removePrefix "#" config.theme.colors.accent})";
-        error = "rgb(${lib.removePrefix "#" config.theme.colors.error})";
+        text = "rgb(${lib.removePrefix "#" colors.foreground})";
+        background = "rgb(${lib.removePrefix "#" colors.background})";
+        accent = "rgb(${lib.removePrefix "#" colors.accent})";
+        error = "rgb(${lib.removePrefix "#" colors.error})";
       in {
         settings = {
           general = {

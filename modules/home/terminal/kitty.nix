@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, colors, ... }: let
   cfg = config.kitty;
 in {
   options.kitty = {
@@ -35,29 +35,29 @@ in {
           cursor_trail = 1;
 
           # Theme
-          foreground = config.theme.colors.foreground;
-          background = config.theme.colors.background;
-          selection_foreground = config.theme.colors.background;
-          selection_background = config.theme.colors.foreground;
+          foreground = colors.foreground;
+          background = colors.background;
+          selection_foreground = colors.background;
+          selection_background = colors.foreground;
           url_color = "#88C0D0";
-          cursor = config.theme.colors.foreground;
+          cursor = colors.foreground;
 
-          color0 = config.theme.colors.base00;
-          color1 = config.theme.colors.base01;
-          color2 = config.theme.colors.base02;
-          color3 = config.theme.colors.base03;
-          color4 = config.theme.colors.base04;
-          color5 = config.theme.colors.base05;
-          color6 = config.theme.colors.base06;
-          color7 = config.theme.colors.base07;
-          color8 = config.theme.colors.base08;
-          color9 = config.theme.colors.base09;
-          color10 = config.theme.colors.base0A;
-          color11 = config.theme.colors.base0B;
-          color12 = config.theme.colors.base0C;
-          color13 = config.theme.colors.base0D;
-          color14 = config.theme.colors.base0E;
-          color15 = config.theme.colors.base0F;
+          color0 = colors.base00;
+          color1 = colors.base01;
+          color2 = colors.base02;
+          color3 = colors.base03;
+          color4 = colors.base04;
+          color5 = colors.base05;
+          color6 = colors.base06;
+          color7 = colors.base07;
+          color8 = colors.base08;
+          color9 = colors.base09;
+          color10 = colors.base0A;
+          color11 = colors.base0B;
+          color12 = colors.base0C;
+          color13 = colors.base0D;
+          color14 = colors.base0E;
+          color15 = colors.base0F;
         };
       };
     }.${cfg.style};

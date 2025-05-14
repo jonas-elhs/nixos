@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, colors, ... }: let
   cfg = config.hyprland;
 in {
   options.hyprland = {
@@ -27,8 +27,8 @@ in {
       plugins = cfg.plugins;
     } // {
       default = let
-        active = "rgba(${lib.removePrefix "#" config.theme.colors.accent}ee)";
-        inactive = "rgba(${lib.removePrefix "#" config.theme.colors.inactive}ee)";
+        active = "rgba(${lib.removePrefix "#" colors.accent}ee)";
+        inactive = "rgba(${lib.removePrefix "#" colors.inactive}ee)";
       in {
         settings = {
           plugin = {
