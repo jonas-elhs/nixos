@@ -198,7 +198,7 @@ in {
             border-radius: 10px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
-            margin: 0px 5px 6px 5px;
+            margin: 0px 10px 6px 10px;
             box-shadow: 2px 2px 2px 0px #101010;
           }
 

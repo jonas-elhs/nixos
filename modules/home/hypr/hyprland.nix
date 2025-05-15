@@ -69,7 +69,7 @@ in {
           general = {
             border_size = 2;
 
-            gaps_in = 5;
+            gaps_in = 10;
             gaps_out = 20;
 
             "col.active_border" = active;
