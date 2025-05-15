@@ -6,7 +6,6 @@
   home.file.".config/hypr/hypridle.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hypridle.conf;
   home.file.".config/walker".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/walker;
   home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
-  home.file.".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/fastfetch;
 
   theme.name = "nordic";
 
@@ -27,6 +26,7 @@
   starship.enable = true;
   fish.enable = true;
   git.enable = true;
+  fastfetch.enable = true;
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
