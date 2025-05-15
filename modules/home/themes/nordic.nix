@@ -1,16 +1,27 @@
 rec {
   background = gray.dark;
   light_background = gray.base;
+
   foreground = white.dark;
   dark_foreground = gray.light;
+
   accent = cyan.dim;
-  error = red.dim;
-  success = green.dim;
   inactive = gray.bright;
 
-  starship = {
-    "0" = red.base; "1" = yellow.base; "2" = green.base; "3" = blue.base; "4" = magenta.base;
-  };
+  success = green.dim;
+  error = red.dim;
+
+  gradient = [
+    red.base
+    orange.base
+    yellow.base
+    green.bright
+    green.base
+    cyan.base
+    blue.base
+    blue.dim
+    magenta.base
+  ];
 
   base00 = black.dim;
   base08 = gray.base;

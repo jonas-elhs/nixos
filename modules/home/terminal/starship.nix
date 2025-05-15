@@ -16,11 +16,11 @@ in {
       enableFishIntegration = true;
      } // {
       default = let
-        hostname = colors.starship."0";
-        username = colors.starship."1";
-        directory = colors.starship."2";
-        git_branch = colors.starship."3";
-        git_status = colors.starship."4";
+        hostname = lib.elemAt colors.gradient 0;
+        username = lib.elemAt colors.gradient 2;
+        directory = lib.elemAt colors.gradient 4;
+        git_branch = lib.elemAt colors.gradient 6;
+        git_status = lib.elemAt colors.gradient 8;
 
         icon = colors.background;
         background = colors.light_background;
