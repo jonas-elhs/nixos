@@ -40,8 +40,6 @@ in {
           # ---------- MONITORS ---------- #
           monitor = [
             "HDMI-A-2, 3840x2160@60, 0x0, 1.5"
-            # Space for waybar
-            ", addreserved, 56, 0, 0, 0"
           ];
 
           workspace = builtins.genList (n: "${toString (n+1)}, persistent:true") cfg.persistentWorkspaces;

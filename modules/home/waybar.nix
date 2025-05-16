@@ -28,8 +28,8 @@ in {
           bar = {
             layer = "top";
             position = "top";
-            margin = "20 0 0 20";
-            exclusive = false;
+            margin = "20 0 -6 20";
+            exclusive = true;
 
             modules-left = [
               "group/apps"
