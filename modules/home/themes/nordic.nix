@@ -1,4 +1,5 @@
 rec {
+  # DEFINTIONS #
   background = gray.dark;
   light_background = gray.base;
 
@@ -11,17 +12,14 @@ rec {
   success = green.dim;
   error = red.dim;
 
-  gradient = [
-    red.base
-    orange.base
-    yellow.base
-    green.bright
-    green.base
-    cyan.base
-    blue.base
-    blue.dim
-    magenta.base
-  ];
+  gradient2 = [ yellow.base green.base ];
+  gradient3 = [ yellow.base green.base blue.base ];
+  gradient4 = [ yellow.base green.base blue.base magenta.base ];
+  gradient5 = [ orange.base yellow.base green.base blue.base magenta.base ];
+  gradient6 = [ orange.base yellow.base green.base cyan.base blue.base magenta.base ];
+  gradient7 = [ orange.base yellow.base green.bright green.base cyan.base blue.base magenta.base ];
+  gradient8 = [ red.base orange.base yellow.base green.bright green.base cyan.base blue.base magenta.base ];
+  gradient9 = [ red.base orange.base yellow.base green.bright green.base cyan.base blue.base blue.dim magenta.base ];
 
   base00 = black.dim;
   base08 = gray.base;

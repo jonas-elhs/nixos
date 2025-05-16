@@ -16,11 +16,11 @@ in {
       enableFishIntegration = true;
      } // {
       default = let
-        hostname = lib.elemAt colors.gradient 0;
-        username = lib.elemAt colors.gradient 2;
-        directory = lib.elemAt colors.gradient 4;
-        git_branch = lib.elemAt colors.gradient 6;
-        git_status = lib.elemAt colors.gradient 8;
+        hostname = lib.elemAt colors.gradient5 0;
+        username = lib.elemAt colors.gradient5 1;
+        directory = lib.elemAt colors.gradient5 2;
+        git_branch = lib.elemAt colors.gradient5 3;
+        git_status = lib.elemAt colors.gradient5 4;
 
         icon = colors.background;
         background = colors.light_background;
