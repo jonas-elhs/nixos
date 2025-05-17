@@ -28,7 +28,7 @@ in {
           bar = {
             layer = "top";
             position = "top";
-            margin = "20 0 -6 20";
+            margin = "20 20 0 20";
             exclusive = true;
 
             modules-left = [
@@ -42,7 +42,6 @@ in {
             modules-right = [
               "group/connections"
               "group/hardware"
-              "temperature"
               "wireplumber"
               "custom/power"
             ];
@@ -90,11 +89,6 @@ in {
             };
             user = {
               format = "<span color='${accent}'></span> {user}";
-            };
-            temperature = {
-              format = "<span color='${accent}'>{icon}</span> {temperatureC}°C";
-              hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
-              format-icons = [ "" "" "" "" "" ];
             };
 
             "hyprland/workspaces" = {
@@ -191,19 +185,18 @@ in {
           #connections,
           #workspaces,
           #hardware,
-          #temperature,
           #wireplumber,
           #custom-power,
           #apps {
             border-radius: 10px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
-            margin: 0px 10px 6px 10px;
-            box-shadow: 2px 2px 2px 0px #101010;
+            margin: 0px 10px;
+            border: 2px solid ${accent};
           }
 
           #custom-power {
-            margin-right: 20px;
+            margin-right: 0px;
             padding: 0px 12px;
           }
 
