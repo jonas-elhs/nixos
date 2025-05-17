@@ -1,16 +1,24 @@
 rec {
   # DEFINTIONS #
-  background = gray.dark;
-  light_background = gray.base;
+  background = {
+    dark = black.dim;
+    base = gray.dark;
+    light = gray.base;
+  };
 
-  foreground = white.dark;
-  dark_foreground = gray.light;
+  foreground = {
+    dark = gray.light;
+    base = white.dark;
+    light = white.light;
+  };
 
   accent = cyan.dim;
   inactive = gray.bright;
 
   success = green.dim;
   error = red.dim;
+
+  url = blue.bright;
 
   gradient2 = [ yellow.base green.base ];
   gradient3 = [ yellow.base green.base blue.base ];

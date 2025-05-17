@@ -21,8 +21,8 @@ in {
     } // {
       default = let
         accent = colors.accent;
-        text = colors.foreground;
-        background = colors.background;
+        text = colors.foreground.base;
+        background = colors.background.base;
       in {
         settings = {
           bar = {
@@ -253,8 +253,8 @@ in {
       };
       modular = let
         accent = colors.accent;
-        text = colors.foreground;
-        background = colors.background;
+        text = colors.foreground.base;
+        background = colors.background.base;
       in {
         settings = {
           bar = {

@@ -16,8 +16,8 @@ in {
     } // {
       default = let
         font = "FiraCode Nerd Font Propo";
-        text = "rgb(${lib.removePrefix "#" colors.foreground})";
-        background = "rgb(${lib.removePrefix "#" colors.background})";
+        text = "rgb(${lib.removePrefix "#" colors.foreground.base})";
+        background = "rgb(${lib.removePrefix "#" colors.background.base})";
         accent = "rgb(${lib.removePrefix "#" colors.accent})";
         error = "rgb(${lib.removePrefix "#" colors.error})";
       in {

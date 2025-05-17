@@ -35,12 +35,12 @@ in {
           cursor_trail = 1;
 
           # Theme
-          foreground = colors.foreground;
-          background = colors.background;
-          selection_foreground = colors.background;
-          selection_background = colors.foreground;
-          url_color = "#88C0D0";
-          cursor = colors.foreground;
+          foreground = colors.foreground.base;
+          background = colors.background.dark;
+          selection_foreground = colors.background.base;
+          selection_background = colors.foreground.base;
+          url_color = colors.url;
+          cursor = colors.foreground.base;
 
           color0 = colors.base00;
           color1 = colors.base01;

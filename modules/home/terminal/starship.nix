@@ -22,10 +22,10 @@ in {
         git_branch = lib.elemAt colors.gradient5 3;
         git_status = lib.elemAt colors.gradient5 4;
 
-        icon = colors.background;
-        background = colors.light_background;
-        foreground = colors.foreground;
-        cmd_duration = colors.dark_foreground;
+        icon = colors.background.base;
+        background = colors.background.light;
+        foreground = colors.foreground.base;
+        cmd_duration = colors.foreground.dark;
       in {
         settings = {
           format = lib.concatStrings [
