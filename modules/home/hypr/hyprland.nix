@@ -84,8 +84,9 @@ in {
               "blur, logout_dialog"
               "ignorezero, logout_dialog"
 
-#              "blur, walker"
+              "blur, walker"
 #              "ignorezero, walker"
+              "ignorealpha 0.4, walker"
             ];
 
             shadow = {

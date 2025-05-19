@@ -33,7 +33,7 @@ slider,
 
 #box {
   border-radius: 10px;
-  background: alpha(@background, 1.0);
+  background: alpha(@background, 0.5);
   padding: 32px;
   border: 2px solid @accent;
   box-shadow:
@@ -42,11 +42,11 @@ slider,
 }
 
 #search {
-  background: @background;
   padding: 8px;
   margin-bottom: 16px;
   border-radius: 10px;
   border: 2px solid @accent;
+  box-shadow: none;
 }
 
 #prompt {
@@ -76,83 +76,6 @@ child:hover {
   opacity: 0.5;
 }
 
-/**/
-
-
-#clear {
-  color: @foreground;
-  opacity: 0.8;
-}
-
-#password,
-#input,
-#typeahead {
-  border-radius: 2px;
-}
-
-#input {
-  background: none;
-}
-
-#password {
-}
-
-#spinner {
-  padding: 8px;
-}
-
-#typeahead {
-  color: @foreground;
-  opacity: 0.8;
-}
-
-#input placeholder {
-  opacity: 0.5;
-}
-
-#list {
-}
-
-#item {
-}
-
 #icon {
   margin-right: 8px;
-}
-
-#text {
-}
-
-#label {
-  font-weight: 500;
-}
-
-#sub {
-  opacity: 0.5;
-  font-size: 0.8em;
-}
-
-#activationlabel {
-}
-
-#bar {
-}
-
-.barentry {
-}
-
-.aiItem {
-  padding: 10px;
-  border-radius: 2px;
-  color: @foreground;
-  background: @background;
-}
-
-.aiItem.user {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.aiItem.assistant {
-  background: lighter(@background);
 }
