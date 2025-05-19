@@ -83,6 +83,9 @@ in {
             layerrule = [
               "blur, logout_dialog"
               "ignorezero, logout_dialog"
+
+#              "blur, walker"
+#              "ignorezero, walker"
             ];
 
             shadow = {

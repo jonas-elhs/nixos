@@ -1,8 +1,9 @@
-app_launch_prefix = ""
+#app_launch_prefix = ""
+ app_launch_prefix = "uwsm app -- "
 terminal_title_flag = ""
 locale = ""
 close_when_open = false
-theme = "default"
+theme = "custom"
 monitor = ""
 hotreload_theme = false
 as_window = false
@@ -53,23 +54,28 @@ delay = 0
 resume_last_query = false
 
 [activation_mode]
+ disabled = true
 labels = "jkl;asdf"
 
 [builtins.applications]
 weight = 5
 name = "applications"
-placeholder = "Applications"
-prioritize_new = true
+#placeholder = "Applications"
+ placeholder = ""
+#prioritize_new = true
+ prioritize_new = false
 hide_actions_with_empty_query = true
 context_aware = true
 refresh = true
 show_sub_when_single = true
 show_icon_when_single = true
 show_generic = true
-history = true
+#history = true
+ history = false
 
 [builtins.applications.actions]
-enabled = true
+#enabled = true
+ enabled = false
 hide_category = false
 hide_without_query = true
 
