@@ -15,10 +15,9 @@ in {
       enable = true;
     } // {
       default = let
-        hardware = lib.elemAt colors.gradient4 0;
-        software = lib.elemAt colors.gradient4 1;
-        software2 = lib.elemAt colors.gradient4 2;
-        peripherals = lib.elemAt colors.gradient4 3;
+        hardware = lib.elemAt colors.gradient3 0;
+        software = lib.elemAt colors.gradient3 1;
+        software2 = lib.elemAt colors.gradient3 2;
 
         text = colors.foreground;
       in {
@@ -35,6 +34,9 @@ in {
             };
             color = {
               output = text;
+            };
+            key = {
+              width = 14;
             };
           };
 
@@ -132,30 +134,6 @@ in {
             {
               type = "shell";
               keyColor = software2;
-            }
-            {
-              type = "custom";
-              format = "└────────────────────────────────────────────────────┘";
-            }
-
-            "break"
-
-            {
-              type = "custom";
-              format = "┌────────────────────Peripherals─────────────────────┐";
-            }
-            {
-              type = "display";
-              format = "{width}x{height} @ {refresh-rate} Hz (as {scaled-width}x{scaled-height})";
-              keyColor = peripherals;
-            }
-            {
-              type = "mouse";
-              keyColor = peripherals;
-            }
-            {
-              type = "keyboard";
-              keyColor = peripherals;
             }
             {
               type = "custom";
