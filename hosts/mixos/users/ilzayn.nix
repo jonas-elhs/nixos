@@ -21,7 +21,6 @@
   waybar = {
     enable = true;
     gpu_hwmon = 5;
-    style = "modular";
   };
   kitty.enable = true;
   starship.enable = true;
