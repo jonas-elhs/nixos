@@ -423,14 +423,14 @@ in {
             border: 1px solid rgba(100, 114, 125, 0.5);
           }
 
+          #apps,
           #clock,
           #user,
-          #connections,
           #workspaces,
           #hardware,
+          #connections,
           #wireplumber,
-          #custom-power,
-          #apps {
+          #custom-power {
             border-radius: 10px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;

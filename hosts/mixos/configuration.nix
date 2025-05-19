@@ -30,6 +30,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  nixpkgs.config.allowUnfree = true;
+
   # TEMPORARY --- will move to nixos-modules
   services.xserver.enable = true;
   services.displayManager.sddm = {
@@ -51,11 +53,30 @@
     wlogout
     wl-clipboard
     cliphist
-    walker
     hypridle
     firefox
     tree
     # END TEMPORARY
+
+    # MAIL
+    thunderbird
+    mailspring # wayland problem?
+    bluemail
+    # END MAIL
+
+    # LAUNCHER
+    walker
+#    fuzzel
+#    rofi-wayland
+    # END LAUNCHER
+
+    # FILES
+#    xfce.thunar
+    kdePackages.dolphin
+#    pcmanfm
+
+    yazi
+    # END FILES
 
     home-manager
   ];
