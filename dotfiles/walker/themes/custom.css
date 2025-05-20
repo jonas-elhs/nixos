@@ -6,24 +6,15 @@
 
 #window,
 #box,
-#aiScroll,
-#aiList,
 #search,
-#password,
 #input,
-#prompt,
-#clear,
 #typeahead,
 #list,
 child,
-scrollbar,
-slider,
 #item,
 #text,
 #label,
-#bar,
-#sub,
-#activationlabel {
+#bar {
   all: unset;
 }
 
@@ -43,43 +34,16 @@ slider,
 
 #search {
   padding: 8px;
-  margin-bottom: 16px;
   border-radius: 10px;
   border: 2px solid @accent;
   box-shadow: none;
-}
-
-#prompt {
-  margin-left: 4px;
-  margin-right: 12px;
-  color: @foreground;
 }
 
 child {
   padding: 8px;
   border-radius: 10px;
 }
-
 child:selected,
 child:hover {
   background: alpha(@highlight, 0.4);
-}
-
-.activation #activationlabel {
-  color: @accent;
-  font-weight: bold;
-}
-
-.activation #text,
-.activation #icon,
-.activation #search {
-  opacity: 0.5;
-}
-
-#icon {
-  margin-right: 10px;
-}
-
-#sub {
-  font-size: 0;
 }

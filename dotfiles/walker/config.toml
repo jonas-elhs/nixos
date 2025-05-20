@@ -3,7 +3,8 @@
 terminal_title_flag = ""
 locale = ""
 close_when_open = false
-theme = "custom"
+#theme = "default"
+ theme = "custom"
 monitor = ""
 hotreload_theme = false
 as_window = false
