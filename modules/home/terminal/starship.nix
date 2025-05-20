@@ -1,5 +1,6 @@
-{ config, pkgs, lib, colors, ... }: let
+{ config, pkgs, lib, ... }: let
   cfg = config.starship;
+  colors = config.theme.colors;
 in {
   options.starship = {
     enable = lib.mkEnableOption "Starship Prompt";

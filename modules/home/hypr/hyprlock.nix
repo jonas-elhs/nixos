@@ -1,5 +1,6 @@
-{ config, pkgs, lib, colors, ... }: let
+{ config, pkgs, lib, ... }: let
   cfg = config.hyprlock;
+  colors = config.theme.colors;
 in {
   options.hyprlock = {
     enable = lib.mkEnableOption "Hyprlock";

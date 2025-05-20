@@ -133,12 +133,27 @@
       home-manager.lib.homeManagerConfiguration {
         pkgs = getPkgs host;
         modules = [
+
           (userFile host user)
           homeModulesFile
+
+          ({ ... }: {
+            specialisation = builtins.listToAttrs (lib.forEach
+              (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir)))
+              (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
+                name = "_theme-${theme-name}";
+                value = {
+                  configuration = {
+                    theme.colors = import (themesFile theme-name);
+                  };
+                };
+              })
+            );
+          })
+
         ];
         extraSpecialArgs = {
           inherit inputs;
-          colors = import (themesFile (getModuleConfig (userFile host user)).theme.name);
         };
       }
     );
