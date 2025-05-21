@@ -56,6 +56,7 @@
     hypridle
     firefox
     tree
+    neovim
     # END TEMPORARY
 
     # MAIL
@@ -63,12 +64,6 @@
     mailspring # wayland problem?
     bluemail
     # END MAIL
-
-    # LAUNCHER
-    walker
-#    fuzzel
-#    rofi-wayland
-    # END LAUNCHER
 
     # FILES
 #    xfce.thunar

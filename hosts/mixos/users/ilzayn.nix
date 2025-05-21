@@ -4,7 +4,6 @@
   home.groups = [ "wheel" "input" ];
 
   home.file.".config/hypr/hypridle.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hypridle.conf;
-  home.file.".config/walker".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/walker;
   home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
 
   theme.name = "nordic";
@@ -27,6 +26,7 @@
   fish.enable = true;
   git.enable = true;
   fastfetch.enable = true;
+  walker.enable = true;
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
