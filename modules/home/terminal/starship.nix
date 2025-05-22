@@ -17,11 +17,9 @@ in {
       enableFishIntegration = true;
      } // {
       default = let
-        hostname = lib.elemAt colors.gradient5 0;
-        username = lib.elemAt colors.gradient5 1;
-        directory = lib.elemAt colors.gradient5 2;
-        git_branch = lib.elemAt colors.gradient5 3;
-        git_status = lib.elemAt colors.gradient5 4;
+        directory = lib.elemAt colors.gradient3 0;
+        git_branch = lib.elemAt colors.gradient3 1;
+        git_status = lib.elemAt colors.gradient3 2;
 
         icon = colors.background.base;
         background = colors.background.light;
@@ -30,31 +28,13 @@ in {
       in {
         settings = {
           format = lib.concatStrings [
-            "($hostname  )$username  \${custom.folder_symbol}$directory"
+            "\${custom.folder_symbol}$directory"
             "$fill"
             "$git_branch $git_status"
             "$line_break $character"
           ];
           right_format = "$cmd_duration";
           continuation_prompt = "[┃]()";
-
-          hostname = {
-            format = lib.concatStrings [
-              "[](fg:${hostname})[](fg:${icon} bg:${hostname})[](fg:${hostname} bg:${background})"
-              "[ $hostname ]($style)[](fg:${background})"
-            ];
-            style = "fg:${foreground} bg:${background}";
-          };
-
-          username = {
-            format = lib.concatStrings [
-              "[](fg:${username})[](fg:${icon} bg:${username})[](fg:${username} bg:${background})"
-              "[ $user ]($style)[](fg:${background})"
-            ];
-            style_root = "fg:${foreground} bg:${background}";
-            style_user = "fg:${foreground} bg:${background}";
-            show_always = true;
-          };
 
           custom.folder_symbol = {
             command = ''git rev-parse --is-inside-work-tree &>/dev/null && echo "󰊢" || echo ""'';

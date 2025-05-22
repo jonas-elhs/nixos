@@ -21,7 +21,7 @@ rec {
   url = blue.bright;
 
   gradient2 = [ yellow.base green.base ];
-  gradient3 = [ yellow.base green.base blue.base ];
+  gradient3 = [ yellow.base blue.base magenta.base ];
   gradient4 = [ yellow.base green.base blue.base magenta.base ];
   gradient5 = [ orange.base yellow.base green.base blue.base magenta.base ];
   gradient6 = [ orange.base yellow.base green.base cyan.base blue.base magenta.base ];
