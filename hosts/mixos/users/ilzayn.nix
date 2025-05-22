@@ -7,6 +7,7 @@
   home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
 
   theme.name = "nordic";
+  theme.themes = "all";
 
   hyprland = {
     enable = true;

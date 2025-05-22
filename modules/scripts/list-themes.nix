@@ -1,5 +1,5 @@
 { pkgs, ... }: pkgs.writeShellApplication {
-  name = "switch-theme";
+  name = "list-themes";
   runtimeInputs = with pkgs; [ gnused coreutils home-manager ];
   text = ''
     generation_index=1
@@ -9,9 +9,9 @@
       generation=$(home-manager generations | sed -n "''${generation_index}p" | sed 's/.*-> //')
 
       if [ -d "$generation/specialisation" ]; then
-        echo "$generation"
-
-        eval "$generation/specialisation/theme-$1/activate"
+        # shellcheck disable=SC2012
+        specialisations=$(ls "$generation/specialisation" | sed "s/theme-//g")
+        echo "$specialisations"
         break
       fi
 

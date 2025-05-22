@@ -23,10 +23,10 @@ in {
     } // {
       default = let
         foreground = colors.foreground.base;
-	background = colors.background.base;
-	background-light = colors.background.light;
-	accent = colors.accent;
-	highlight = colors.foreground.dark;
+        background = colors.background.base;
+        background-light = colors.background.light;
+        accent = colors.accent;
+        highlight = colors.foreground.dark;
       in {
         config = {
           app_launch_prefix = "uwsm app -- ";
@@ -42,30 +42,38 @@ in {
           };
 
           list = {
-            show_initial_entries = false;
+            show_initial_entries = true;
             placeholder = "";
-	  };
+          };
 
           activation_mode = {
             disabled = true;
-	  };
+          };
 
           builtins = {
-	    applications = {
+            applications = {
               placeholder = "";
               prioritize_new = false;
               history = false;
               actions = {
                 enabled = false;
-	      };
-	    };
-	  };
-	};
+              };
+            };
+          };
+
+          plugins = [
+            {
+              name = "theme";
+              src_once = "list-themes";
+              cmd = "switch-theme %RESULT%";
+            }
+          ];
+        };
 
 	theme = {
 	  layout = {
             ui = {
-	      anchors = {
+              anchors = {
                 bottom = true;
                 left = true;
                 right = true;
@@ -78,12 +86,13 @@ in {
               };
 
               window = {
-	        box = {
+                box = {
                   h_align = "center";
                   width = 450;
                   margins = {
                     top = 200;
-		  };
+                  };
+
 
                   bar = {
                     orientation = "horizontal";
@@ -96,14 +105,14 @@ in {
                         h_expand = true;
                         pixel_size = 24;
                         theme = "";
-		      };
-		    };
-		  };
+                      };
+                    };
+                  };
 
                   scroll = {
                     h_scrollbar_policy = "external";
                     v_scrollbar_policy = "never";
-		    list = {
+                    list = {
                       marker_color = accent;
                       always_show = false;
                       min_height = 0;
@@ -112,45 +121,45 @@ in {
                       min_width = 0;
                       margins = {
                         top = 26;
-		      };
+                      };
 
                       item = {
-		        icon = {
+                        icon = {
                           pixel_size = 26;
                           theme = "";
-	                  margins = {
+                          margins = {
                             end = 10;
-		          };
-			};
+                          };
+                        };
                         text = {
-			  sub = {
+                          sub = {
                             hide = true;
-			  };
-		        };
-		      };
-		    };
+                          };
+                        };
+                      };
+                    };
                   };
 
                   search = {
-		    input = {
+                    input = {
                       h_align = "fill";
                       h_expand = true;
-		    };
+                    };
                     prompt = {
                       hide = true;
-		    };
+                    };
                     clear = {
                       hide = true;
-	            };
+                    };
                     spinner = {
                       hide = true;
-		    };
-		  };
-		};
-	      };
-	    };
-	  };
-	  style = ''
+                    };
+                  };
+                };
+              };
+            };
+          };
+          style = ''
             #window,
             #box,
             #search,
@@ -194,8 +203,8 @@ in {
             child:hover {
               background: alpha(${highlight}, 0.4);
             }
-	  '';
-	};
+          '';
+        };
       };
     }.${cfg.style};
   };
