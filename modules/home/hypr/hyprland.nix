@@ -32,12 +32,6 @@ in {
         inactive = "rgba(${lib.removePrefix "#" colors.inactive}ee)";
       in {
         settings = {
-          plugin = {
-            overview = {
-              showNewWorkspace = false;
-            };
-          };
-
           # ---------- MONITORS ---------- #
           monitor = [
             "HDMI-A-2, 3840x2160@60, 0x0, 1.5"
@@ -86,7 +80,6 @@ in {
               "ignorezero, logout_dialog"
 
               "blur, walker"
-#              "ignorezero, walker"
               "ignorealpha 0.4, walker"
             ];
 
