@@ -43,31 +43,18 @@ in {
             modules-right = [
               "group/hardware"
               "group/information"
-              "custom/power"
+              "group/power"
             ];
 
-            # GROUPS #
             "group/apps" = {
               orientation = "inherit";
               modules = [ "custom/launcher" "custom/terminal" "custom/browser" "custom/files" "custom/mail" ];
               drawer = {
                 transition-duration = 300;
-                children-class = "app";
+                children-class = "app-icon";
                 transition-left-to-right = true;
               };
             };
-
-            "group/hardware" = {
-              orientation = "inherit";
-              modules = [ "cpu" "custom/gpu" "memory" "disk" ];
-            };
-
-            "group/information" = {
-              orientation = "inherit";
-              modules = [ "network" "bluetooth" "wireplumber" ];
-            };
-
-            # MODULES #
             "custom/launcher" = {
               format = "<span color='${accent}'></span>";
               tooltip = false;
@@ -94,11 +81,11 @@ in {
               on-click = "";
             };
 
-
             clock = {
               format = "<span color='${accent}'></span> {:%H:%M}";
               tooltip-format = "{:%A, %d. %B %Y}";
             };
+
             user = {
               format = "<span color='${accent}'></span> {user}";
             };
@@ -110,6 +97,10 @@ in {
               on-scroll-down = "hyprctl dispatch workspace e-1";
             };
 
+            "group/hardware" = {
+              orientation = "inherit";
+              modules = [ "cpu" "custom/gpu" "memory" "disk" ];
+            };
             cpu = {
               format = "<span color='${accent}'></span> {usage}%";
               tooltip-format = "{load}";
@@ -130,6 +121,10 @@ in {
               unit = "GB";
             };
 
+            "group/information" = {
+              orientation = "inherit";
+              modules = [ "network" "bluetooth" "wireplumber" ];
+            };
             network = {
               format-wifi = "<span color='${accent}'>{icon}</span>";
               tooltip-format-wifi = "{essid} ({signalStrength}%)";
@@ -155,7 +150,6 @@ in {
               tooltip-format-off = "Off";
               on-click = "bluetooth-toggle";
             };
-
             wireplumber = {
               format = "<span color='${accent}'>{icon}</span>";
               format-low = "<span color='${accent}'>x</span> {volume}%"; # not working
@@ -171,10 +165,45 @@ in {
                 low = 50;
               };
             };
-            "custom/power" = {
+
+            "group/power" = {
+              orientation = "inherit";
+              modules = [ "custom/shutdown" "custom/suspend" "custom/hibernate" "custom/logout" "custom/lock" "custom/reboot" ];
+              drawer = {
+                transition-duration = 300;
+                children-class = "power-icon";
+                transition-left-to-right = false;
+              };
+            };
+            "custom/shutdown" = {
               format = "<span color='${accent}'>⏻</span>";
-              on-click = "wlogout";
-              tooltip = false;
+              on-click = "systemctl poweroff";
+              tooltip-format = "Shutdown";
+            };
+            "custom/reboot" = {
+              format = "";
+              on-click = "systemctl reboot";
+              tooltip-format = "Reboot";
+            };
+            "custom/lock" = {
+              format = "";
+              on-click = "loginctl lock-session";
+              tooltip-format = "Lock";
+            };
+            "custom/logout" = {
+              format = "󰍃";
+              on-click = "hyprctl dispatch exit";
+              tooltip-format = "Logout";
+            };
+            "custom/hibernate" = {
+              format = "";
+              on-click = "systemctl hibernate";
+              tooltip-format = "Hibernate";
+            };
+            "custom/suspend" = {
+              format = "";
+              on-click = "systemctl suspend";
+              tooltip-format = "Suspend";
             };
           };
         };
@@ -200,7 +229,7 @@ in {
           #workspaces,
           #hardware,
           #information,
-          #custom-power {
+          #power {
             border-radius: 10px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
@@ -208,16 +237,20 @@ in {
             border: 2px solid ${accent};
           }
 
-          #custom-power {
+          #power {
             margin-right: 0px;
             padding: 0px 12px;
+          }
+          .power-icon label {
+            font-size: 15px;
+            margin: 0px 20px 0px 0px;
           }
 
           #apps {
             margin-left: 0px;
             padding: 0px 12px;
           }
-          .app label {
+          .app-icon label {
             font-size: 15px;
             margin: 0px 0px 0px 20px;
           }
