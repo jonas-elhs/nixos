@@ -129,7 +129,6 @@
           ({ ... }: {
             environment.systemPackages = (scripts hosts.${host}.system);
           })
-
         ];
       }
     );
@@ -137,6 +136,7 @@
     homeConfigurations = getHomeConfigurations (host: user:
       home-manager.lib.homeManagerConfiguration {
         pkgs = getPkgs host;
+        extraSpecialArgs = { inherit inputs; };
         modules = [
 
           (userFile host user)
@@ -158,11 +158,7 @@
               })
             );
           })
-
         ];
-        extraSpecialArgs = {
-          inherit inputs;
-        };
       }
     );
 
