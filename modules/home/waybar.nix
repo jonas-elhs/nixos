@@ -42,8 +42,7 @@ in {
             ];
             modules-right = [
               "group/hardware"
-              "group/connections"
-              "wireplumber"
+              "group/information"
               "custom/power"
             ];
 
@@ -58,13 +57,14 @@ in {
               };
             };
 
-            "group/connections" = {
-              orientation = "inherit";
-              modules = [ "network" "bluetooth" ];
-            };
             "group/hardware" = {
               orientation = "inherit";
               modules = [ "cpu" "custom/gpu" "memory" "disk" ];
+            };
+
+            "group/information" = {
+              orientation = "inherit";
+              modules = [ "network" "bluetooth" "wireplumber" ];
             };
 
             # MODULES #
@@ -110,6 +110,26 @@ in {
               on-scroll-down = "hyprctl dispatch workspace e-1";
             };
 
+            cpu = {
+              format = "<span color='${accent}'></span> {usage}%";
+              tooltip-format = "{load}";
+            };
+            "custom/gpu" = {
+              format = "<span color='${accent}'>󰢮</span> {}%";
+              exec = "cat /sys/class/hwmon/hwmon${toString cfg.gpu_hwmon}/device/gpu_busy_percent";
+              tooltip = false;
+              interval = 1;
+            };
+            memory = {
+              format = "<span color='${accent}'></span> {percentage}%";
+              tooltip-format = "{used:0.1f} GiB / {total:0.1f} GiB";
+            };
+            disk = {
+              format = "<span color='${accent}'></span> {percentage_used}%";
+              tooltip-format = "{specific_used:0.1f} GB / {specific_total:0.1f} GB";
+              unit = "GB";
+            };
+
             network = {
               format-wifi = "<span color='${accent}'>{icon}</span>";
               tooltip-format-wifi = "{essid} ({signalStrength}%)";
@@ -136,31 +156,12 @@ in {
               on-click = "bluetooth-toggle";
             };
 
-            cpu = {
-              format = "<span color='${accent}'></span> {usage}%";
-              tooltip-format = "{load}";
-            };
-            "custom/gpu" = {
-              format = "<span color='${accent}'>󰢮</span> {}%";
-              exec = "cat /sys/class/hwmon/hwmon${toString cfg.gpu_hwmon}/device/gpu_busy_percent";
-              tooltip = false;
-              interval = 1;
-            };
-            memory = {
-              format = "<span color='${accent}'></span> {percentage}%";
-              tooltip-format = "{used:0.1f} GiB / {total:0.1f} GiB";
-            };
-            disk = {
-              format = "<span color='${accent}'></span> {percentage_used}%";
-              tooltip-format = "{specific_used:0.1f} GB / {specific_total:0.1f} GB";
-              unit = "GB";
-            };
-
             wireplumber = {
-              format = "<span color='${accent}'>{icon}</span> {volume}%";
-              format-low = "<span color='${accent}'></span> {volume}%"; # not working
-              format-none = "<span color='${accent}'></span> {volume}%"; # not working
-              format-muted = "<span color='${accent}'></span> {volume}%";
+              format = "<span color='${accent}'>{icon}</span>";
+              format-low = "<span color='${accent}'>x</span> {volume}%"; # not working
+              format-none = "<span color='${accent}'>x</span> {volume}%"; # not working
+              format-muted = "<span color='${accent}'></span>";
+              tooltip-format = "{volume}%";
               on-click = "audio-toggle";
 
               format-icons = [ "" "" "" ];
@@ -170,7 +171,6 @@ in {
                 low = 50;
               };
             };
-
             "custom/power" = {
               format = "<span color='${accent}'>⏻</span>";
               on-click = "wlogout";
@@ -199,8 +199,7 @@ in {
           #user,
           #workspaces,
           #hardware,
-          #connections,
-          #wireplumber,
+          #information,
           #custom-power {
             border-radius: 10px;
             background: alpha(${background}, 0.9);
@@ -223,8 +222,8 @@ in {
             margin: 0px 0px 0px 20px;
           }
 
-          #connections label,
-          #hardware label {
+          #hardware label,
+          #information label {
             margin: 0 10px;
           }
 
