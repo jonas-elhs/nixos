@@ -19,6 +19,7 @@ rec {
   error = red.dim;
 
   url = blue.bright;
+  cursor = white.dark;
 
   gradient2 = [ yellow.base green.base ];
   gradient3 = [ yellow.base blue.base magenta.base ];

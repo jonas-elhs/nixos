@@ -41,7 +41,7 @@ in {
           selection_foreground = colors.background.base;
           selection_background = colors.foreground.base;
           url_color = colors.url;
-          cursor = colors.foreground.base;
+          cursor = colors.cursor;
 
           color0 = colors.base00;
           color1 = colors.base01;

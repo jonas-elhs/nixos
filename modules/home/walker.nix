@@ -42,7 +42,7 @@ in {
           };
 
           list = {
-            show_initial_entries = true;
+            show_initial_entries = false;
             placeholder = "";
           };
 
@@ -63,7 +63,7 @@ in {
 
           plugins = [
             {
-              name = "theme";
+              name = "themes";
               src_once = "list-themes";
               cmd = "switch-theme %RESULT%";
             }
