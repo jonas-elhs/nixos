@@ -43,6 +43,7 @@ in {
           "$terminal" = "kitty";
           "$fileManager" = "dolphin";
           "$appLauncher" = "walker --modules applications";
+          "$themeSwitcher" = "walker --modules themes";
           "$browser" = "firefox";
 
           # ---------- AUTOSTART ---------- #
@@ -117,6 +118,7 @@ in {
             "$prefix, Return, exec, uwsm app -- $terminal"
             "$prefix, B, exec, uwsm app -- $browser"
             "$prefix, R, exec, $appLauncher"
+            "$prefix, T, exec, $themeSwitcher"
             "$prefix, E, exec, $fileManager"
 
             "$prefix, Q, killactive,"
