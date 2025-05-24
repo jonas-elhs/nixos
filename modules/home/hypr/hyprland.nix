@@ -48,8 +48,6 @@ in {
 
           # ---------- AUTOSTART ---------- #
           exec-once = [
-            "hyprpaper"
-            "hypridle"
             "waybar"
 
             "wl-paste --type text --watch cliphist store"
@@ -58,6 +56,11 @@ in {
 
           # ---------- ENVIRONMENT VARIABLES ---------- #
           env = [];
+
+          # ---------- LAYOUTS ----------- #
+          master = {
+            mfact = 0.6;
+          };
 
           # ---------- LOOK AND FEEL ---------- #
           general = {
@@ -122,7 +125,7 @@ in {
             "$prefix, E, exec, $fileManager"
 
             "$prefix, Q, killactive,"
-            "$prefix, M, exit,"
+            "$prefix SHIFT, Q, exit,"
 
             "$prefix, V, togglefloating,"
             "$prefix, F, fullscreen, 1"
@@ -131,6 +134,9 @@ in {
             # Utils
             "$prefix SHIFT, L, exec, loginctl lock-session"
             "$prefix SHIFT, S, exec, screenshot"
+
+            # Layouts
+            "$prefix, M, layoutmsg, swapwithmaster master"
 
             # Move Window Focus
             "$prefix, H, movefocus, l"
@@ -167,8 +173,7 @@ in {
             "$prefix, mouse:272, movewindow"
             "$prefix, mouse:273, resizewindow"
           ];
-        };
-      };
+        }; };
     }.${cfg.style} // {
 # PLUGINS
 #      settings = ;
