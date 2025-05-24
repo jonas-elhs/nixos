@@ -3,7 +3,6 @@
   home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
 
-  home.file.".config/hypr/hypridle.conf".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/hypr/hypridle.conf;
   home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
 
   theme.name = "nordic";
@@ -14,6 +13,7 @@
     persistentWorkspaces = 5;
   };
   hyprlock.enable = true;
+  hypridle.enable = true;
   hyprpaper = {
     enable = true;
     wallpaper = "~/wallpapers/moon.png";

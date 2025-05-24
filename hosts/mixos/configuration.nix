@@ -53,7 +53,6 @@
     wlogout
     wl-clipboard
     cliphist
-    hypridle
     firefox
     tree
     neovim
