@@ -21,6 +21,7 @@
   waybar = {
     enable = true;
     gpu_hwmon = 5;
+    style = "vertical";
   };
   kitty.enable = true;
   starship.enable = true;
