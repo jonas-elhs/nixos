@@ -102,6 +102,14 @@ in {
             };
           };
 
+          animations = {
+            enabled = true;
+
+            animation = [
+              "workspaces, 1, 5, default, slidevert"
+            ];
+          };
+
           misc = {
             disable_hyprland_logo = true;
             disable_splash_rendering = true;
