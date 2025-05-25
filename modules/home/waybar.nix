@@ -22,6 +22,7 @@ in {
     } // {
       default = let
         accent = colors.accent;
+        inactive = colors.inactive;
         text = colors.foreground.base;
         background = colors.background.base;
       in {
@@ -241,6 +242,15 @@ in {
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
             margin: 0px ${gap}px;
+            border: ${border}px solid ${inactive};
+            transition: border 0.2s ease;
+          }
+          #apps:hover,
+          #information:hover,
+          #clock:hover,
+          #workspaces:hover,
+          #hardware:hover,
+          #power:hover {
             border: ${border}px solid ${accent};
           }
 
@@ -295,6 +305,7 @@ in {
       };
       vertical = let
         accent = colors.accent;
+        inactive = colors.inactive;
         text = colors.foreground.base;
         background = colors.background.base;
       in {
@@ -522,6 +533,15 @@ in {
             background: alpha(${background}, 0.9);
             padding: 10px 0px;
             margin: ${gap}px 0px;
+            border: ${border}px solid ${inactive};
+            transition: border 0.2s ease;
+          }
+          #apps:hover,
+          #information:hover,
+          #clock:hover,
+          #workspaces:hover,
+          #hardware:hover,
+          #power:hover {
             border: ${border}px solid ${accent};
           }
 
