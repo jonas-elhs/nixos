@@ -213,6 +213,7 @@ in {
           main_size = "18";
           sub_size = "15";
           border_radius = "10";
+          border = "2";
           gap = "10";
         in ''
           * {
@@ -225,8 +226,8 @@ in {
           }
 
           tooltip {
-            background: rgba(43, 48, 59, 0.5);
-            border: 1px solid rgba(100, 114, 125, 0.5);
+            background: ${background};
+            border: ${border}px solid ${accent};
           }
 
           #apps,
@@ -240,7 +241,7 @@ in {
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
             margin: 0px ${gap}px;
-            border: 2px solid ${accent};
+            border: ${border}px solid ${accent};
           }
 
           #apps {
@@ -494,6 +495,7 @@ in {
           main_size = "18";
           sub_size = "15";
           border_radius = "10";
+          border = "2";
           gap = "10";
         in ''
           * {
@@ -506,8 +508,8 @@ in {
           }
 
           tooltip {
-            background: rgba(43, 48, 59, 0.5);
-            border: 1px solid rgba(100, 114, 125, 0.5);
+            background: ${background};
+            border: ${border}px solid ${accent};
           }
 
           #apps,
@@ -520,7 +522,7 @@ in {
             background: alpha(${background}, 0.9);
             padding: 10px 0px;
             margin: ${gap}px 0px;
-            border: 2px solid ${accent};
+            border: ${border}px solid ${accent};
           }
 
           #apps {
