@@ -107,6 +107,7 @@ in {
 
             animation = [
               "workspaces, 1, 5, default, slidevert"
+              "border, 1, 2, linear"
             ];
           };
 
