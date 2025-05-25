@@ -270,7 +270,7 @@ in {
             background: ${text};
             padding: 0px 0px;
             margin: 10px 5px;
-            transition: all 0.2s ease;
+            transition: padding 0.2s ease;
             border-radius: 10px;
             border-style: none;
           }
@@ -550,7 +550,7 @@ in {
             background: ${text};
             padding: 0px 0px;
             margin: 5px 13px;
-            transition: all 0.2s ease;
+            transition: padding 0.2s ease;
             border-radius: 10px;
             border-style: none;
           }
