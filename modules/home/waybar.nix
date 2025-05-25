@@ -56,7 +56,7 @@ in {
               };
             };
             "custom/launcher" = {
-              format = "<span color='${accent}'></span>";
+              format = "<span color='${accent}'></span>";
               tooltip = false;
               on-click = "walker";
             };
