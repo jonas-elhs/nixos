@@ -44,6 +44,7 @@ in {
           "$fileManager" = "dolphin";
           "$appLauncher" = "walker --modules applications";
           "$themeSwitcher" = "walker --modules themes";
+          "$wallpaperSwitcher" = "walker --modules wallpapers";
           "$browser" = "zen";
 
           # ---------- AUTOSTART ---------- #
@@ -130,7 +131,8 @@ in {
             "$prefix, Return, exec, uwsm app -- $terminal"
             "$prefix, B, exec, uwsm app -- $browser"
             "$prefix, R, exec, $appLauncher"
-            "$prefix, T, exec, $themeSwitcher"
+            "$prefix SHIFT, T, exec, $themeSwitcher"
+            "$prefix SHIFT, W, exec, $wallpaperSwitcher"
             "$prefix, E, exec, $fileManager"
 
             "$prefix, Q, killactive,"

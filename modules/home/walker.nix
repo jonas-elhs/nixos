@@ -42,7 +42,7 @@ in {
           };
 
           list = {
-            show_initial_entries = false;
+            show_initial_entries = true;
             placeholder = "";
           };
 
@@ -66,6 +66,12 @@ in {
               name = "themes";
               src_once = "list-themes";
               cmd = "switch-theme %RESULT%";
+            }
+            {
+              name = "wallpapers";
+              src_once = "ls ~/wallpapers/ | sed 's/.png//g'";
+              cmd = "hyprctl hyprpaper reload ',~/wallpapers/%RESULT%.png'";
+#              cmd = "echo 'test'";
             }
           ];
         };
