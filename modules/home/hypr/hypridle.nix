@@ -30,16 +30,16 @@ in {
               on-timeout = "loginctl lock-session";
             }
 
-            # Dim Screen - 10 Minutes
+            # Dim Screen - 20 Minutes
             {
-              timeout = 600;
+              timeout = 1200;
               on-timeout = "hyprctl dispatch dpms off";
               on-resume = "hyprctl dispatch dpms on";
             }
 
-            # Suspend System - 30 minutes
+            # Suspend System - 1 hour
             {
-              timeout = 1800;
+              timeout = 3600;
               on-timeout = "systemctl hibernate";
             }
           ];
