@@ -44,7 +44,7 @@ in {
           "$fileManager" = "dolphin";
           "$appLauncher" = "walker --modules applications";
           "$themeSwitcher" = "walker --modules themes";
-          "$browser" = "firefox";
+          "$browser" = "zen";
 
           # ---------- AUTOSTART ---------- #
           exec-once = [

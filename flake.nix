@@ -14,6 +14,10 @@
       url = "github:abenz1267/walker";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs: let
@@ -143,6 +147,7 @@
           homeModulesFile
 
           inputs.walker.homeManagerModules.default
+          inputs.zen-browser.homeModules.twilight
 
           ({ ... }: {
             specialisation = builtins.listToAttrs (lib.forEach

@@ -3,6 +3,7 @@
   home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
 
+  programs.zen-browser.enable = true;
   home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
 
   theme.name = "nordic";
