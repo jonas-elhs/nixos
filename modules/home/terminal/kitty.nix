@@ -22,7 +22,7 @@ in {
         };
         font = {
           package = pkgs.nerd-fonts.fira-code;
-          name = "FiraCode Nerd Font Mono";
+          name = "Maple Mono NF";
           size = 12;
         };
         keybindings = {

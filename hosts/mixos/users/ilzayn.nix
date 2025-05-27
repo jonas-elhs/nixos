@@ -3,6 +3,13 @@
   home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
 
+  fonts.fontconfig.enable = true;
+  home.packages = with pkgs; [
+    font-awesome
+#    nerd-fonts.fira-code
+    maple-mono.NF
+  ];
+
   programs.zen-browser.enable = true;
   home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
 

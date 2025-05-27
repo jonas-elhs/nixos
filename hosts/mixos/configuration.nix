@@ -42,15 +42,8 @@
   };
   # END TEMPORARY
 
-  # TEMPORARY --- will move to home-manager
-  fonts.packages = with pkgs; [
-    font-awesome
-    nerd-fonts.fira-code
-  ];
-  # END TEMPORARY
   environment.systemPackages = with pkgs; [
     # TEMPORARY --- will move to home-manager
-    wlogout
     wl-clipboard
     cliphist
     firefox

@@ -130,9 +130,9 @@ in {
             network = {
               format-wifi = "<span color='${accent}'>{icon}</span>";
               tooltip-format-wifi = "{essid} ({signalStrength}%)";
-              format-ethernet = "<span color='${accent}'></span>";
+              format-ethernet = "<span color='${accent}'></span>";
               tooltip-format-ethernet = "{ifname} ({bandwidthUpBits}  | {bandwidthDownBits} )";
-              format-linked = "<span color='${accent}'> </span>";
+              format-linked = "<span color='${accent}'></span>";
               tooltip-format-linked = "{ifname}";
               format-disconnected = "";
               format-icons = [
@@ -422,9 +422,9 @@ in {
             network = {
               format-wifi = "<span color='${accent}'>{icon}</span>";
               tooltip-format-wifi = "{essid} ({signalStrength}%)";
-              format-ethernet = "<span color='${accent}'></span>";
+              format-ethernet = "<span color='${accent}'></span>";
               tooltip-format-ethernet = "{ifname} ({bandwidthUpBits}  | {bandwidthDownBits} )";
-              format-linked = "<span color='${accent}'> </span>";
+              format-linked = "<span color='${accent}'></span>";
               tooltip-format-linked = "{ifname}";
               format-disconnected = "";
               format-icons = [
