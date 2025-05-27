@@ -3,19 +3,19 @@
   home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
 
+  # TEMPORARY -- will move to module
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     font-awesome
 #    nerd-fonts.fira-code
     maple-mono.NF
   ];
-
-  programs.zen-browser.enable = true;
-  home.file.".config/wlogout".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/nixos/dotfiles/wlogout;
+  # END TEMPORARY
 
   theme.name = "nordic";
   theme.themes = "all";
 
+  programs.zen-browser.enable = true;
   hyprland = {
     enable = true;
     persistentWorkspaces = 5;
