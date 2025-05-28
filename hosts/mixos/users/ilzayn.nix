@@ -37,6 +37,7 @@
   git.enable = true;
   fastfetch.enable = true;
   walker.enable = true;
+  neovim.enable = true;
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";

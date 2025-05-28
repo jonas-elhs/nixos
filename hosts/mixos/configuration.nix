@@ -65,6 +65,9 @@
     yazi
     # END FILES
 
+    (python3.withPackages (python-pkgs: with python-pkgs; [
+      image-go-nord
+    ]))
     home-manager
   ];
 
