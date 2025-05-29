@@ -35,7 +35,7 @@ in {
               virtualedit = "block";
               laststatus = 3;
               shortmess = "WltToOCF";
-              updatetime = 50;
+              updatetime = 100;
 #              fillchars.eob = " ";
             };
 
@@ -91,6 +91,18 @@ in {
 
             # Keymaps
             keymaps = [
+              {
+                key = " ";
+                action = "<NOP>";
+                mode = "n";
+                silent = true;
+              }
+              {
+                key = " ";
+                action = "<NOP>";
+                mode = "v";
+                silent = true;
+              }
               {
                 key = "x";
                 action = "\"_x";
@@ -162,6 +174,31 @@ in {
               {
                 key = "<C-l>";
                 action = "<CMD>wincmd l<CR>";
+                mode = "n";
+                silent = true;
+              }
+              # Buffers
+              {
+                key = "<leader>bn";
+                action = "<CMD>bnext<CR>";
+                mode = "n";
+                silent = true;
+              }
+              {
+                key = "<leader>bp";
+                action = "<CMD>bprevious<CR>";
+                mode = "n";
+                silent = true;
+              }
+              {
+                key = "<leader>bx";
+                action = "<CMD>bdelete<CR>";
+                mode = "n";
+                silent = true;
+              }
+              {
+                key = "<leader>bX";
+                action = "<CMD>bnext<CR>";
                 mode = "n";
                 silent = true;
               }
