@@ -172,7 +172,6 @@
 
           ({ ... }: {
             specialisation = builtins.listToAttrs (lib.forEach
-#              (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir)))
               (if ((getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((getModuleConfig (userFile host user)).theme.themes))
               (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
                 name = "theme-${theme-name}";

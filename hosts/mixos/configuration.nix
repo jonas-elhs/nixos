@@ -36,6 +36,7 @@
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
+# Core Dumping
 #    wayland.enable = true;
     package = pkgs.kdePackages.sddm;
     theme = "/usr/share/sddm/themes/sddm-ilzayn-theme";
