@@ -15,7 +15,6 @@
   theme.name = "nordic";
   theme.themes = "all";
 
-  programs.zen-browser.enable = true;
   hyprland = {
     enable = true;
     persistentWorkspaces = 5;
@@ -39,6 +38,7 @@
   walker.enable = true;
   neovim.enable = true;
   mako.enable = true;
+  zen.enable = true;
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
