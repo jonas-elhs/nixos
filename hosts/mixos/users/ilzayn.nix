@@ -38,6 +38,7 @@
   fastfetch.enable = true;
   walker.enable = true;
   neovim.enable = true;
+  mako.enable = true;
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";

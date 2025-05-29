@@ -86,6 +86,9 @@ in {
 
               "blur, walker"
               "ignorealpha 0.4, walker"
+
+              "blur, notifications"
+              "ignorezero, notifications"
             ];
 
             shadow = {

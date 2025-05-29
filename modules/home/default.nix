@@ -3,6 +3,7 @@
     ./extra-options.nix
     ./waybar.nix
     ./walker.nix
+    ./mako.nix
 
     ./themes
     ./terminal
