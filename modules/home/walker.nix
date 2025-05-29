@@ -27,6 +27,9 @@ in {
         background-light = colors.background.light;
         accent = colors.accent;
         highlight = colors.foreground.dark;
+
+        border-size = "2";
+        border-radius = "10";
       in {
         config = {
           app_launch_prefix = "uwsm app -- ";
@@ -185,10 +188,10 @@ in {
             }
 
             #box {
-              border-radius: 10px;
+              border-radius: ${border-radius}px;
               background: alpha(${background}, 0.5);
               padding: 32px;
-              border: 2px solid ${accent};
+              border: ${border-size}px solid ${accent};
               box-shadow:
                 0 19px 38px rgba(0, 0, 0, 0.3),
                 0 15px 12px rgba(0, 0, 0, 0.22);
@@ -196,14 +199,14 @@ in {
 
             #search {
               padding: 8px;
-              border-radius: 10px;
-              border: 2px solid ${accent};
+              border-radius: ${border-radius}px;
+              border: ${border-size}px solid ${accent};
               box-shadow: none;
             }
 
             child {
               padding: 8px;
-              border-radius: 10px;
+              border-radius: ${border-radius}px;
             }
             child:selected,
             child:hover {

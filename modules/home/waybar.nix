@@ -25,6 +25,12 @@ in {
         inactive = colors.inactive;
         text = colors.foreground.base;
         background = colors.background.base;
+
+        text-size = "18";
+        sub-size = "15";
+        gap-size = "10";
+        border-size = "2";
+        border-radius = "10";
       in {
         settings = {
           bar = {
@@ -210,16 +216,10 @@ in {
           };
         };
 
-        style = let
-          main_size = "18";
-          sub_size = "15";
-          border_radius = "10";
-          border = "2";
-          gap = "10";
-        in ''
+        style = ''
           * {
             font-family: FiraCode Nerd Font Propo, Roboto, Helvetica, Arial, sans-serif;
-            font-size: ${main_size}px;
+            font-size: ${text-size}px;
             min-height: 0;
             background: transparent;
             border-style: none;
@@ -228,7 +228,7 @@ in {
 
           tooltip {
             background: ${background};
-            border: ${border}px solid ${accent};
+            border: ${border-size}px solid ${accent};
           }
 
           #apps,
@@ -238,11 +238,11 @@ in {
           #hardware,
           #information,
           #power {
-            border-radius: ${border_radius}px;
+            border-radius: ${border-radius}px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
-            margin: 0px ${gap}px;
-            border: ${border}px solid ${inactive};
+            margin: 0px ${gap-size}px;
+            border: ${border-size}px solid ${inactive};
             transition: border 0.2s ease;
           }
           #apps:hover,
@@ -251,7 +251,7 @@ in {
           #workspaces:hover,
           #hardware:hover,
           #power:hover {
-            border: ${border}px solid ${accent};
+            border: ${border-size}px solid ${accent};
           }
 
           #apps {
@@ -259,7 +259,7 @@ in {
             padding: 0px 12px;
           }
           .app-icon label {
-            font-size: ${sub_size}px;
+            font-size: ${sub-size}px;
             margin: 0px 0px 0px 20px;
           }
 
@@ -268,7 +268,7 @@ in {
             padding: 0px 12px;
           }
           .power-icon label {
-            font-size: ${sub_size}px;
+            font-size: ${sub-size}px;
             margin: 0px 20px 0px 0px;
           }
 
@@ -308,6 +308,12 @@ in {
         inactive = colors.inactive;
         text = colors.foreground.base;
         background = colors.background.base;
+
+        text-size = "18";
+        sub-size = "15";
+        gap-size = "10";
+        border-size = "2";
+        border-radius = "10";
       in {
         settings = {
           bar = {
@@ -502,16 +508,10 @@ in {
           };
         };
 
-        style = let
-          main_size = "18";
-          sub_size = "15";
-          border_radius = "10";
-          border = "2";
-          gap = "10";
-        in ''
+        style = ''
           * {
             font-family: FiraCode Nerd Font Propo, Roboto, Helvetica, Arial, sans-serif;
-            font-size: ${main_size}px;
+            font-size: ${text-size}px;
             min-height: 0;
             background: transparent;
             border-style: none;
@@ -520,7 +520,7 @@ in {
 
           tooltip {
             background: ${background};
-            border: ${border}px solid ${accent};
+            border: ${border-size}px solid ${accent};
           }
 
           #apps,
@@ -529,11 +529,11 @@ in {
           #workspaces,
           #hardware,
           #power {
-            border-radius: ${border_radius}px;
+            border-radius: ${border-radius}px;
             background: alpha(${background}, 0.9);
             padding: 10px 0px;
-            margin: ${gap}px 0px;
-            border: ${border}px solid ${inactive};
+            margin: ${gap-size}px 0px;
+            border: ${border-size}px solid ${inactive};
             transition: border 0.2s ease;
           }
           #apps:hover,
@@ -542,7 +542,7 @@ in {
           #workspaces:hover,
           #hardware:hover,
           #power:hover {
-            border: ${border}px solid ${accent};
+            border: ${border-size}px solid ${accent};
           }
 
           #apps {
@@ -550,7 +550,7 @@ in {
             padding: 10px 0px;
           }
           .app-icon label {
-            font-size: ${sub_size}px;
+            font-size: ${sub-size}px;
             margin: 20px 0px 0px 0px;
           }
 
@@ -559,7 +559,7 @@ in {
             padding: 10px 0px;
           }
           .power-icon label {
-            font-size: ${sub_size}px;
+            font-size: ${sub-size}px;
             margin: 0px 0px 20px 0px;
           }
 

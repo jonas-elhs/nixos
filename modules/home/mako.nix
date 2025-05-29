@@ -23,6 +23,8 @@ in {
         font = "Maple Mono NF";
         font-size = "10";
         title-size = "12";
+        border-size = 2;
+        border-radius = 10;
       in {
         settings = {
           sort = "-time";
@@ -51,8 +53,8 @@ in {
           text-color = text;
           progress-color = "source ${accent}";
 
-          border-size = 2;
-          border-radius = 10;
+          border-size = border-size;
+          border-radius = border-radius;
           border-color = accent;
 
           width = 300;

@@ -30,6 +30,9 @@ in {
       default = let
         active = "rgba(${lib.removePrefix "#" colors.accent}ee)";
         inactive = "rgba(${lib.removePrefix "#" colors.inactive}ee)";
+
+        border-size = 2;
+        border-radius = 10;
       in {
         settings = {
           # ---------- MONITORS ---------- #
@@ -65,7 +68,7 @@ in {
 
           # ---------- LOOK AND FEEL ---------- #
           general = {
-            border_size = 2;
+            border_size = border-size;
 
             gaps_in = 10;
             gaps_out = 20;
@@ -77,7 +80,7 @@ in {
           };
 
           decoration = {
-            rounding = 10;
+            rounding = border-radius;
             rounding_power = 2.0;
 
             layerrule = [
