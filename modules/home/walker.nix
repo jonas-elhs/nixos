@@ -24,7 +24,6 @@ in {
       default = let
         foreground = colors.foreground.base;
         background = colors.background.base;
-        background-light = colors.background.light;
         accent = colors.accent;
         highlight = colors.foreground.dark;
 
