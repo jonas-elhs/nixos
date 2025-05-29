@@ -19,18 +19,41 @@ in {
         background = colors.background.base;
         text = colors.foreground.base;
         accent = colors.accent;
+
+        font = "Maple Mono NF";
+        font-size = "10";
+        title-size = "12";
       in {
         settings = {
           sort = "-time";
       
+          actions = 1;
+          markup = 1;
+          format = "<span font='${title-size}' weight='bold'>%s</span>\\n%b";
+          text-alignment = "left";
+
+          default-timeout = 10000;
+          ignore-timeout = 1;
+
+          history = 1;
+          max-history = 5;
+          max-visible = 5;
+
+          layer = "top";
+          anchor = "top-right";
+
           on-button-left = "invoke-default-action";
           on-button-middle = "dismiss-all";
           on-button-right = "dismiss";
 
-          font = "Maple Mono NF 10";
+          font = "${font} ${font-size}";
           background-color = "${background}08";
           text-color = text;
           progress-color = "source ${accent}";
+
+          border-size = 2;
+          border-radius = 10;
+          border-color = accent;
 
           width = 300;
           height = 500;
@@ -38,31 +61,11 @@ in {
           margin = 10;
           padding = 5;
 
-          border-size = 2;
-          border-radius = 10;
-          border-color = accent;
-
           icons = 1;
           max-icon-size = 64;
-          #icon-path = "";
+          icon-path = "";
           icon-location = "left";
           icon-border-radius = 0;
-
-          actions = 1;
-
-          history = 1;
-          max-history = 5;
-          max-visible = 5;
-
-          markup = 1;
-          format = "<span font='12' weight='bold'>%s</span>\\n%b";
-          text-alignment = "left";
-
-          default-timeout = 10000;
-          ignore-timeout = 1;
-
-          layer = "top";
-          anchor = "top-right";
         };
       };
     }.${cfg.style};
