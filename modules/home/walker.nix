@@ -43,6 +43,7 @@ in {
 
           list = {
             show_initial_entries = false;
+            max_entries = 10;
             placeholder = "";
           };
 
