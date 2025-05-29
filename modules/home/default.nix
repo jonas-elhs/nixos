@@ -6,7 +6,6 @@
     ./mako.nix
     ./zen.nix
 
-    ./themes
     ./terminal
     ./hypr
   ];

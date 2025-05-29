@@ -41,7 +41,7 @@
     scriptsDir =               ./modules/scripts;
     scriptFile = script:       scriptsDir + /${script};
 
-    themesDir =                homeModulesDir + /themes;
+    themesDir =                ./modules/themes;
     themesFile = theme:        themesDir + /${theme}.nix;
 
     # ---------- UTILS ---------- #
@@ -170,6 +170,8 @@
           inputs.zen-browser.homeModules.twilight
           inputs.nvf.homeManagerModules.default
 
+          themesDir
+
           ({ ... }: {
             specialisation = builtins.listToAttrs (lib.forEach
               (if ((getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((getModuleConfig (userFile host user)).theme.themes))
@@ -183,6 +185,7 @@
               })
             );
           })
+
         ];
       }
     );
