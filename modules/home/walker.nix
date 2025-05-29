@@ -42,7 +42,7 @@ in {
           };
 
           list = {
-            show_initial_entries = true;
+            show_initial_entries = false;
             placeholder = "";
           };
 
@@ -71,13 +71,12 @@ in {
               name = "wallpapers";
               src_once = "ls ~/wallpapers/ | sed 's/.png//g'";
               cmd = "hyprctl hyprpaper reload ',~/wallpapers/%RESULT%.png'";
-#              cmd = "echo 'test'";
             }
           ];
         };
 
-	theme = {
-	  layout = {
+        theme = {
+          layout = {
             ui = {
               anchors = {
                 bottom = true;
