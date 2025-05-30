@@ -33,10 +33,7 @@
     userFile = host: user:     (usersDir host) + /${user}.nix;
 
     nixosModulesDir =          ./modules/nixos;
-    nixosModulesFile =         nixosModulesDir;
-
     homeModulesDir =           ./modules/home;
-    homeModulesFile =          homeModulesDir;
 
     scriptsDir =               ./modules/scripts;
     scriptFile = script:       scriptsDir + /${script};
@@ -164,7 +161,6 @@
 
           (userFile host user)
           (listPaths homeModulesDir)
-          themesDir
 
           inputs.walker.homeManagerModules.default
           inputs.zen-browser.homeModules.twilight

@@ -20,6 +20,6 @@
   };
 
   config = {
-    theme.colors = import ./${config.theme.name}.nix;
+    theme.colors = import ../themes/${config.theme.name}.nix;
   };
 }
