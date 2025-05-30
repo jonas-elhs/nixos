@@ -50,6 +50,7 @@
     getPkgs = (host: nixpkgs.legacyPackages.${hosts.${host}.system});
     getDirNames = (dir: builtins.attrNames (builtins.readDir dir));
     getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; });
+    listPaths = dir: lib.flatten (lib.forEach (getDirNames dir) (name: if lib.hasPrefix "_" name then [] else if lib.hasSuffix ".nix" name then /${dir}/${name} else (listPaths /${dir}/${name})));
 
     # ---------- READ HOSTS AND USERS FROM FILE SYSTEM ---------- #
 
@@ -116,10 +117,10 @@
     nixosConfigurations = forEachHost (host:
       nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs host; };
-        modules = [
+        modules = lib.flatten [
 
           (hostFile host)
-          nixosModulesFile
+          (listPaths nixosModulesDir)
 
           ({ config, pkgs, lib, ... }: builtins.listToAttrs (
             lib.forEach hosts.${host}.users (user: {
@@ -136,9 +137,7 @@
 
           ({ ... }: {
             environment.systemPackages = (scripts hosts.${host}.system);
-          })
 
-          ({ ... }: {
             nix.settings = {
               trusted-users = [
                 "root"
@@ -161,16 +160,15 @@
       home-manager.lib.homeManagerConfiguration {
         pkgs = getPkgs host;
         extraSpecialArgs = { inherit inputs; };
-        modules = [
+        modules = lib.flatten [
 
           (userFile host user)
-          homeModulesFile
+          (listPaths homeModulesDir)
+          themesDir
 
           inputs.walker.homeManagerModules.default
           inputs.zen-browser.homeModules.twilight
           inputs.nvf.homeManagerModules.default
-
-          themesDir
 
           ({ ... }: {
             specialisation = builtins.listToAttrs (lib.forEach
