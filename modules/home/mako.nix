@@ -49,7 +49,7 @@ in {
           on-button-right = "dismiss";
 
           font = "${font} ${font-size}";
-          background-color = "${background}08";
+          background-color = "${background}80";
           text-color = text;
           progress-color = "source ${accent}";
 
