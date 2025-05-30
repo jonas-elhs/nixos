@@ -25,7 +25,7 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs: let
-    # ----------- PATHS ---------- #
+    # Paths
     hostsDir =                 ./hosts;
     hostFile = host:           hostsDir + /${host}/configuration.nix;
 
@@ -41,83 +41,21 @@
     themesDir =                ./modules/themes;
     themesFile = theme:        themesDir + /${theme}.nix;
 
-    # ---------- UTILS ---------- #
+    # Lib
     lib = nixpkgs.lib;
+    libx = (import ./lib.nix) { inherit hosts usersDir hostsDir hostFile scriptsDir scriptFile nixpkgs; };
 
-    getPkgs = (host: nixpkgs.legacyPackages.${hosts.${host}.system});
-    getDirNames = (dir: builtins.attrNames (builtins.readDir dir));
-    getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; });
-    listPaths = dir: lib.flatten (lib.forEach (getDirNames dir) (name: if lib.hasPrefix "_" name then [] else if lib.hasSuffix ".nix" name then /${dir}/${name} else (listPaths /${dir}/${name})));
-
-    # ---------- READ HOSTS AND USERS FROM FILE SYSTEM ---------- #
-
-    # hosts = {
-    #   <host name> = {
-    #     users = [
-    #       "<user1>"
-    #       "<user2>"
-    #     ];
-    #     system = "<system architecture>";
-    #   };
-    # };
-
-    getUsersFromHost = (host:
-                         lib.flatten (
-                           lib.forEach
-                             (getDirNames (usersDir host))
-                             (userFile: lib.take 1 (lib.splitString "." userFile))
-                         )
-                       );
-    hosts = builtins.listToAttrs
-              (lib.forEach
-                (getDirNames hostsDir)
-                (host: {
-                  name = host;
-                  value = {
-                    users = getUsersFromHost host;
-                    system = (getModuleConfig (hostFile host)).system.architecture;
-                  };
-                })
-              );
-
-    hostNames = builtins.attrNames hosts;
-    forEachHost = (f: nixpkgs.lib.genAttrs hostNames f);
-
-    # ---------- HOME MANAGER ---------- #
-    # Host name and function to every user in that host mapped to their configuration | [{ name = "user1@host1"; value = configuration; } { name = "user2@host1"; value = configuration; }]
-    getUserConfigurationsInHost = (host: f:
-                                    lib.forEach
-                                      hosts.${host}.users
-                                      (user: {
-                                        name = "${user}@${host}";
-                                        value = (f user);
-                                      })
-                                  );
-    # Function to every user in every host mapped to their configuration | [{ name = "user1@host1"; value = configuration; } { ... } { name = "user1@host2"; value = configuration }]
-    getUserConfigurationsInEveryHost = (f:
-                                         lib.flatten (lib.mapAttrsToList
-                                           (getUserConfigurationsInHost)
-                                           (forEachHost f)
-                                         )
-                                       );
-    # Function to every user in every host mapped to their configuration | { "user1@host1" = configuration "..." = ... "user1@host2" = configuration }
-    getHomeConfigurations = (f: builtins.listToAttrs (getUserConfigurationsInEveryHost f));
-
-    # ---------- SCRIPTS ---------- #
-    scripts = (system:
-                lib.forEach
-                  (getDirNames scriptsDir)
-                  (script: (import (scriptFile script) { pkgs = import nixpkgs { inherit system; }; }))
-              );
+    hosts = libx.getHosts;
+    scripts = libx.getScripts;
   in {
 
-    nixosConfigurations = forEachHost (host:
+    nixosConfigurations = libx.forEachHost (host:
       nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs host; };
         modules = lib.flatten [
 
           (hostFile host)
-          (listPaths nixosModulesDir)
+          (libx.listPaths nixosModulesDir)
 
           ({ config, pkgs, lib, ... }: builtins.listToAttrs (
             lib.forEach hosts.${host}.users (user: {
@@ -153,14 +91,14 @@
       }
     );
 
-    homeConfigurations = getHomeConfigurations (host: user:
+    homeConfigurations = libx.forEachHome (host: user:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = getPkgs host;
+        pkgs = libx.getPkgs host;
         extraSpecialArgs = { inherit inputs; };
         modules = lib.flatten [
 
           (userFile host user)
-          (listPaths homeModulesDir)
+          (libx.listPaths homeModulesDir)
 
           inputs.walker.homeManagerModules.default
           inputs.zen-browser.homeModules.twilight
@@ -168,7 +106,7 @@
 
           ({ ... }: {
             specialisation = builtins.listToAttrs (lib.forEach
-              (if ((getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((getModuleConfig (userFile host user)).theme.themes))
+              (if ((libx.getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((libx.getModuleConfig (userFile host user)).theme.themes))
               (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
                 name = "theme-${theme-name}";
                 value = {
