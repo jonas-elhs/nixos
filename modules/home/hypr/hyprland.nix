@@ -48,7 +48,7 @@ in {
           "$appLauncher" = "walker --modules applications";
           "$themeSwitcher" = "walker --modules themes";
           "$wallpaperSwitcher" = "walker --modules wallpapers";
-          "$browser" = "zen";
+          "$browser" = "zen-twilight";
 
           # ---------- AUTOSTART ---------- #
           exec-once = [
@@ -136,6 +136,7 @@ in {
             # General
             "$prefix, Return, exec, uwsm app -- $terminal"
             "$prefix, B, exec, uwsm app -- $browser"
+            "$prefix, C, exec, uwsm app -- firefox"
             "$prefix, R, exec, $appLauncher"
             "$prefix SHIFT, T, exec, $themeSwitcher"
             "$prefix SHIFT, W, exec, $wallpaperSwitcher"
@@ -149,7 +150,7 @@ in {
             "$prefix SHIFT, F, fullscreen, 0"
 
             # Utils
-            "$prefix SHIFT, L, exec, loginctl lock-session"
+            #"$prefix SHIFT, L, exec, loginctl lock-session"
             "$prefix SHIFT, S, exec, screenshot"
 
             # Layouts
@@ -160,6 +161,12 @@ in {
             "$prefix, J, movefocus, d"
             "$prefix, K, movefocus, u"
             "$prefix, L, movefocus, r"
+
+            # Move Window
+            "$prefix SHIFT, H, movewindow, l"
+            "$prefix SHIFT, J, movewindow, d"
+            "$prefix SHIFT, K, movewindow, u"
+            "$prefix SHIFT, L, movewindow, r"
 
             # Switch Workspaces
             "$prefix, 1, workspace, 1"
@@ -185,8 +192,15 @@ in {
             "$prefix SHIFT, 9, movetoworkspace, 9"
             "$prefix SHIFT, 0, movetoworkspace, 10"
           ];
+          binde = [
+            # Resize Window
+            "$prefix CTRL, H, resizeactive, -10 0"
+            "$prefix CTRL, J, resizeactive, 0 10"
+            "$prefix CTRL, K, resizeactive, 0 -10"
+            "$prefix CTRL, L, resizeactive, 10 0"
+          ];
           bindm = [
-            # Move & Resize Windows
+            # Move & Resize Windows Mouse
             "$prefix, mouse:272, movewindow"
             "$prefix, mouse:273, resizewindow"
           ];
