@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprlock;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.hyprlock = {
     enable = lib.mkEnableOption "Hyprlock";
@@ -18,7 +19,6 @@ in {
       default = let
         font = "FiraCode Nerd Font Propo";
         text = "rgb(${lib.removePrefix "#" colors.foreground.base})";
-        background = "rgb(${lib.removePrefix "#" colors.background.base})";
         accent = "rgb(${lib.removePrefix "#" colors.accent})";
         error = "rgb(${lib.removePrefix "#" colors.error})";
       in {

@@ -14,6 +14,12 @@
 
   theme.name = "nordic";
   theme.themes = "all";
+  layout = {
+    font = {
+      name = "Maple Mono NF";
+      sub = "8";
+    };
+  };
 
   hyprland = {
     enable = true;

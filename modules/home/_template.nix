@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.XXX;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.XXX = {
     enable = lib.mkEnableOption "XXX";

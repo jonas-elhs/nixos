@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.kitty;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.kitty = {
     enable = lib.mkEnableOption "Kitty Terminal";
@@ -21,18 +22,16 @@ in {
           mode = "no-rc no-cursor";
         };
         font = {
-          package = pkgs.nerd-fonts.fira-code;
-          name = "Maple Mono NF";
-          size = 12;
+          name = layout.font.name;
+          size = lib.toInt layout.font.size;
         };
         keybindings = {
           "ctrl+c" = "copy_or_interrupt";
           "ctrl+v" = "paste_from_clipboard";
         };
         settings = {
-          background_opacity = 0.5;
+          background_opacity = layout.background.opacity;
           window_padding_width = 8;
-          background_blur = 0;
           cursor_trail = 1;
 
           # Theme

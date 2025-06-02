@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.mako;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.mako = {
     enable = lib.mkEnableOption "Mako";
@@ -19,19 +20,13 @@ in {
         background = colors.background.base;
         text = colors.foreground.base;
         accent = colors.accent;
-
-        font = "Maple Mono NF";
-        font-size = "10";
-        title-size = "12";
-        border-size = 2;
-        border-radius = 10;
       in {
         settings = {
           sort = "-time";
       
           actions = 1;
           markup = 1;
-          format = "<span font='${title-size}' weight='bold'>%s</span>\\n%b";
+          format = "<span font='${layout.font.size}' weight='bold'>%s</span>\\n%b";
           text-alignment = "left";
 
           default-timeout = 10000;
@@ -48,13 +43,13 @@ in {
           on-button-middle = "dismiss-all";
           on-button-right = "dismiss";
 
-          font = "${font} ${font-size}";
+          font = "${layout.font.name} ${layout.font.sub}";
           background-color = "${background}80";
           text-color = text;
           progress-color = "source ${accent}";
 
-          border-size = border-size;
-          border-radius = border-radius;
+          border-size = layout.border.width;
+          border-radius = layout.border.radius;
           border-color = accent;
 
           width = 300;

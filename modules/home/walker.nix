@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.walker;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.walker = {
     enable = lib.mkEnableOption "walker";
@@ -26,9 +27,6 @@ in {
         background = colors.background.base;
         accent = colors.accent;
         highlight = colors.foreground.dark;
-
-        border-size = "2";
-        border-radius = "10";
       in {
         config = {
           app_launch_prefix = "uwsm app -- ";
@@ -187,10 +185,10 @@ in {
             }
 
             #box {
-              border-radius: ${border-radius}px;
+              border-radius: ${layout.border.radius}px;
               background: alpha(${background}, 0.5);
               padding: 32px;
-              border: ${border-size}px solid ${accent};
+              border: ${layout.border.width}px solid ${accent};
               box-shadow:
                 0 19px 38px rgba(0, 0, 0, 0.3),
                 0 15px 12px rgba(0, 0, 0, 0.22);
@@ -198,14 +196,14 @@ in {
 
             #search {
               padding: 8px;
-              border-radius: ${border-radius}px;
-              border: ${border-size}px solid ${accent};
+              border-radius: ${layout.border.radius}px;
+              border: ${layout.border.width}px solid ${accent};
               box-shadow: none;
             }
 
             child {
               padding: 8px;
-              border-radius: ${border-radius}px;
+              border-radius: ${layout.border.radius}px;
             }
             child:selected,
             child:hover {

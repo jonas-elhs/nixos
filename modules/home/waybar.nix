@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.waybar;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options = {
     waybar.enable = lib.mkEnableOption "Waybar";
@@ -28,9 +29,6 @@ in {
 
         text-size = "18";
         sub-size = "15";
-        gap-size = "10";
-        border-size = "2";
-        border-radius = "10";
       in {
         settings = {
           bar = {
@@ -228,7 +226,7 @@ in {
 
           tooltip {
             background: ${background};
-            border: ${border-size}px solid ${accent};
+            border: ${layout.border.width}px solid ${accent};
           }
 
           #apps,
@@ -238,11 +236,11 @@ in {
           #hardware,
           #information,
           #power {
-            border-radius: ${border-radius}px;
+            border-radius: ${layout.border.radius}px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
-            margin: 0px ${gap-size}px;
-            border: ${border-size}px solid ${inactive};
+            margin: 0px ${layout.gap.size}px;
+            border: ${layout.border.width}px solid ${inactive};
             transition: border 0.2s ease;
           }
           #apps:hover,
@@ -251,7 +249,7 @@ in {
           #workspaces:hover,
           #hardware:hover,
           #power:hover {
-            border: ${border-size}px solid ${accent};
+            border: ${layout.border.width}px solid ${accent};
           }
 
           #apps {
@@ -311,9 +309,6 @@ in {
 
         text-size = "18";
         sub-size = "15";
-        gap-size = "10";
-        border-size = "2";
-        border-radius = "10";
       in {
         settings = {
           bar = {
@@ -520,7 +515,7 @@ in {
 
           tooltip {
             background: ${background};
-            border: ${border-size}px solid ${accent};
+            border: ${layout.border.width}px solid ${accent};
           }
 
           #apps,
@@ -529,11 +524,11 @@ in {
           #workspaces,
           #hardware,
           #power {
-            border-radius: ${border-radius}px;
+            border-radius: ${layout.border.radius}px;
             background: alpha(${background}, 0.9);
             padding: 10px 0px;
-            margin: ${gap-size}px 0px;
-            border: ${border-size}px solid ${inactive};
+            margin: ${layout.gap.size}px 0px;
+            border: ${layout.border.width}px solid ${inactive};
             transition: border 0.2s ease;
           }
           #apps:hover,
@@ -542,7 +537,7 @@ in {
           #workspaces:hover,
           #hardware:hover,
           #power:hover {
-            border: ${border-size}px solid ${accent};
+            border: ${layout.border.width}px solid ${accent};
           }
 
           #apps {

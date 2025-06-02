@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.neovim;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.neovim = {
     enable = lib.mkEnableOption "Neovim";

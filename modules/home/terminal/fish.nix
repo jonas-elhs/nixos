@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.fish;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.fish = {
     enable = lib.mkEnableOption "Fish Shell";

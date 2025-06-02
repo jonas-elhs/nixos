@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprpaper;
+  colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.hyprpaper = {
     enable = lib.mkEnableOption "Hyprpaper";

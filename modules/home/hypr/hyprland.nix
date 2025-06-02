@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprland;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.hyprland = {
     enable = lib.mkEnableOption "Hyprland";
@@ -10,7 +11,7 @@ in {
       description = "The style of Hyprland";
     };
     persistentWorkspaces = lib.mkOption {
-      type = lib.types.ints.unsigned;
+      type = lib.types.int;
       default = 0;
       example = 5;
       description = "The amount of persistent workspaces to have";
@@ -30,9 +31,6 @@ in {
       default = let
         active = "rgba(${lib.removePrefix "#" colors.accent}ee)";
         inactive = "rgba(${lib.removePrefix "#" colors.inactive}ee)";
-
-        border-size = 2;
-        border-radius = 10;
       in {
         settings = {
           # ---------- MONITORS ---------- #
@@ -68,7 +66,7 @@ in {
 
           # ---------- LOOK AND FEEL ---------- #
           general = {
-            border_size = border-size;
+            border_size = layout.border.width;
 
             gaps_in = 10;
             gaps_out = 20;
@@ -80,7 +78,7 @@ in {
           };
 
           decoration = {
-            rounding = border-radius;
+            rounding = layout.border.radius;
             rounding_power = 2.0;
 
             layerrule = [
@@ -205,9 +203,6 @@ in {
             "$prefix, mouse:273, resizewindow"
           ];
         }; };
-    }.${cfg.style} // {
-# PLUGINS
-#      settings = ;
-    };
+    }.${cfg.style};
   };
 }

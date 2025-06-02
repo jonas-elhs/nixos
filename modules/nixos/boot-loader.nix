@@ -14,7 +14,7 @@ in {
       default = 5;
       example = 0;
       description = "The timeout before the default boot entry gets booted";
-      type = lib.types.ints.unsigned;
+      type = lib.types.int;
     };
     extraConfig = lib.mkOption {
       default = "";
