@@ -68,8 +68,8 @@ in {
           general = {
             border_size = layout.border.width;
 
-            gaps_in = 10;
-            gaps_out = 20;
+            gaps_in = builtins.div (lib.toInt layout.gap.size) 2;
+            gaps_out = layout.gap.size;
 
             "col.active_border" = active;
             "col.inactive_border" = inactive;
@@ -78,7 +78,7 @@ in {
           };
 
           decoration = {
-            rounding = layout.border.radius;
+            rounding = layout.border.radius.size;
             rounding_power = 2.0;
 
             layerrule = [
@@ -100,8 +100,8 @@ in {
             };
             blur = {
               enabled = true;
-              size = 5;
-              passes = 1;
+              size = layout.blur.size;
+              passes = layout.blur.passes;
 
               vibrancy = 0.1696;
             };

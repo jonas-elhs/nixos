@@ -216,7 +216,7 @@ in {
 
         style = ''
           * {
-            font-family: FiraCode Nerd Font Propo, Roboto, Helvetica, Arial, sans-serif;
+            font-family: ${layout.font.name};
             font-size: ${text-size}px;
             min-height: 0;
             background: transparent;
@@ -236,7 +236,7 @@ in {
           #hardware,
           #information,
           #power {
-            border-radius: ${layout.border.radius}px;
+            border-radius: ${layout.border.radius.size}px;
             background: alpha(${background}, 0.9);
             padding: 0px 10px;
             margin: 0px ${layout.gap.size}px;
@@ -505,7 +505,7 @@ in {
 
         style = ''
           * {
-            font-family: FiraCode Nerd Font Propo, Roboto, Helvetica, Arial, sans-serif;
+            font-family: ${layout.font.name};
             font-size: ${text-size}px;
             min-height: 0;
             background: transparent;
@@ -524,7 +524,7 @@ in {
           #workspaces,
           #hardware,
           #power {
-            border-radius: ${layout.border.radius}px;
+            border-radius: ${layout.border.radius.size}px;
             background: alpha(${background}, 0.9);
             padding: 10px 0px;
             margin: ${layout.gap.size}px 0px;

@@ -1,18 +1,20 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }: let
+  layout = config.layout;
+in {
   options.layout = {
     border.width = lib.mkOption {
       type = lib.types.str;
       default = "2";
       description = "The border width.";
     };
-    border.radius = lib.mkOption {
+    border.radius.size = lib.mkOption {
       type = lib.types.str;
       default = "10";
       description = "The border radius.";
     };
-    border.inner_radius = lib.mkOption {
+    border.radius.inner = lib.mkOption {
       type = lib.types.str;
-      default = config.layout.border.radius;
+      default = layout.border.radius.size;
       description = "The border radius of inner elements.";
     };
 
@@ -23,7 +25,7 @@
     };
     font.sub = lib.mkOption {
       type = lib.types.str;
-      default = config.layout.font.size;
+      default = layout.font.size;
       description = "The sub font size.";
     };
     font.size = lib.mkOption {
@@ -33,7 +35,7 @@
     };
     font.title = lib.mkOption {
       type = lib.types.int;
-      default = config.layout.font.size;
+      default = layout.font.size;
       description = "The title font size.";
     };
 
@@ -50,13 +52,29 @@
 
     gap.size = lib.mkOption {
       type = lib.types.str;
-      default = "10";
+      default = "20";
       description = "The main gap size between elements.";
     };
     gap.inner = lib.mkOption {
       type = lib.types.str;
-      default = config.layout.gap.size;
+      default = layout.gap.size;
       description = "The gap size between inner elements.";
+    };
+
+    blur.size = lib.mkOption {
+      type = lib.types.str;
+      default = "5";
+      description = "The blur size.";
+    };
+    blur.passes = lib.mkOption {
+      type = lib.types.str;
+      default = "2";
+      description = "The amount of blur passes to perform.";
+    };
+    blur.amount = lib.mkOption {
+      type = lib.types.str;
+      default = toString ((lib.toInt layout.blur.size) * (lib.toInt layout.blur.passes));
+      description = "The blur amount in pixel.";
     };
   };
 }

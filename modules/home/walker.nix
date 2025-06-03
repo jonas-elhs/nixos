@@ -185,7 +185,7 @@ in {
             }
 
             #box {
-              border-radius: ${layout.border.radius}px;
+              border-radius: ${layout.border.radius.size}px;
               background: alpha(${background}, 0.5);
               padding: 32px;
               border: ${layout.border.width}px solid ${accent};
@@ -196,14 +196,14 @@ in {
 
             #search {
               padding: 8px;
-              border-radius: ${layout.border.radius}px;
+              border-radius: ${layout.border.radius.inner}px;
               border: ${layout.border.width}px solid ${accent};
               box-shadow: none;
             }
 
             child {
               padding: 8px;
-              border-radius: ${layout.border.radius}px;
+              border-radius: ${layout.border.radius.inner}px;
             }
             child:selected,
             child:hover {

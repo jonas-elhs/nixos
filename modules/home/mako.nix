@@ -44,12 +44,12 @@ in {
           on-button-right = "dismiss";
 
           font = "${layout.font.name} ${layout.font.sub}";
-          background-color = "${background}80";
+          background-color = background + layout.background.opacity_hex;
           text-color = text;
           progress-color = "source ${accent}";
 
           border-size = layout.border.width;
-          border-radius = layout.border.radius;
+          border-radius = layout.border.radius.size;
           border-color = accent;
 
           width = 300;
