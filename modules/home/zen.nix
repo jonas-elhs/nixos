@@ -21,6 +21,7 @@ in {
         background = colors.background.base;
         text = colors.foreground.base;
         highlight = colors.foreground.dark;
+        inactive = colors.inactive;
       in {
         policies = {
           DisableAppUpdate = true;
@@ -45,8 +46,6 @@ in {
               /*
               sidebar transition
               blur url bar
-              essential tabs
-              pinned tabs
               */
 
               * {
@@ -76,7 +75,7 @@ in {
                 transition: background 0.2s ease;
               }
 
-              /* Tabs */
+              /* Tabbar */
               #tabbrowser-tabs {
                 margin-top: 0px !important;
 
@@ -92,12 +91,24 @@ in {
                     }
                   }
                 }
-              }
-              tab.tabbrowser-tab {
-                margin: 4px 0px 0px 0px !important;
 
-                &:first-child {
-                  margin-top: 0px !important;
+                #zen-essentials:has(tab) {
+                  margin-bottom: ${layout.gap.inner}px !important;
+                }
+
+                .vertical-pinned-tabs-container-separator {
+                  margin: ${layout.gap.inner}px 0px 0px 0px !important;
+                }
+              }
+
+              /* Tabs */
+              tab.tabbrowser-tab {
+                &:not([zen-essential]) {
+                  margin: 4px 0px 0px 0px !important;
+
+                  &:first-child {
+                    margin-top: 0px !important;
+                  }
                 }
                 
                 &:hover .tab-background {
@@ -113,6 +124,14 @@ in {
                 .tab-background {
                   margin: 0 !important;
                   border-radius: ${layout.border.radius.inner}px !important;
+
+                  &:is([selected], [multiselected]) {
+                    border: ${layout.border.width}px solid ${accent} !important;
+                  }
+                }
+
+                &[zen-essential] .tab-background {
+                  border: ${layout.border.width}px solid ${inactive} !important;
 
                   &:is([selected], [multiselected]) {
                     border: ${layout.border.width}px solid ${accent} !important;
@@ -163,7 +182,7 @@ in {
               }
 
               /* Popups */
-              #urlbar-background,
+              #urlbar-container #urlbar #urlbar-background,
               #zen-welcome-pages,
               slot[part~=content],
               arrowscrollbox[part~=content],
@@ -172,6 +191,7 @@ in {
                 background: ${background}${layout.background.opacity_hex} !important;
                 border: ${layout.border.width}px solid ${accent} !important;
                 border-radius: ${layout.border.radius.size}px !important;
+                backdrop-filter: blur(${layout.blur.amount}px) !important;
               }
 
               /* Spacing */
