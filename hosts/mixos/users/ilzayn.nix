@@ -35,7 +35,7 @@
     };
     blur = {
       size = "5";
-      passes = "3";
+      passes = "4";
     };
   };
 
