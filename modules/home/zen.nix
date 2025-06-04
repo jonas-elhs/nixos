@@ -44,25 +44,22 @@ in {
             userChrome = ''
               /*
               sidebar transition
-              css nesting cleanup
+              blur url bar
+              essential tabs
+              pinned tabs
               */
 
-              /* Font */
               * {
+                /* Font */
                 font-family: ${layout.font.name} !important;
                 color: ${text} !important;
-              }
 
-              /* Transparent Background */
-              * {
+                /* Transparent Background */
                 &,
                 &::before,
                 &::after {
                   background: transparent !important;
                 }
-              }
-              html#main-window {
-                --zen-main-browser-background: transparent !important;
               }
 
               /* Colored Background */
@@ -82,6 +79,19 @@ in {
               /* Tabs */
               #tabbrowser-tabs {
                 margin-top: 0px !important;
+
+                #zen-tabs-wrapper {
+                  width: 100% !important;
+                  margin-left: 0px !important;
+
+                  zen-workspace {
+                    width: 100% !important;
+
+                    .zen-workspace-tabs-section {
+                      padding: 0px !important;
+                    }
+                  }
+                }
               }
               tab.tabbrowser-tab {
                 margin: 4px 0px 0px 0px !important;
@@ -109,33 +119,20 @@ in {
                   }
                 }
               }
-              zen-workspace {
-                width: 100% !important;
-              }
-              #zen-tabs-wrapper {
-                width: 100% !important;
-                margin-left: 0px !important;
-              }
-              .zen-workspace-tabs-section {
-                padding: 0px !important;
-              }
-
-              /* URL Bar */
-              #urlbar-input::placeholder {
-                color: transparent;
-              }
 
               /* Collapsed Mode */
               #main-window:not([zen-sidebar-expanded]) {
                 #TabsToolbar {
                   height: 9999px !important;
                 }
+
                 #navigator-toolbox {
                   margin-right: ${layout.gap.inner}px !important;
                   max-width: unset !important;
                   min-width: unset !important;
                   width: 36px !important;
                 }
+
                 #zen-appcontent-navbar-wrapper {
                   display: block !important;
 
@@ -145,6 +142,7 @@ in {
                     }
                   }
                 }
+
                 .tab-background {
                   width: 36px !important;
                   height: 36px !important;
@@ -158,17 +156,19 @@ in {
                   z-index: -999;
                   width: 0;
                 }
+
                 #zen-appcontent-wrapper {
                   margin-left: ${layout.gap.inner}px !important;
                 }
               }
 
               /* Popups */
-              tooltip,
+              #urlbar-background,
+              #zen-welcome-pages,
               slot[part~=content],
               arrowscrollbox[part~=content],
-              #urlbar-background,
-              #zen-welcome-pages {
+              tooltip,
+              .dialogBox {
                 background: ${background}${layout.background.opacity_hex} !important;
                 border: ${layout.border.width}px solid ${accent} !important;
                 border-radius: ${layout.border.radius.size}px !important;
@@ -192,6 +192,10 @@ in {
               }
 
               /* Hide */
+              #urlbar-input::placeholder {
+                color: transparent;
+              }
+
               #nav-bar:has(#urlbar:not([zen-floating-urlbar])) *,
               #zen-appcontent-navbar-wrapper * {
                 opacity: 0 !important;
@@ -199,7 +203,6 @@ in {
               #nav-bar,
               #nav-bar-customization-target,
               #urlbar-container,
-
               #zen-appcontent-navbar-wrapper {
                 position: absolute !important;
               }
@@ -214,16 +217,18 @@ in {
               #page-action-buttons,
               scrollbar,
               .urlbarView,
-              .zen-current-workspace-indicator {
+              .zen-current-workspace-indicator,
+
+              #tabbarItemsMenuSeparator,
+              #zen-context-menu-compact-mode,
+              #zen-toolbar-context-tabs-right,
+              #viewToolbarsMenuSeparator,
+              #zenToolbarThemePicker,
+              #toolbar-context-customize {
                 display: none !important;
               }
             '';
             userContent = ''
-              @-moz-document url-prefix("about") {
-                html,
-                body {
-                  background: transparent !important;
-                }
             '';
           };
         };
