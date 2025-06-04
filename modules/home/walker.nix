@@ -186,7 +186,7 @@ in {
 
             #box {
               border-radius: ${layout.border.radius.size}px;
-              background: alpha(${background}, 0.5);
+              background: alpha(${background}, ${toString layout.background.opacity});
               padding: 32px;
               border: ${layout.border.width}px solid ${accent};
               box-shadow:
