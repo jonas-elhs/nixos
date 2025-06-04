@@ -6,8 +6,10 @@
     maple-mono.NF
   ];
 
-  theme.name = "nordic";
-  theme.themes = "all";
+  theme = {
+    name = "nordic";
+    themes = "all";
+  };
 
   layout = {
     border = {
