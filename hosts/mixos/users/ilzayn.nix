@@ -2,14 +2,10 @@
   home.username = "ilzayn";
   home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
-
-  # TEMPORARY -- will move to module
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
+  home.fonts = with pkgs; [
     #font-awesome
     maple-mono.NF
   ];
-  # END TEMPORARY
 
   theme.name = "nordic";
   theme.themes = "all";
