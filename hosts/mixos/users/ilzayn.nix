@@ -1,6 +1,5 @@
 { config, pkgs, ... }: {
   home.username = "ilzayn";
-  home.homeDirectory = "/home/ilzayn";
   home.groups = [ "wheel" "input" ];
   home.fonts = with pkgs; [
     #font-awesome
@@ -62,7 +61,4 @@
   neovim.enable = true;
   mako.enable = true;
   zen.enable = true;
-
-  programs.home-manager.enable = true;
-  home.stateVersion = "24.11";
 }

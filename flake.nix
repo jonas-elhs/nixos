@@ -61,6 +61,7 @@
           (hostFile host)
           (libx.listPaths nixosModulesDir)
 
+          # Users
           ({ config, pkgs, lib, ... }: builtins.listToAttrs (
             lib.forEach hosts.${host}.users (user: {
               name = "users";
@@ -75,8 +76,10 @@
           ))
 
           ({ ... }: {
+            # Scripts
             environment.systemPackages = (scripts hosts.${host}.system);
 
+            # Caches
             nix.settings = {
               trusted-users = [
                 "root"
@@ -108,7 +111,8 @@
           inputs.zen-browser.homeModules.twilight
           inputs.nvf.homeManagerModules.default
 
-          ({ ... }: {
+          ({ config, ... }: {
+            # Themes
             specialisation = builtins.listToAttrs (lib.forEach
               (if ((libx.getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((libx.getModuleConfig (userFile host user)).theme.themes))
               (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
@@ -120,6 +124,11 @@
                 };
               })
             );
+
+            # Options
+            home.homeDirectory = "/home/${config.home.username}";
+            programs.home-manager.enable = true;
+            home.stateVersion = (libx.getModuleConfig (hostFile host)).system.stateVersion;
           })
 
         ];
