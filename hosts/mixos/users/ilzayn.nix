@@ -9,6 +9,7 @@
 
   theme.name = "nordic";
   theme.themes = "all";
+
   layout = {
     border = {
       width = "2";

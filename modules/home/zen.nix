@@ -1,6 +1,7 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, inputs, ... }: let
   cfg = config.zen;
   colors = config.theme.colors;
+  layout = config.layout;
 in {
   options.zen = {
     enable = lib.mkEnableOption "Zen";
@@ -15,8 +16,217 @@ in {
     programs.zen-browser = {
       enable = true;
     } // {
-      default = {
-        
+      default = let
+        accent = colors.accent;
+        background = colors.background.base;
+        text = colors.foreground.base;
+        highlight = colors.foreground.dark;
+      in {
+        policies = {
+          DisableAppUpdate = true;
+          DisableTelemetry = true;
+        };
+        profiles = {
+          default = {
+            id = 0;
+
+            extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+              ublock-origin
+            ];
+            settings = {
+              "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+              "zen.urlbar.behavior" = "float";
+              "zen.welcome-screen.seen" = true;
+              "browser.aboutConfig.showWarning" = false;
+              "browser.shell.checkDefaultBrowser" = false;
+            };
+
+            userChrome = ''
+              /*
+              sidebar transition
+              css nesting cleanup
+              */
+
+              /* Font */
+              * {
+                font-family: ${layout.font.name} !important;
+                color: ${text} !important;
+              }
+
+              /* Transparent Background */
+              * {
+                &,
+                &::before,
+                &::after {
+                  background: transparent !important;
+                }
+              }
+              html#main-window {
+                --zen-main-browser-background: transparent !important;
+              }
+
+              /* Colored Background */
+              body {
+                background: ${background}${layout.background.opacity_hex} !important;
+              }
+              .browserSidebarContainer {
+                background: ${background} !important;
+                border-radius: ${layout.border.radius.inner}px !important;
+              }
+
+              /* Transitions */
+              .tab-background {
+                transition: background 0.2s ease;
+              }
+
+              /* Tabs */
+              #tabbrowser-tabs {
+                margin-top: 0px !important;
+              }
+              tab.tabbrowser-tab {
+                margin: 4px 0px 0px 0px !important;
+
+                &:first-child {
+                  margin-top: 0px !important;
+                }
+                
+                &:hover .tab-background {
+                  background: ${highlight}${layout.background.opacity_hex} !important;
+                }
+
+                &[selected]:not(:hover) {
+                  .tab-close-button {
+                    display: none !important;
+                  }
+                }
+
+                .tab-background {
+                  margin: 0 !important;
+                  border-radius: ${layout.border.radius.inner}px !important;
+
+                  &:is([selected], [multiselected]) {
+                    border: ${layout.border.width}px solid ${accent} !important;
+                  }
+                }
+              }
+              zen-workspace {
+                width: 100% !important;
+              }
+              #zen-tabs-wrapper {
+                width: 100% !important;
+                margin-left: 0px !important;
+              }
+              .zen-workspace-tabs-section {
+                padding: 0px !important;
+              }
+
+              /* URL Bar */
+              #urlbar-input::placeholder {
+                color: transparent;
+              }
+
+              /* Collapsed Mode */
+              #main-window:not([zen-sidebar-expanded]) {
+                #TabsToolbar {
+                  height: 9999px !important;
+                }
+                #navigator-toolbox {
+                  margin-right: ${layout.gap.inner}px !important;
+                  max-width: unset !important;
+                  min-width: unset !important;
+                  width: 36px !important;
+                }
+                #zen-appcontent-navbar-wrapper {
+                  display: block !important;
+
+                  #urlbar[zen-floating-urlbar] {
+                    &, *, #urlbar-background {
+                      opacity: 1 !important;
+                    }
+                  }
+                }
+                .tab-background {
+                  width: 36px !important;
+                  height: 36px !important;
+                }
+              }
+
+              /* Compact Mode */
+              #zen-main-app-wrapper[zen-compact-mode=true] {
+                #navigator-toolbox {
+                  opacity: 0;
+                  z-index: -999;
+                  width: 0;
+                }
+                #zen-appcontent-wrapper {
+                  margin-left: ${layout.gap.inner}px !important;
+                }
+              }
+
+              /* Popups */
+              tooltip,
+              slot[part~=content],
+              arrowscrollbox[part~=content],
+              #urlbar-background,
+              #zen-welcome-pages {
+                background: ${background}${layout.background.opacity_hex} !important;
+                border: ${layout.border.width}px solid ${accent} !important;
+                border-radius: ${layout.border.radius.size}px !important;
+              }
+
+              /* Spacing */
+              #navigator-toolbox {
+                padding: 0px !important;
+                margin: ${layout.gap.inner}px 0px ${layout.gap.inner}px ${layout.gap.inner}px !important;
+              }
+              #zen-appcontent-wrapper {
+                margin: ${layout.gap.inner}px ${layout.gap.inner}px ${layout.gap.inner}px 0px !important;
+              }
+              #zen-tabbox-wrapper {
+                margin: 0px !important;
+              }
+              #zen-sidebar-splitter {
+                width: ${layout.gap.inner}px !important;
+                max-width: unset !important;
+                min-width: unset !important;
+              }
+
+              /* Hide */
+              #nav-bar:has(#urlbar:not([zen-floating-urlbar])) *,
+              #zen-appcontent-navbar-wrapper * {
+                opacity: 0 !important;
+              }
+              #nav-bar,
+              #nav-bar-customization-target,
+              #urlbar-container,
+
+              #zen-appcontent-navbar-wrapper {
+                position: absolute !important;
+              }
+
+              #zen-appcontent-navbar-wrapper,
+              #zen-sidebar-top-buttons,
+              #zen-sidebar-bottom-buttons,
+              #identity-box,
+              #tabbrowser-arrowscrollbox-periphery,
+              #remote-control-box,
+              #urlbar-search-button,
+              #page-action-buttons,
+              scrollbar,
+              .urlbarView,
+              .zen-current-workspace-indicator {
+                display: none !important;
+              }
+            '';
+            userContent = ''
+              @-moz-document url-prefix("about") {
+                html,
+                body {
+                  background: transparent !important;
+                }
+            '';
+          };
+        };
       };
     }.${cfg.style};
   };
