@@ -76,6 +76,9 @@
           ))
 
           ({ ... }: {
+            # Hostname
+            networking.hostName = host;
+
             # Scripts
             environment.systemPackages = (scripts hosts.${host}.system);
 

@@ -47,9 +47,10 @@
     # TEMPORARY --- will move to home-manager
     wl-clipboard
     cliphist
+
     firefox
+
     tree
-    neovim
     # END TEMPORARY
 
     # MAIL
@@ -73,7 +74,6 @@
   ];
 
   system.architecture = "x86_64-linux";
-  networking.hostName = "mixos";
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
