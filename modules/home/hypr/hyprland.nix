@@ -102,8 +102,8 @@ in {
               enabled = true;
               size = layout.blur.size;
               passes = layout.blur.passes;
-
               vibrancy = 0.1696;
+              popups = true;
             };
           };
 
