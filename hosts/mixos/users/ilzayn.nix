@@ -19,7 +19,7 @@
     };
     font = {
       name = "Maple Mono NF";
-      sub = "8";
+      sub = "10";
       size = "12";
       title = "18";
     };
@@ -33,7 +33,7 @@
     };
     blur = {
       size = "5";
-      passes = "2";
+      passes = "3";
     };
   };
 
