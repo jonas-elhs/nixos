@@ -31,6 +31,7 @@ in {
       default = let
         active = "rgba(${lib.removePrefix "#" colors.accent}ee)";
         inactive = "rgba(${lib.removePrefix "#" colors.inactive}ee)";
+        dark-background = lib.removePrefix "#" colors.background.dark;
       in {
         settings = {
           # ---------- MONITORS ---------- #
@@ -94,9 +95,9 @@ in {
 
             shadow = {
               enabled = true;
-              range = 4;
+              range = 8;
               render_power = 3;
-              color = "rgba(1a1a1aee)";
+              color = "rgba(${dark-background}ee)";
             };
             blur = {
               enabled = true;
