@@ -7,6 +7,7 @@
     pulse.enable = true;
     alsa.enable = true;
   };
+  home-manager.enable = true;
 
   boot-loader = {
     systemd-boot.enable = true;
@@ -75,7 +76,6 @@
     (python3.withPackages (python-pkgs: with python-pkgs; [
       image-go-nord
     ]))
-    home-manager
   ];
 
   system.architecture = "x86_64-linux";
