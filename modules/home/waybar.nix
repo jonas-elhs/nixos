@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.waybar;
   colors = config.theme.colors;
-  layout = config.layout;
+  layout = config.theme.layout;
 in {
   options = {
     waybar.enable = lib.mkEnableOption "Waybar";

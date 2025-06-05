@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.kitty;
   colors = config.theme.colors;
-  layout = config.layout;
+  layout = config.theme.layout;
 in {
   options.kitty = {
     enable = lib.mkEnableOption "Kitty Terminal";

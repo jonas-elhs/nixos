@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.mako;
   colors = config.theme.colors;
-  layout = config.layout;
+  layout = config.theme.layout;
 in {
   options.mako = {
     enable = lib.mkEnableOption "Mako";

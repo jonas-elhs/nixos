@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.fastfetch;
   colors = config.theme.colors;
-  layout = config.layout;
+  layout = config.theme.layout;
 in {
   options.fastfetch = {
     enable = lib.mkEnableOption "Fastfetch";

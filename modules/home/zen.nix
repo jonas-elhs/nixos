@@ -1,7 +1,7 @@
 { config, pkgs, lib, inputs, ... }: let
   cfg = config.zen;
   colors = config.theme.colors;
-  layout = config.layout;
+  layout = config.theme.layout;
 in {
   options.zen = {
     enable = lib.mkEnableOption "Zen";

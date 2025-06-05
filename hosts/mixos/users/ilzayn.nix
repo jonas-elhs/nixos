@@ -9,33 +9,32 @@
   theme = {
     name = "nordic";
     themes = "all";
-  };
-
-  layout = {
-    border = {
-      width = "2";
-      radius = {
-        size = "10";
-        inner = "7";
+    layout = {
+      border = {
+        width = "2";
+        radius = {
+          size = "10";
+          inner = "7";
+        };
       };
-    };
-    font = {
-      name = "Maple Mono NF";
-      sub = "10";
-      size = "12";
-      title = "18";
-    };
-    background = {
-      opacity = 0.5;
-      opacity_hex = "80";
-    };
-    gap = {
-      size = "20";
-      inner = "10";
-    };
-    blur = {
-      size = "5";
-      passes = "4";
+      font = {
+        name = "Maple Mono NF";
+        sub = "10";
+        size = "12";
+        title = "18";
+      };
+      background = {
+        opacity = 0.5;
+        opacity_hex = "80";
+      };
+      gap = {
+        size = "20";
+        inner = "10";
+      };
+      blur = {
+        size = "5";
+        passes = "4";
+      };
     };
   };
 

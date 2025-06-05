@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hyprland;
   colors = config.theme.colors;
-  layout = config.layout;
+  layout = config.theme.layout;
 in {
   options.hyprland = {
     enable = lib.mkEnableOption "Hyprland";

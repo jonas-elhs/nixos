@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: let
   cfg = config.hypridle;
   colors = config.theme.colors;
-  layout = config.layout;
+  layout = config.theme.layout;
 in {
   options.hypridle = {
     enable = lib.mkEnableOption "Hypridle";
