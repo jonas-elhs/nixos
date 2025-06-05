@@ -32,7 +32,7 @@
         inner = "10";
       };
       blur = {
-        size = "5";
+        size = "3";
         passes = "4";
       };
     };
