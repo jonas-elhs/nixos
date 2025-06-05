@@ -96,8 +96,14 @@ in {
                   margin-bottom: ${layout.gap.inner}px !important;
                 }
 
-                .vertical-pinned-tabs-container-separator {
-                  margin: ${layout.gap.inner}px 0px 0px 0px !important;
+                .zen-workspace-pinned-tabs-section {
+                  .vertical-pinned-tabs-container-separator {
+                    margin: ${layout.gap.inner}px 0px 0px 0px !important;
+                  }
+
+                  &[hide-separator] .vertical-pinned-tabs-container-separator {
+                    margin: 0px !important;
+                  }
                 }
               }
 
