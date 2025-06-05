@@ -32,6 +32,7 @@
     # Paths
     hostsDir =                 ./hosts;
     hostFile = host:           hostsDir + /${host}/configuration.nix;
+    hardwareFile = host:       hostsDir + /${host}/hardware-configuration.nix;
 
     usersDir = host:           ./hosts/${host}/users;
     userFile = host: user:     (usersDir host) + /${user}.nix;
@@ -76,6 +77,14 @@
           ))
 
           ({ ... }: {
+            # Hardware Configuration
+            imports = [
+              (hardwareFile host)
+            ];
+
+            # Required Experimental Features
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            
             # Hostname
             networking.hostName = host;
 

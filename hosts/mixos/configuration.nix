@@ -1,8 +1,4 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   hyprland.enable = true;
   bluetooth.enable = true;
   hardware-acceleration.enable = true;
@@ -43,6 +39,15 @@
   };
   # END TEMPORARY
 
+  # TEMPORARY --- will move to nixos-modules
+  networking.wireless.enable = true;
+  # END TEMPORARY
+
+  # TEMPORARY --- will move to nixos-modules
+  time.timeZone = "Europe/Berlin";
+  i18n.defaultLocale = "en_US.UTF-8";
+  # END TEMPORARY
+
   environment.systemPackages = with pkgs; [
     # TEMPORARY --- will move to home-manager
     wl-clipboard
@@ -74,10 +79,5 @@
   ];
 
   system.architecture = "x86_64-linux";
-  time.timeZone = "Europe/Berlin";
-  i18n.defaultLocale = "en_US.UTF-8";
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  networking.wireless.enable = true;
-
   system.stateVersion = "24.11";
 }
