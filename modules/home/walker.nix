@@ -126,7 +126,7 @@ in {
                       max_width = 0;
                       min_width = 0;
                       margins = {
-                        top = 26;
+                        top = layout.gap.size;
                       };
 
                       item = {
@@ -186,8 +186,8 @@ in {
 
             #box {
               border-radius: ${layout.border.radius.size}px;
-              background: alpha(${background}, ${toString layout.background.opacity});
-              padding: 32px;
+              background: ${background}${layout.background.opacity_hex};
+              padding: ${layout.gap.size}px;
               border: ${layout.border.width}px solid ${accent};
               box-shadow:
                 0 19px 38px rgba(0, 0, 0, 0.3),
@@ -195,19 +195,19 @@ in {
             }
 
             #search {
-              padding: 8px;
+              padding: ${layout.gap.inner}px;
               border-radius: ${layout.border.radius.inner}px;
               border: ${layout.border.width}px solid ${accent};
               box-shadow: none;
             }
 
             child {
-              padding: 8px;
+              padding: ${layout.gap.inner}px;
               border-radius: ${layout.border.radius.inner}px;
             }
             child:selected,
             child:hover {
-              background: alpha(${highlight}, 0.4);
+              background: ${highlight}${layout.background.opacity_hex};
             }
           '';
         };
