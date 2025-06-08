@@ -30,28 +30,30 @@
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs: let
     # Paths
-    hostsDir =                 ./hosts;
-    hostFile = host:           hostsDir + /${host}/configuration.nix;
-    hardwareFile = host:       hostsDir + /${host}/hardware-configuration.nix;
+    paths = rec {
+      hostsDir =                 ./hosts;
+      hostFile = host:           hostsDir + /${host}/configuration.nix;
+      hardwareFile = host:       hostsDir + /${host}/hardware-configuration.nix;
 
-    usersDir = host:           ./hosts/${host}/users;
-    userFile = host: user:     (usersDir host) + /${user}.nix;
+      usersDir = host:           ./hosts/${host}/users;
+      userFile = host: user:     (usersDir host) + /${user}.nix;
 
-    nixosModulesDir =          ./modules/nixos;
-    homeModulesDir =           ./modules/home;
+      nixosModulesDir =          ./modules/nixos;
+      homeModulesDir =           ./modules/home;
 
-    scriptsDir =               ./modules/scripts;
-    scriptFile = script:       scriptsDir + /${script};
+      scriptsDir =               ./modules/scripts;
+      scriptFile = script:       scriptsDir + /${script};
 
-    packagesDir =               ./modules/packages;
-    packagesFile = package:      packagesDir + /${package};
+      packagesDir =              ./modules/packages;
+      packagesFile = package:     packagesDir + /${package};
 
-    themesDir =                ./modules/themes;
-    themesFile = theme:        themesDir + /${theme}.nix;
+      themesDir =                ./modules/themes;
+      themesFile = theme:        themesDir + /${theme}.nix;
+    };
 
     # Lib
     lib = nixpkgs.lib;
-    libx = (import ./lib.nix) { inherit hosts usersDir userFile hostsDir hostFile scriptsDir scriptFile packagesDir packagesFile themesDir themesFile nixpkgs; };
+    libx = (import ./lib.nix) { inherit hosts paths nixpkgs; };
 
     hosts = libx.getHosts;
     scripts = libx.getScripts;
@@ -63,8 +65,8 @@
         specialArgs = { inherit inputs host; pckgsx = packages; };
         modules = lib.flatten [
 
-          (hostFile host)
-          (libx.listPaths nixosModulesDir)
+          (paths.hostFile host)
+          (libx.listPaths paths.nixosModulesDir)
 
           # Users
           ({ config, pkgs, lib, ... }: builtins.listToAttrs (
@@ -73,7 +75,7 @@
               value = {
                 users.${user} = {
                   isNormalUser = true;
-                  extraGroups = (import (userFile host user) { config = null; pkgs = null; }).home.groups;
+                  extraGroups = (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups;
                   initialPassword = user;
                 };
               };
@@ -83,7 +85,7 @@
           ({ ... }: {
             # Hardware Configuration
             imports = [
-              (hardwareFile host)
+              (paths.hardwareFile host)
             ];
 
             # Required Experimental Features
@@ -120,8 +122,8 @@
         extraSpecialArgs = { inherit inputs; };
         modules = lib.flatten [
 
-          (userFile host user)
-          (libx.listPaths homeModulesDir)
+          (paths.userFile host user)
+          (libx.listPaths paths.homeModulesDir)
 
           inputs.walker.homeManagerModules.default
           inputs.zen-browser.homeModules.twilight
@@ -134,7 +136,7 @@
             # Options
             home.homeDirectory = "/home/${config.home.username}";
             programs.home-manager.enable = true;
-            home.stateVersion = (libx.getModuleConfig (hostFile host)).system.stateVersion;
+            home.stateVersion = (libx.getModuleConfig (paths.hostFile host)).system.stateVersion;
           })
 
         ];

@@ -1,10 +1,6 @@
 {
   hosts,
-  usersDir, userFile,
-  hostsDir, hostFile,
-  scriptsDir, scriptFile,
-  packagesFile, packagesDir,
-  themesFile, themesDir,
+  paths,
   nixpkgs,
   ...
 }: let
@@ -30,17 +26,17 @@ in rec {
   getUsersFromHost = (host:
     lib.flatten (
       lib.forEach
-      (getDirNames (usersDir host))
+      (getDirNames (paths.usersDir host))
       (userFile: lib.take 1 (lib.splitString "." userFile))
     )
   );
   getHosts = builtins.listToAttrs (lib.forEach
-    (getDirNames hostsDir)
+    (getDirNames paths.hostsDir)
     (host: {
       name = host;
       value = {
         users = getUsersFromHost host;
-        system = (getModuleConfig (hostFile host)).system.architecture;
+        system = (getModuleConfig (paths.hostFile host)).system.architecture;
       };
     })
   );
@@ -70,25 +66,25 @@ in rec {
   # Scripts
   getScripts = (system:
     lib.forEach
-    (getDirNames scriptsDir)
-    (script: (import (scriptFile script) { pkgs = import nixpkgs { inherit system; }; }))
+    (getDirNames paths.scriptsDir)
+    (script: (import (paths.scriptFile script) { pkgs = import nixpkgs { inherit system; }; }))
   );
 
   # Packages
   getPackages = (system:
     lib.forEach
-    (getDirNames packagesDir)
-    (package: (import (packagesFile package)))
+    (getDirNames paths.packagesDir)
+    (package: (import (paths.packagesFile package)))
   );
 
   # Themes
   getThemeSpecialisations = host: user: builtins.listToAttrs (lib.forEach
-      (if ((getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((getModuleConfig (userFile host user)).theme.themes))
+      (if ((getModuleConfig (paths.userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir paths.themesDir))) else ((getModuleConfig (paths.userFile host user)).theme.themes))
       (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
       name = "theme-${theme-name}";
       value = {
         configuration = {
-          theme.colors = import (themesFile theme-name);
+          theme.colors = import (paths.themesFile theme-name);
         };
       };
     })
