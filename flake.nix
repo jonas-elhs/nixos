@@ -43,20 +43,24 @@
     scriptsDir =               ./modules/scripts;
     scriptFile = script:       scriptsDir + /${script};
 
+    packagesDir =               ./modules/packages;
+    packagesFile = package:      packagesDir + /${package};
+
     themesDir =                ./modules/themes;
     themesFile = theme:        themesDir + /${theme}.nix;
 
     # Lib
     lib = nixpkgs.lib;
-    libx = (import ./lib.nix) { inherit hosts usersDir hostsDir hostFile scriptsDir scriptFile nixpkgs; };
+    libx = (import ./lib.nix) { inherit hosts usersDir userFile hostsDir hostFile scriptsDir scriptFile packagesDir packagesFile themesDir themesFile nixpkgs; };
 
     hosts = libx.getHosts;
     scripts = libx.getScripts;
+    packages = libx.getPackages;
   in {
 
     nixosConfigurations = libx.forEachHost (host:
       nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs host; };
+        specialArgs = { inherit inputs host; pckgsx = packages; };
         modules = lib.flatten [
 
           (hostFile host)
@@ -112,7 +116,7 @@
 
     homeConfigurations = libx.forEachHome (host: user:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = libx.getPkgs host;
+        pkgs = libx.getSystemPkgs host;
         extraSpecialArgs = { inherit inputs; };
         modules = lib.flatten [
 
@@ -125,17 +129,7 @@
 
           ({ config, ... }: {
             # Themes
-            specialisation = builtins.listToAttrs (lib.forEach
-              (if ((libx.getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((libx.getModuleConfig (userFile host user)).theme.themes))
-              (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
-                name = "theme-${theme-name}";
-                value = {
-                  configuration = {
-                    theme.colors = import (themesFile theme-name);
-                  };
-                };
-              })
-            );
+            specialisation = libx.getThemeSpecialisations host user;
 
             # Options
             home.homeDirectory = "/home/${config.home.username}";

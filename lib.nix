@@ -1,8 +1,17 @@
-{ hosts, usersDir, hostsDir, hostFile, scriptsDir, scriptFile, nixpkgs, ... }: let
+{
+  hosts,
+  usersDir, userFile,
+  hostsDir, hostFile,
+  scriptsDir, scriptFile,
+  packagesFile, packagesDir,
+  themesFile, themesDir,
+  nixpkgs,
+  ...
+}: let
   lib = nixpkgs.lib;
 in rec {
   # Utils
-  getPkgs = (host: nixpkgs.legacyPackages.${hosts.${host}.system});
+  getSystemPkgs = (host: nixpkgs.legacyPackages.${hosts.${host}.system});
   getDirNames = (dir: builtins.attrNames (builtins.readDir dir));
   getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; });
   listPaths = (dir:
@@ -65,4 +74,24 @@ in rec {
                    (getDirNames scriptsDir)
                    (script: (import (scriptFile script) { pkgs = import nixpkgs { inherit system; }; }))
                );
+
+  # Packages
+  getPackages = (system:
+                 lib.forEach
+                   (getDirNames packagesDir)
+                   (package: (import (packagesFile package)))
+               );
+
+  # Themes
+  getThemeSpecialisations = host: user: builtins.listToAttrs (lib.forEach
+      (if ((getModuleConfig (userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir themesDir))) else ((getModuleConfig (userFile host user)).theme.themes))
+      (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
+      name = "theme-${theme-name}";
+      value = {
+        configuration = {
+          theme.colors = import (themesFile theme-name);
+        };
+      };
+    })
+  );
 }
