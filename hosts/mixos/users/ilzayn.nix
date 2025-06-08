@@ -2,9 +2,7 @@
   home.username = "ilzayn";
   home.groups = [ "wheel" "input" ];
   home.fonts = with pkgs; [
-    #font-awesome
     maple-mono.NF
-    nerd-fonts.fira-code
   ];
 
   theme = {
@@ -19,7 +17,6 @@
         };
       };
       font = {
-        #name = "FiraCode Nerd Font Mono";
         name = "Maple Mono NF";
         sub = "10";
         size = "12";
