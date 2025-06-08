@@ -1,15 +1,10 @@
-{
-  hosts,
-  paths,
-  nixpkgs,
-  ...
-}: let
+{ hosts, paths, nixpkgs, ... }: let
   lib = nixpkgs.lib;
 in rec {
   # Utils
   getSystemPkgs = (host: nixpkgs.legacyPackages.${hosts.${host}.system});
   getDirNames = (dir: builtins.attrNames (builtins.readDir dir));
-  getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; });
+  getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; libx = null; });
   listPaths = (dir:
     lib.flatten (
       lib.forEach

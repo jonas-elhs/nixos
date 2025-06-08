@@ -119,7 +119,7 @@
     homeConfigurations = libx.forEachHome (host: user:
       home-manager.lib.homeManagerConfiguration {
         pkgs = libx.getSystemPkgs host;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs; pckgsx = packages; };
         modules = lib.flatten [
 
           (paths.userFile host user)
