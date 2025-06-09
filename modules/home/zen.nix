@@ -109,7 +109,7 @@ in {
 
               /* Tabs */
               tab.tabbrowser-tab {
-                &:not([zen-essential]) {
+                &:not([zen-essential]):not([zen-glance-tab]) {
                   margin: 4px 0px 0px 0px !important;
 
                   &:first-child {
