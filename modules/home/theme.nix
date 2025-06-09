@@ -44,6 +44,11 @@ in {
             default = null;
             description = "The main font.";
           };
+          font.mono = lib.mkOption {
+            type = lib.types.str;
+            default = cfg.layout.font.name;
+            description = "The mono font.";
+          };
           font.sub = lib.mkOption {
             type = lib.types.str;
             default = cfg.layout.font.size;

@@ -2,7 +2,8 @@
   home.username = "ilzayn";
   home.groups = [ "wheel" "input" ];
   home.fonts = with pkgs; [
-    maple-mono.NF
+    maple-nerd-font-mono
+    maple-nerd-font-propo
   ];
 
   theme = {
@@ -17,7 +18,8 @@
         };
       };
       font = {
-        name = "Maple Mono NF";
+        name = "MapleMono Nerd Font Propo";
+        mono = "MapleMono Nerd Font Mono";
         sub = "10";
         size = "12";
         title = "18";

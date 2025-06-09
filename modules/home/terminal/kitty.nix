@@ -22,7 +22,7 @@ in {
           mode = "no-rc no-cursor";
         };
         font = {
-          name = layout.font.name;
+          name = layout.font.mono;
           size = lib.toInt layout.font.size;
         };
         keybindings = {
