@@ -4,13 +4,16 @@ in rec {
   # Utils
   getSystem = (host: hosts.${host}.system);
   getSystemPkgs = (host: nixpkgs.legacyPackages.${getSystem host});
-  getDirNames = (dir: builtins.attrNames (builtins.readDir dir));
+  getDirNames = (dir: builtins.filter
+    (file: !(lib.hasPrefix "_" file) && !(lib.hasPrefix "." file))
+    (builtins.attrNames (builtins.readDir dir))
+  );
   getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; libx = null; });
   isHomeManagerEnabled = (host: (getModuleConfig (paths.hostFile host)).home-manager.enable == true);
   listPaths = (dir:
     lib.flatten (
       lib.forEach
-      (builtins.filter (file: !(lib.hasPrefix "_" file)) (getDirNames dir))
+      (getDirNames dir)
       (name:
         if lib.hasSuffix ".nix" name then /${dir}/${name}
         else (listPaths /${dir}/${name})
