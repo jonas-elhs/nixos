@@ -5,6 +5,7 @@ in rec {
   getSystemPkgs = (host: nixpkgs.legacyPackages.${hosts.${host}.system});
   getDirNames = (dir: builtins.attrNames (builtins.readDir dir));
   getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; libx = null; });
+  isHomeManagerEnabled = (host: (getModuleConfig (paths.hostFile host)).home-manager.enable == true);
   listPaths = (dir:
     lib.flatten (
       lib.forEach
@@ -53,7 +54,7 @@ in rec {
     builtins.listToAttrs (
       lib.flatten (lib.mapAttrsToList
         (forEachUserInHost)
-        (forEachHost f)
+        (lib.filterAttrs (name: value: isHomeManagerEnabled name) (forEachHost f))
       )
     )
   );
