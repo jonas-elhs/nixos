@@ -2,8 +2,9 @@
   lib = nixpkgs.lib;
 in rec {
   # Utils
+  getPkgs = (system: nixpkgs.legacyPackages.${system});
   getSystem = (host: hosts.${host}.system);
-  getSystemPkgs = (host: nixpkgs.legacyPackages.${getSystem host});
+  getSystemPkgs = (host: getPkgs (getSystem host));
   getDirNames = (dir: builtins.filter
     (file: !(lib.hasPrefix "_" file) && !(lib.hasPrefix "." file))
     (builtins.attrNames (builtins.readDir dir))
@@ -22,9 +23,8 @@ in rec {
   );
 
   # Read Hosts and Users
-  _getUsersFromHost = (host:
-    lib.flatten (
-      lib.forEach
+  _getUsersFromHost = (host: lib.flatten
+    (lib.forEach
       (getDirNames (paths.usersDir host))
       (userFile: lib.take 1 (lib.splitString "." userFile))
     )
@@ -65,14 +65,17 @@ in rec {
   # Scripts
   getScripts = (system: lib.forEach
     (getDirNames paths.scriptsDir)
-    (script: (import (paths.scriptFile script) { pkgs = import nixpkgs { inherit system; }; }))
+    (script: (import (paths.scriptFile script) { pkgs = getPkgs system; }))
   );
 
   # Packages
   getPackages = (system: builtins.listToAttrs
     (lib.forEach
       (getDirNames paths.packagesDir)
-      (package: { name = package; value = (import (paths.packagesFile package)); })
+      (package: {
+        name = (lib.elemAt (lib.splitString "." package) 0);
+        value = ((getPkgs system).callPackage (paths.packagesFile package) { });
+      })
     )
   );
 
