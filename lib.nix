@@ -10,10 +10,9 @@ in rec {
   listPaths = (dir:
     lib.flatten (
       lib.forEach
-      (getDirNames dir)
+      (builtins.filter (file: !(lib.hasPrefix "_" file)) (getDirNames dir))
       (name:
-        if lib.hasPrefix "_" name then []
-        else if lib.hasSuffix ".nix" name then /${dir}/${name}
+        if lib.hasSuffix ".nix" name then /${dir}/${name}
         else (listPaths /${dir}/${name})
       )
     )
