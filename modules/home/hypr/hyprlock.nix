@@ -18,7 +18,7 @@ in {
     } // {
       default = let
         foreground = "rgb(${lib.removePrefix "#" colors.foreground.base})";
-        text = "rgb(${lib.removePrefix "#" colors.background.base})";
+        background = "rgb(${lib.removePrefix "#" colors.background.base})";
         accent = "rgb(${lib.removePrefix "#" colors.accent})";
         error = "rgb(${lib.removePrefix "#" colors.error})";
       in {
@@ -49,7 +49,7 @@ in {
               text = "$TIME";
               font_size = 90;
               font_family = layout.font.name;
-              color = text;
+              color = foreground;
               position = "0, 300";
               halign = "center";
               valign = "center";
@@ -58,7 +58,7 @@ in {
               text = "cmd[update:43200000] echo \"$(date +\"%A, %0d. %B %Y\")\"";
               font_size = 25;
               font_family = layout.font.name;
-              color = text;
+              color = foreground;
               position = "0, 220";
               halign = "center";
               valign = "center";
@@ -67,7 +67,7 @@ in {
 
           input-field = {
             size = "300, 60";
-            outline_thickness = layout.border.width;
+            outline_thickness = (lib.toInt layout.border.width) * 2;
             dots_size = 0.2;
             dots_spacing = 0.5;
             dots_center = true;
@@ -82,7 +82,7 @@ in {
 
             outer_color = accent;
             inner_color = foreground;
-            font_color = text;
+            font_color = background;
             fail_color = error;
             check_color = accent;
           };
