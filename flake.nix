@@ -65,31 +65,29 @@
           (paths.hostFile host)
           (libx.listPaths paths.nixosModulesDir)
 
-          # Users
-          ({ config, pkgs, lib, ... }: builtins.listToAttrs (
-            lib.forEach hosts.${host}.users (user: {
-              name = "users";
-              value = {
-                users.${user} = {
-                  isNormalUser = true;
-                  extraGroups = (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups;
-                  initialPassword = user;
-                };
-              };
-            })
-          ))
-
-          ({ ... }: {
+          ({ lib, ... }: {
             # Hardware Configuration
             imports = [
               (paths.hardwareFile host)
             ];
 
-            # Required Experimental Features
-            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            # Users
+            users.users = builtins.listToAttrs (
+              lib.forEach hosts.${host}.users (user: {
+                name = user;
+                value = {
+                  isNormalUser = true;
+                  extraGroups = (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups;
+                  initialPassword = user;
+                };
+              })
+            );
             
             # Hostname
             networking.hostName = host;
+
+            # Required Experimental Features
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
             # Scripts
             environment.systemPackages = (libx.getScripts (libx.getSystem host));
@@ -136,7 +134,8 @@
             specialisation = libx.getThemeSpecialisations host user;
 
             # Options
-            home.homeDirectory = "/home/${config.home.username}";
+            home.username = user;
+            home.homeDirectory = "/home/${user}";
             programs.home-manager.enable = true;
             home.stateVersion = (libx.getModuleConfig (paths.hostFile host)).system.stateVersion;
 

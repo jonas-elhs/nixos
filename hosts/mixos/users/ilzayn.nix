@@ -1,5 +1,4 @@
 { config, pkgs, ... }: {
-  home.username = "ilzayn";
   home.groups = [ "wheel" "input" ];
   home.fonts = with pkgs; [
     maple-nerd-font-mono
