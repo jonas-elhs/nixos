@@ -19,7 +19,7 @@ in rec {
   );
 
   # Read Hosts and Users
-  getUsersFromHost = (host:
+  _getUsersFromHost = (host:
     lib.flatten (
       lib.forEach
       (getDirNames (paths.usersDir host))
@@ -31,7 +31,7 @@ in rec {
     (host: {
       name = host;
       value = {
-        users = getUsersFromHost host;
+        users = _getUsersFromHost host;
         system = (getModuleConfig (paths.hostFile host)).system.architecture;
       };
     })
@@ -42,7 +42,7 @@ in rec {
   forEachHost = (f: nixpkgs.lib.genAttrs getHostNames f);
 
   # Home Manager
-  forEachUserInHost = (host: f:
+  _forEachUserInHost = (host: f:
     lib.forEach
     hosts.${host}.users
     (user: {
@@ -53,7 +53,7 @@ in rec {
   forEachHome = (f:
     builtins.listToAttrs (
       lib.flatten (lib.mapAttrsToList
-        (forEachUserInHost)
+        (_forEachUserInHost)
         (lib.filterAttrs (name: value: isHomeManagerEnabled name) (forEachHost f))
       )
     )
@@ -72,17 +72,17 @@ in rec {
   );
 
   # Themes
-  useAllThemes = (host: user:
+  _useAllThemes = (host: user:
     ((getModuleConfig (paths.userFile host user)).theme.themes) == "all"
   );
-  getAllThemes = (lib.remove "default.nix" (builtins.attrNames (builtins.readDir paths.themesDir)));
-  getSpecifiedThemes = (host: user: ((getModuleConfig (paths.userFile host user)).theme.themes));
-  getThemeNames = (host: user:
-    if (useAllThemes host user) then getAllThemes
-    else getSpecifiedThemes host user
+  _getAllThemes = (lib.remove "default.nix" (builtins.attrNames (builtins.readDir paths.themesDir)));
+  _getSpecifiedThemes = (host: user: ((getModuleConfig (paths.userFile host user)).theme.themes));
+  _getThemeNames = (host: user:
+    if (_useAllThemes host user) then _getAllThemes
+    else _getSpecifiedThemes host user
   );
   getThemeSpecialisations = host: user: builtins.listToAttrs (lib.forEach
-      (getThemeNames host user)
+      (_getThemeNames host user)
       (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
       name = "theme-${theme-name}";
       value = {
