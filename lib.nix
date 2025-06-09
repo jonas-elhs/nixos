@@ -60,22 +60,29 @@ in rec {
   );
 
   # Scripts
-  getScripts = (system:
-    lib.forEach
+  getScripts = (system: lib.forEach
     (getDirNames paths.scriptsDir)
     (script: (import (paths.scriptFile script) { pkgs = import nixpkgs { inherit system; }; }))
   );
 
   # Packages
-  getPackages = (system:
-    lib.forEach
+  getPackages = (system: lib.forEach
     (getDirNames paths.packagesDir)
     (package: (import (paths.packagesFile package)))
   );
 
   # Themes
+  useAllThemes = (host: user:
+    ((getModuleConfig (paths.userFile host user)).theme.themes) == "all"
+  );
+  getAllThemes = (lib.remove "default.nix" (builtins.attrNames (builtins.readDir paths.themesDir)));
+  getSpecifiedThemes = (host: user: ((getModuleConfig (paths.userFile host user)).theme.themes));
+  getThemeNames = (host: user:
+    if (useAllThemes host user) then getAllThemes
+    else getSpecifiedThemes host user
+  );
   getThemeSpecialisations = host: user: builtins.listToAttrs (lib.forEach
-      (if ((getModuleConfig (paths.userFile host user)).theme.themes) == "all" then (lib.remove "default.nix" (builtins.attrNames (builtins.readDir paths.themesDir))) else ((getModuleConfig (paths.userFile host user)).theme.themes))
+      (getThemeNames host user)
       (file: let theme-name = builtins.toString (lib.take 1 (lib.splitString "." file)); in {
       name = "theme-${theme-name}";
       value = {
