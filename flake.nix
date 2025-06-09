@@ -77,7 +77,7 @@
                 name = user;
                 value = {
                   isNormalUser = true;
-                  extraGroups = (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups;
+                  extraGroups = libx.getUserGroups host user;
                   initialPassword = user;
                 };
               })

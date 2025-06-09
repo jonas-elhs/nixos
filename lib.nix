@@ -21,6 +21,7 @@ in rec {
       )
     )
   );
+  getUserGroups = (host: user: (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups);
 
   # Read Hosts and Users
   _getUsersFromHost = (host: lib.flatten
