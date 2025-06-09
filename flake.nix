@@ -44,7 +44,7 @@
       scriptsDir =               ./modules/scripts;
       scriptFile = script:       scriptsDir + /${script};
 
-      packagesDir =              ./modules/packages;
+      packagesDir =              ./packages;
       packagesFile = package:     packagesDir + /${package};
 
       themesDir =                ./modules/themes;
@@ -54,15 +54,12 @@
     # Lib
     lib = nixpkgs.lib;
     libx = (import ./lib.nix) { inherit hosts paths nixpkgs; };
-
     hosts = libx.getHosts;
-    scripts = libx.getScripts;
-    packages = libx.getPackages;
   in {
 
     nixosConfigurations = libx.forEachHost (host:
       nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs host; pckgsx = packages; };
+        specialArgs = { inherit inputs host; };
         modules = lib.flatten [
 
           (paths.hostFile host)
@@ -95,7 +92,12 @@
             networking.hostName = host;
 
             # Scripts
-            environment.systemPackages = (scripts hosts.${host}.system);
+            environment.systemPackages = (libx.getScripts (libx.getSystem host));
+
+            # Packages
+            nixpkgs.overlays = [
+              (final: prev: libx.getPackages (libx.getSystem host))
+            ];
 
             # Caches
             nix.settings = {
@@ -119,7 +121,7 @@
     homeConfigurations = libx.forEachHome (host: user:
       home-manager.lib.homeManagerConfiguration {
         pkgs = libx.getSystemPkgs host;
-        extraSpecialArgs = { inherit inputs; pckgsx = packages; };
+        extraSpecialArgs = { inherit inputs; };
         modules = lib.flatten [
 
           (paths.userFile host user)
@@ -137,6 +139,11 @@
             home.homeDirectory = "/home/${config.home.username}";
             programs.home-manager.enable = true;
             home.stateVersion = (libx.getModuleConfig (paths.hostFile host)).system.stateVersion;
+
+            # Packages
+            nixpkgs.overlays = [
+              (final: prev: libx.getPackages (libx.getSystem host))
+            ];
           })
 
         ];

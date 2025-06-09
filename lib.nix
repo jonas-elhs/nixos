@@ -2,7 +2,8 @@
   lib = nixpkgs.lib;
 in rec {
   # Utils
-  getSystemPkgs = (host: nixpkgs.legacyPackages.${hosts.${host}.system});
+  getSystem = (host: hosts.${host}.system);
+  getSystemPkgs = (host: nixpkgs.legacyPackages.${getSystem host});
   getDirNames = (dir: builtins.attrNames (builtins.readDir dir));
   getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; libx = null; });
   isHomeManagerEnabled = (host: (getModuleConfig (paths.hostFile host)).home-manager.enable == true);
@@ -66,9 +67,11 @@ in rec {
   );
 
   # Packages
-  getPackages = (system: lib.forEach
-    (getDirNames paths.packagesDir)
-    (package: (import (paths.packagesFile package)))
+  getPackages = (system: builtins.listToAttrs
+    (lib.forEach
+      (getDirNames paths.packagesDir)
+      (package: { name = package; value = (import (paths.packagesFile package)); })
+    )
   );
 
   # Themes
