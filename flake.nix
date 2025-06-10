@@ -53,7 +53,7 @@
 
     # Lib
     lib = nixpkgs.lib;
-    libx = (import ./lib.nix) { inherit hosts paths nixpkgs; };
+    libx = (import ./lib) { inherit hosts paths nixpkgs; };
     hosts = libx.getHosts;
   in {
 

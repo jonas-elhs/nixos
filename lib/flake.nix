@@ -1,42 +1,20 @@
-{ hosts, paths, nixpkgs, ... }: let
+{ utils, hosts, paths, nixpkgs, ... }: let
   lib = nixpkgs.lib;
 in rec {
-  # Utils
-  getPkgs = (system: nixpkgs.legacyPackages.${system});
-  getSystem = (host: hosts.${host}.system);
-  getSystemPkgs = (host: getPkgs (getSystem host));
-  getDirNames = (dir: builtins.filter
-    (file: !(lib.hasPrefix "_" file) && !(lib.hasPrefix "." file))
-    (builtins.attrNames (builtins.readDir dir))
-  );
-  getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; libx = null; });
-  isHomeManagerEnabled = (host: (getModuleConfig (paths.hostFile host)).home-manager.enable == true);
-  listPaths = (dir:
-    lib.flatten (
-      lib.forEach
-      (getDirNames dir)
-      (name:
-        if lib.hasSuffix ".nix" name then /${dir}/${name}
-        else (listPaths /${dir}/${name})
-      )
-    )
-  );
-  getUserGroups = (host: user: (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups);
-
   # Read Hosts and Users
   _getUsersFromHost = (host: lib.flatten
     (lib.forEach
-      (getDirNames (paths.usersDir host))
+      (utils.getDirNames (paths.usersDir host))
       (userFile: lib.take 1 (lib.splitString "." userFile))
     )
   );
   getHosts = builtins.listToAttrs (lib.forEach
-    (getDirNames paths.hostsDir)
+    (utils.getDirNames paths.hostsDir)
     (host: {
       name = host;
       value = {
         users = _getUsersFromHost host;
-        system = (getModuleConfig (paths.hostFile host)).system.architecture;
+        system = (utils.getModuleConfig (paths.hostFile host)).system.architecture;
       };
     })
   );
@@ -58,34 +36,34 @@ in rec {
     builtins.listToAttrs (
       lib.flatten (lib.mapAttrsToList
         (_forEachUserInHost)
-        (lib.filterAttrs (name: value: isHomeManagerEnabled name) (forEachHost f))
+        (lib.filterAttrs (name: value: utils.isHomeManagerEnabled name) (forEachHost f))
       )
     )
   );
 
   # Scripts
   getScripts = (system: lib.forEach
-    (getDirNames paths.scriptsDir)
-    (script: (import (paths.scriptFile script) { pkgs = getPkgs system; }))
+    (utils.getDirNames paths.scriptsDir)
+    (script: (import (paths.scriptFile script) { pkgs = utils.getPkgs system; }))
   );
 
   # Packages
   getPackages = (system: builtins.listToAttrs
     (lib.forEach
-      (getDirNames paths.packagesDir)
+      (utils.getDirNames paths.packagesDir)
       (package: {
         name = (lib.elemAt (lib.splitString "." package) 0);
-        value = ((getPkgs system).callPackage (paths.packagesFile package) { });
+        value = ((utils.getPkgs system).callPackage (paths.packagesFile package) { });
       })
     )
   );
 
   # Themes
   _useAllThemes = (host: user:
-    ((getModuleConfig (paths.userFile host user)).theme.themes) == "all"
+    ((utils.getModuleConfig (paths.userFile host user)).theme.themes) == "all"
   );
   _getAllThemes = (lib.remove "default.nix" (builtins.attrNames (builtins.readDir paths.themesDir)));
-  _getSpecifiedThemes = (host: user: ((getModuleConfig (paths.userFile host user)).theme.themes));
+  _getSpecifiedThemes = (host: user: ((utils.getModuleConfig (paths.userFile host user)).theme.themes));
   _getThemeNames = (host: user:
     if (_useAllThemes host user) then _getAllThemes
     else _getSpecifiedThemes host user
