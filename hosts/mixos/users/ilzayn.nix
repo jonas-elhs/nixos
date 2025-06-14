@@ -41,12 +41,13 @@
   hyprland = {
     enable = true;
     persistentWorkspaces = 5;
+    vertical = true;
   };
   hyprlock.enable = true;
   hypridle.enable = true;
   hyprpaper = {
     enable = true;
-    wallpaper = "~/wallpapers/moon.png";
+    wallpaper = "/home/ilzayn/wallpapers/moon.png";
   };
   waybar = {
     enable = true;

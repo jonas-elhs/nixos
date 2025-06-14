@@ -10,6 +10,7 @@ in {
       default = "default";
       description = "The style of Hyprland";
     };
+    vertical = lib.mkEnableOption "Vertical Workspaces";
     persistentWorkspaces = lib.mkOption {
       type = lib.types.int;
       default = 0;
@@ -69,7 +70,7 @@ in {
           general = {
             border_size = layout.border.width;
 
-            gaps_in = builtins.div (lib.toInt layout.gap.size) 2;
+            gaps_in = (lib.toInt layout.gap.size) / 2;
             gaps_out = layout.gap.size;
 
             "col.active_border" = active;
@@ -112,7 +113,7 @@ in {
             enabled = true;
 
             animation = [
-              "workspaces, 1, 5, default, slidevert"
+              "workspaces, 1, 5, default, ${if cfg.vertical == false then "slide" else "slidevert" }"
               "border, 1, 2, linear"
             ];
           };
