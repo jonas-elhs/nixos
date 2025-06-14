@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, libx, ... }: let
   cfg = config.hyprland;
   colors = config.theme.colors;
   layout = config.theme.layout;
@@ -70,7 +70,7 @@ in {
           general = {
             border_size = layout.border.width;
 
-            gaps_in = (lib.toInt layout.gap.size) / 2;
+            gaps_in = libx.stringDivide layout.gap.size 2;
             gaps_out = layout.gap.size;
 
             "col.active_border" = active;
@@ -84,8 +84,8 @@ in {
             rounding_power = 2.0;
 
             layerrule = [
-              "blur, logout_dialog"
-              "ignorezero, logout_dialog"
+              "blur, waybar"
+              "ignorezero, waybar"
 
               "blur, walker"
               "ignorealpha 0.4, walker"
