@@ -65,7 +65,7 @@ Notes:
 
     nixosConfigurations = libx.forEachHost (host:
       nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs host; };
+        specialArgs = { inherit inputs host libx; };
         modules = lib.flatten [
 
           (paths.hostFile host)
@@ -125,7 +125,7 @@ Notes:
     homeConfigurations = libx.forEachHome (host: user:
       home-manager.lib.homeManagerConfiguration {
         pkgs = libx.getSystemPkgs host;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs host user libx; };
         modules = lib.flatten [
 
           (paths.userFile host user)
