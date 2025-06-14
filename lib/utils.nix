@@ -28,4 +28,6 @@ in rec {
   );
 
   getUserGroups = (host: user: (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups);
+
+  stringDivide = (string_dividend: int_divisor: (toString ((lib.toInt string_dividend) / int_divisor)));
 }
