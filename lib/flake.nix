@@ -60,7 +60,7 @@ in rec {
 
   # Themes
   _useAllThemes = (host: user:
-    ((utils.getModuleConfig (paths.userFile host user)).theme.themes) == "all"
+    ((utils.getModuleConfig (paths.userFile host user)).theme.color.themes) == "all"
   );
   _getAllThemes = (lib.remove "default.nix" (builtins.attrNames (builtins.readDir paths.themesDir)));
   _getSpecifiedThemes = (host: user: ((utils.getModuleConfig (paths.userFile host user)).theme.themes));
