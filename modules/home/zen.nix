@@ -235,7 +235,7 @@ in {
 
               #zen-appcontent-navbar-wrapper,
               #zen-sidebar-top-buttons,
-              #zen-sidebar-bottom-buttons,
+              #zen-sidebar-foot-buttons,
               #identity-box,
               #tabbrowser-arrowscrollbox-periphery,
               #remote-control-box,
