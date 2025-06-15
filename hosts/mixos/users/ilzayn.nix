@@ -6,8 +6,10 @@
   ];
 
   theme = {
-    name = "nordic";
-    themes = "all";
+    color = {
+      name = "nordic";
+      themes = "all";
+    };
     layout = {
       border = {
         width = "2";

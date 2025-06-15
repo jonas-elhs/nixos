@@ -2,22 +2,21 @@
   cfg = config.theme;
 in {
   options.theme = {
-    name = lib.mkOption {
+    color.name = lib.mkOption {
       type = lib.types.str;
       default = "nordic";
       description = "The name of the theme";
+    };
+    color.themes = lib.mkOption {
+      type = lib.types.either (lib.types.enum [ "all" ]) (lib.types.listOf lib.types.str);
+      default = "all";
+      description = "All the themes to build";
     };
 
     colors = lib.mkOption {
       type = lib.types.attrs;
       default = {};
       description = "The colors of the theme";
-    };
-
-    themes = lib.mkOption {
-      type = lib.types.either (lib.types.enum [ "all" ]) (lib.types.listOf lib.types.str);
-      default = "all";
-      description = "All the themes to build";
     };
 
     layout = lib.mkOption {
@@ -109,6 +108,6 @@ in {
   };
 
   config = {
-    theme.colors = import ../themes/${config.theme.name}.nix;
+    theme.colors = import ../themes/${config.theme.color.name}.nix;
   };
 }
