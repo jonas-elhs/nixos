@@ -55,7 +55,7 @@ in {
           width = 300;
           height = 500;
 
-          margin = 10;
+          margin = layout.gap.inner;
           padding = 5;
 
           icons = 1;
