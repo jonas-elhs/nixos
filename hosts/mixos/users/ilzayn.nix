@@ -45,7 +45,10 @@
     persistentWorkspaces = 5;
     vertical = true;
   };
-  hyprlock.enable = true;
+  hyprlock = {
+    enable = true;
+    dm = true;
+  };
   hypridle.enable = true;
   hyprpaper = {
     enable = true;

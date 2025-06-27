@@ -24,21 +24,18 @@
       }
     ];
   };
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  nixpkgs.config.allowUnfree = true;
-
-  # TEMPORARY --- will move to nixos-modules
-  services.xserver.enable = true;
-  services.displayManager.sddm = {
-    enable = true;
-# Core Dumping
-#    wayland.enable = true;
-    package = pkgs.kdePackages.sddm;
-    theme = "/usr/share/sddm/themes/sddm-ilzayn-theme";
+  display-manager = {
+    # sddm.enable = true;
+    autologin = {
+      enable = true;
+      user = "ilzayn";
+      command = "Hyprland";
+    };
   };
-  # END TEMPORARY
+
+  nixpkgs.config.allowUnfree = true;
 
   # TEMPORARY --- will move to nixos-modules
   networking.wireless.enable = true;

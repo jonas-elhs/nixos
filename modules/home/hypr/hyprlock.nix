@@ -10,6 +10,7 @@ in {
       default = "default";
       description = "The style of Hyprlock";
     };
+    dm = lib.mkEnableOption "Hyprlock As The Display Manager";
   };
 
   config = lib.mkIf cfg.enable {
@@ -89,5 +90,7 @@ in {
         };
       };
     }.${cfg.style};
+
+    wayland.windowManager.hyprland.settings.exec-once = if cfg.dm == true then [ "hyprlock" ] else [];
   };
 }
