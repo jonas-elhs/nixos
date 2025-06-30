@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, libx, ... }: let
   cfg = config.waybar;
   colors = config.theme.colors;
   layout = config.theme.layout;
@@ -314,9 +314,8 @@ in {
           bar = {
             layer = "top";
             position = "left";
-            margin = "20 0 20 20";
+            margin = "${libx.stringDivide layout.gap.size 2} 0 ${libx.stringDivide layout.gap.size 2} ${layout.gap.size}";
             exclusive = true;
-            width = 45;
 
             modules-left = [
               "group/apps"
@@ -336,7 +335,7 @@ in {
               modules = [ "custom/launcher" "custom/terminal" "custom/browser" "custom/files" "custom/mail" ];
               drawer = {
                 transition-duration = 300;
-                children-class = "app-icon";
+                children-class = "bottom-drawer-sub-icon";
                 transition-left-to-right = true;
               };
             };
@@ -466,7 +465,7 @@ in {
               modules = [ "custom/shutdown" "custom/suspend" "custom/hibernate" "custom/logout" "custom/lock" "custom/reboot" ];
               drawer = {
                 transition-duration = 300;
-                children-class = "power-icon";
+                children-class = "top-drawer-sub-icon";
                 transition-left-to-right = false;
               };
             };
@@ -509,26 +508,23 @@ in {
             font-size: ${text-size}px;
             min-height: 0;
             background: transparent;
-            border-style: none;
+            border: none;
             color: ${text};
           }
 
-          tooltip {
-            background: ${background};
-            border: ${layout.border.width}px solid ${accent};
-          }
-
+          /* Visual Groups */
           #apps,
           #information,
           #clock,
           #workspaces,
           #hardware,
-          #power {
-            border-radius: ${layout.border.radius.size}px;
-            background: alpha(${background}, 0.9);
-            padding: 10px 0px;
-            margin: ${layout.gap.size}px 0px;
+          #power,
+          tooltip label {
+            background: alpha(${background}, ${toString layout.background.opacity});
+            padding: ${layout.gap.inner}px;
+            margin: ${libx.stringDivide layout.gap.size 2}px 0px;
             border: ${layout.border.width}px solid ${inactive};
+            border-radius: ${layout.border.radius.size}px;
             transition: border 0.2s ease;
           }
           #apps:hover,
@@ -540,41 +536,46 @@ in {
             border: ${layout.border.width}px solid ${accent};
           }
 
-          #apps {
-            margin-top: 0px;
-            padding: 10px 0px;
-          }
-          .app-icon label {
-            font-size: ${sub-size}px;
-            margin: 20px 0px 0px 0px;
+          /* Tooltips Border */
+          tooltip label {
+            border: ${layout.border.width}px solid ${accent};
           }
 
-          #power {
-            margin-bottom: 0px;
-            padding: 10px 0px;
-          }
-          .power-icon label {
+          /* Drawers */
+          .bottom-drawer-sub-icon label {
             font-size: ${sub-size}px;
-            margin: 0px 0px 20px 0px;
+            margin: ${layout.gap.inner}px 0px 0px 0px;
+          }
+          .top-drawer-sub-icon label {
+            font-size: ${sub-size}px;
+            margin: 0px 0px ${layout.gap.inner}px 0px;
           }
 
+          /* Groups */
+          #hardware,
+          #information {
+            padding: ${libx.stringDivide layout.gap.inner 2}px 0px;
+          }
           #hardware label,
           #information label {
-            margin: 5px 0px;
+            margin: ${libx.stringDivide layout.gap.inner 2}px 0px;
           }
 
+          /* Workspaces */
+          #workspaces {
+            padding: ${libx.stringDivide layout.gap.inner 2}px ${layout.gap.inner}px;
+          }
           #workspaces button {
             background: ${text};
             padding: 0px 0px;
-            margin: 5px 13px;
+            margin: ${libx.stringDivide layout.gap.inner 2}px 3px;
             transition: padding 0.2s ease;
             border-radius: 10px;
-            border-style: none;
+            border: none;
           }
           #workspaces button:hover {
             background: ${text};
-            border-color: rgba(0, 0, 0, 0);
-            border-style: none;
+            border: none;
             box-shadow: none;
           }
           #workspaces button.active {
