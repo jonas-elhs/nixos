@@ -47,12 +47,12 @@
   };
   hyprlock = {
     enable = true;
-    dm = true;
+    #dm = true;
   };
   hypridle.enable = true;
   hyprpaper = {
     enable = true;
-    wallpaper = "/home/ilzayn/wallpapers/moon.png";
+    wallpaper = "/home/ilzayn/wallpapers/cloud.jpg";
   };
   waybar = {
     enable = true;
@@ -62,7 +62,11 @@
   kitty.enable = true;
   starship.enable = true;
   fish.enable = true;
-  git.enable = true;
+  git = {
+    enable = true;
+    name = "jonas-elhs";
+    email = "jonas.elhs@outlook.com";
+  };
   fastfetch.enable = true;
   walker.enable = true;
   neovim.enable = true;
