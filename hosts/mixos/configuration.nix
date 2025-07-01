@@ -8,6 +8,7 @@
     alsa.enable = true;
   };
   home-manager.enable = true;
+  config-root = "/home/ilzayn/nixos";
 
   boot-loader = {
     systemd-boot.enable = true;
