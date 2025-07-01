@@ -42,9 +42,9 @@ in rec {
   );
 
   # Scripts
-  getScripts = (system: lib.forEach
+  getScripts = (system: config: lib.forEach
     (utils.getDirNames paths.scriptsDir)
-    (script: (import (paths.scriptFile script) { pkgs = utils.getPkgs system; }))
+    (script: (import (paths.scriptFile script) { pkgs = utils.getPkgs system; inherit config; }))
   );
 
   # Packages

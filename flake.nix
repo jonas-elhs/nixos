@@ -71,7 +71,7 @@ Notes:
           (paths.hostFile host)
           (libx.listPaths paths.nixosModulesDir)
 
-          ({ lib, ... }: {
+          ({ lib, config, ... }: {
             # Hardware Configuration
             imports = [
               (paths.hardwareFile host)
@@ -96,7 +96,7 @@ Notes:
             nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
             # Scripts
-            environment.systemPackages = (libx.getScripts (libx.getSystem host));
+            environment.systemPackages = (libx.getScripts (libx.getSystem host) config);
 
             # Packages
             nixpkgs.overlays = [
