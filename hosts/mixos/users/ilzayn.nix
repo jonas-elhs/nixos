@@ -47,7 +47,7 @@
   };
   hyprlock = {
     enable = true;
-    #dm = true;
+    dm = true;
   };
   hypridle.enable = true;
   hyprpaper = {
