@@ -554,7 +554,7 @@ in {
           /* Groups */
           #hardware,
           #information {
-            padding: ${libx.stringDivide layout.gap.inner 2}px 0px;
+            padding: ${libx.stringDivide layout.gap.inner 2}px ${layout.gap.inner}px;
           }
           #hardware label,
           #information label {
