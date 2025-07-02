@@ -561,6 +561,11 @@ in {
             margin: ${libx.stringDivide layout.gap.inner 2}px 0px;
           }
 
+          /* None Padded Groups */
+          #hardware {
+            padding: ${libx.stringDivide layout.gap.inner 2}px 0px;
+          }
+
           /* Workspaces */
           #workspaces {
             padding: ${libx.stringDivide layout.gap.inner 2}px ${layout.gap.inner}px;
