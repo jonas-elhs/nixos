@@ -39,7 +39,7 @@ in {
           };
 
           background = {
-            path = "~/wallpapers/moon.png";
+            path = "~/.wall";
             blur_size = layout.blur.size;
             blur_passes = layout.blur.passes;
             vibrancy_darkness = 0;

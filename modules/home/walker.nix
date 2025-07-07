@@ -42,8 +42,9 @@ in {
           };
 
           list = {
-            show_initial_entries = false;
-            max_entries = 10;
+            show_initial_entries = true;
+              #max_entries = 10;
+            visibility_threshold = 10;
             placeholder = "";
           };
 
@@ -71,7 +72,7 @@ in {
             {
               name = "wallpapers";
               src_once = "ls ~/wallpapers/ | sed 's/.png//g'";
-              cmd = "hyprctl hyprpaper reload ',~/wallpapers/%RESULT%.png'";
+              cmd = "ln -sf ~/wallpapers/%RESULT%.png ~/.wall && hyprctl hyprpaper reload ',~/.wall'";
             }
           ];
         };

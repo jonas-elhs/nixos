@@ -52,7 +52,7 @@
   hypridle.enable = true;
   hyprpaper = {
     enable = true;
-    wallpaper = "/home/ilzayn/wallpapers/cloud.jpg";
+    wallpaper = "/home/ilzayn/wallpapers/moonlight.png";
   };
   waybar = {
     enable = true;
