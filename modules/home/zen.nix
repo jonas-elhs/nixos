@@ -146,7 +146,7 @@ in {
               }
 
               /* Collapsed Mode */
-              #main-window:not([zen-sidebar-expanded]) {
+              #main-window:not([zen-sidebar-expanded]):not(zen-single-toolbar) {
                 #TabsToolbar {
                   height: 9999px !important;
                 }
@@ -184,6 +184,13 @@ in {
 
                 #zen-appcontent-wrapper {
                   margin-left: ${layout.gap.inner}px !important;
+                }
+              }
+
+              /* URL Bar Mode */
+              #main-window[zen-sidebar-expanded=true]:not(zen-single-toolbar) {
+                #zen-appcontent-navbar-container {
+                  display: block;
                 }
               }
 
