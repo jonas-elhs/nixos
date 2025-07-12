@@ -72,7 +72,7 @@ in {
             {
               name = "wallpapers";
               src_once = "ls ~/wallpapers/ | sed 's/.png//g'";
-              cmd = "ln -sf ~/wallpapers/%RESULT%.png ~/.wall && hyprctl hyprpaper reload ',~/.wall'";
+              cmd = "ln -sf ~/wallpapers/%RESULT%.png ~/.wall && wall ~/.wall";
             }
           ];
         };

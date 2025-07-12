@@ -10,26 +10,32 @@ in {
       default = "";
       description = "The path to the wallpaper for all monitors.";
     };
-    wallpapers = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
-      default = "";
-      description = "The path to the wallpaper for multiple monitors.";
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ hyprpaper ];
     services.hyprpaper = {
       enable = true;
       
       settings = {
-        preload = if cfg.wallpaper != ""
-                  then cfg.wallpaper
-                  else builtins.attrValues cfg.wallpapers;
-        wallpaper = if cfg.wallpaper != ""
-                    then ", ${cfg.wallpaper}"
-                    else builtins.mapAttrs (monitor: path: "${monitor}, ${path}") cfg.wallpapers;
+        preload = cfg.wallpaper;
+        wallpaper = ", ${cfg.wallpaper}"; 
       };
     };
+
+    home.packages = with pkgs; [
+      hyprpaper
+
+      (writeShellApplication rec {
+        name = "wall";
+        text = ''
+          if [[ $# -ne 1 ]]; then
+            echo "Usage: ${name} <wallpaper path>"
+            exit 1
+          fi
+
+          hyprctl hyprpaper reload ",$1"
+        '';
+      })
+    ];
   };
 }

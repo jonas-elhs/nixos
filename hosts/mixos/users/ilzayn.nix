@@ -45,31 +45,47 @@
     persistentWorkspaces = 5;
     vertical = true;
   };
+
   hyprlock = {
     enable = true;
     dm = true;
   };
+
   hypridle.enable = true;
+
+  swww.enable = true;
+
   hyprpaper = {
-    enable = true;
-    wallpaper = "/home/ilzayn/wallpapers/moonlight.png";
+    enable = false;
+    wallpaper = "/home/ilzayn/.wall";
+    #wallpaper = "/home/ilzayn/wallpapers/moonlight.png";
   };
+
   waybar = {
     enable = true;
     gpu_hwmon = 5;
     style = "vertical";
   };
+
   kitty.enable = true;
+
   starship.enable = true;
+
   fish.enable = true;
+
   git = {
     enable = true;
     name = "jonas-elhs";
     email = "jonas.elhs@outlook.com";
   };
+
   fastfetch.enable = true;
+
   walker.enable = true;
+
   neovim.enable = true;
+
   mako.enable = true;
+
   zen.enable = true;
 }
