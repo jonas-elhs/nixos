@@ -66,13 +66,14 @@ in {
           plugins = [
             {
               name = "themes";
-              src_once = "list-themes";
-              cmd = "switch-theme %RESULT%";
+              src_once = "list-themes | sed 's/-/ /g' | sed 's/\\b./\\u&/g'";
+              cmd = "switch-theme $(echo %RESULT% | sed 's/ /-/g' | sed 's/\\b./\\l&/g')";
             }
             {
               name = "wallpapers";
-              src_once = "ls ~/wallpapers/ | sed 's/.png//g'";
-              cmd = "ln -sf ~/wallpapers/%RESULT%.png ~/.wall && wall ~/.wall";
+              src_once = "walker-list-wallpapers";
+              switcher_only = true;
+              parser = "kv";
             }
           ];
         };
