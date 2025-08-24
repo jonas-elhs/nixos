@@ -23,7 +23,7 @@ in {
       in {
         settings = {
           sort = "-time";
-      
+
           actions = 1;
           markup = 1;
           format = "<span font='${layout.font.size}' weight='bold'>%s</span>\\n%b";
