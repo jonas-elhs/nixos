@@ -39,7 +39,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # TEMPORARY --- will move to nixos-modules
-  networking.wireless.enable = true;
+  # networking.wireless.enable = true;
   # END TEMPORARY
 
   # TEMPORARY --- will move to nixos-modules
@@ -67,8 +67,6 @@
 #    xfce.thunar
     kdePackages.dolphin
 #    pcmanfm
-
-    yazi
     # END FILES
 
     (python3.withPackages (python-pkgs: with python-pkgs; [

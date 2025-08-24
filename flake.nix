@@ -17,7 +17,7 @@ Notes:
     };
 
     walker = {
-      url = "github:abenz1267/walker";
+      url = "github:abenz1267/walker?ref=0.13.26";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
