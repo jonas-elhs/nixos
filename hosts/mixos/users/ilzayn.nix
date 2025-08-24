@@ -40,6 +40,15 @@
     };
   };
 
+  programs.quickshell = {
+    enable = true;
+    activeConfig = "meshell";
+    configs = {
+      "meshell" = "/home/ilzayn/meshell";
+    };
+    systemd.enable = true;
+  };
+
   hyprland = {
     enable = true;
     persistentWorkspaces = 5;

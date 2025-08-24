@@ -52,8 +52,6 @@ in {
 
           # ---------- AUTOSTART ---------- #
           exec-once = [
-            "waybar"
-
             "wl-paste --type text --watch cliphist store"
             "wl-paste --type image --watch cliphist store"
           ];
@@ -63,7 +61,7 @@ in {
 
           # ---------- LAYOUTS ----------- #
           master = {
-            mfact = 0.6;
+            mfact = 0.65;
           };
 
           # ---------- LOOK AND FEEL ---------- #
@@ -92,6 +90,9 @@ in {
 
               "blur, notifications"
               "ignorezero, notifications"
+
+              "blur, quickshell"
+              "ignorezero, quickshell"
             ];
 
             shadow = {
@@ -133,6 +134,9 @@ in {
           "$prefix" = "SUPER";
 
           bind = [
+            "$prefix, p, global, meshell:powerMenu"
+            "$prefix, s, global, meshell:bar"
+
             # General
             "$prefix, Return, exec, uwsm app -- $terminal"
             "$prefix, B, exec, uwsm app -- $browser"
@@ -154,7 +158,7 @@ in {
             "$prefix SHIFT, S, exec, screenshot"
 
             # Layouts
-            "$prefix, M, layoutmsg, swapwithmaster master"
+            "$prefix, M, layoutmsg, swapwithmaster"
 
             # Move Window Focus
             "$prefix, H, movefocus, l"
