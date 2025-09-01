@@ -5,6 +5,11 @@
     maple-nerd-font-propo
   ];
 
+  home.packages = with pkgs; [
+    krita
+    hyprpicker
+  ];
+
   theme = {
     color = {
       name = "nordic";
@@ -43,11 +48,9 @@
   programs.quickshell = {
     enable = true;
     activeConfig = "meshell";
-    configs = {
-      "meshell" = "/home/ilzayn/meshell";
-    };
     systemd.enable = true;
   };
+  home.file.".config/quickshell/meshell".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/meshell;
 
   hyprland = {
     enable = true;
