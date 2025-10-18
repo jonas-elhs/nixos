@@ -12,7 +12,7 @@ in rec {
     (builtins.attrNames (builtins.readDir dir))
   );
 
-  getModuleConfig = (modulePath: (import modulePath) { config = null; lib = null; pkgs = null; libx = null; });
+  getModuleConfig = (modulePath: (import modulePath) { inputs = null; config = null; lib = null; pkgs = null; libx = null; });
 
   isHomeManagerEnabled = (host: (getModuleConfig (paths.hostFile host)).home-manager.enable == true);
 
@@ -27,7 +27,7 @@ in rec {
     )
   );
 
-  getUserGroups = (host: user: (import (paths.userFile host user) { config = null; pkgs = null; }).home.groups);
+  getUserGroups = (host: user: (getModuleConfig (paths.userFile host user)).home.groups);
 
   stringDivide = (string_dividend: int_divisor: (toString ((lib.toInt string_dividend) / int_divisor)));
 }
