@@ -13,7 +13,7 @@ in {
       language = "en_US";
       sync = {
         usernameFile = "/home/ilzayn/nixos/secrets/anki-username.txt";
-        passwordFile = "/home/ilzayn/nixos/secrets/anki-password.txt";
+        keyFile = "/home/ilzayn/nixos/secrets/anki-sync-key.txt";
       };
     };
   };
