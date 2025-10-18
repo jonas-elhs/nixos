@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ inputs, config, pkgs, ... }: {
   home.groups = [ "wheel" "input" ];
   home.fonts = with pkgs; [
     maple-nerd-font-mono
@@ -8,6 +8,15 @@
   home.packages = with pkgs; [
     krita
     hyprpicker
+    material-symbols
+
+    rustc
+    cargo
+    gcc
+    gnumake
+    cmake
+
+    inputs.meshell.packages.x86_64-linux.cli
   ];
 
   theme = {
@@ -58,7 +67,7 @@
     vertical = true;
   };
   hyprlock = {
-    enable = true;
+    enable = false;
     dm = true;
   };
   hyprpaper = {
@@ -77,15 +86,16 @@
     email = "jonas.elhs@outlook.com";
   };
 
-  hypridle.enable = true;
-  swww.enable = true;
+  hypridle = {
+    enable = true;
+    lockCommand = "meshell lock";
+  };
   kitty.enable = true;
   starship.enable = true;
   fish.enable = true;
   fastfetch.enable = true;
   walker.enable = true;
   neovim.enable = true;
-  # mako.enable = true;
   zen.enable = true;
   anki.enable = true;
 }

@@ -5,6 +5,10 @@
 in {
   options.hypridle = {
     enable = lib.mkEnableOption "Hypridle";
+    lockCommand = lib.mkOption {
+      type = lib.types.str;
+      description = "The command to run when the screen should be locked";
+    };
     style = lib.mkOption {
       type = lib.types.str;
       default = "default";
@@ -19,7 +23,7 @@ in {
       default = {
         settings = {
           general = {
-            lock_cmd = "pidof hyprlock || hyprlock";
+            lock_cmd = cfg.lockCommand;
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };

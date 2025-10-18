@@ -52,6 +52,7 @@ in {
 
           # ---------- AUTOSTART ---------- #
           exec-once = [
+            "sleep 1 && meshell lock"
             "wl-paste --type text --watch cliphist store"
             "wl-paste --type image --watch cliphist store"
           ];
@@ -91,8 +92,8 @@ in {
               "blur, notifications"
               "ignorezero, notifications"
 
-              "blur, quickshell"
-              "ignorezero, quickshell"
+              "blur, meshell-shell"
+              "ignorezero, meshell-shell"
             ];
 
             shadow = {
@@ -122,6 +123,7 @@ in {
           misc = {
             disable_hyprland_logo = true;
             disable_splash_rendering = true;
+            session_lock_xray = true;
           };
 
           # ---------- INPUT --------- #
@@ -134,13 +136,15 @@ in {
           "$prefix" = "SUPER";
 
           bind = [
-            "$prefix, p, global, meshell:powerMenu"
+            "$prefix, t, global, meshell:test"
             "$prefix, s, global, meshell:bar"
+            "$prefix, p, global, meshell:powerMenu"
+            "$prefix, c, global, meshell:pickHexColorCopy"
 
             # General
             "$prefix, Return, exec, uwsm app -- $terminal"
             "$prefix, B, exec, uwsm app -- $browser"
-            "$prefix, C, exec, uwsm app -- firefox"
+            "$prefix, Y, exec, uwsm app -- firefox"
             "$prefix, R, exec, $appLauncher"
             "$prefix SHIFT, T, exec, $themeSwitcher"
             "$prefix SHIFT, W, exec, $wallpaperSwitcher"
