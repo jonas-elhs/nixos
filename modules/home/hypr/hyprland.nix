@@ -65,6 +65,15 @@ in {
             mfact = 0.65;
           };
 
+          # ---------- PLUGINS ---------- #
+          plugin = {
+            dynamic-cursors = {
+              enabled = true;
+              mode = "stretch";
+              threshhold = 2;
+            };
+          };
+
           # ---------- LOOK AND FEEL ---------- #
           general = {
             border_size = layout.border.width;

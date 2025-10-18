@@ -61,10 +61,28 @@
   };
   home.file.".config/quickshell/meshell".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/meshell;
 
+  home.pointerCursor = {
+    enable = true;
+
+    # MacOS Cursors
+    # name = "macOS";
+    # package = pkgs.apple-cursor;
+
+    # Phinger Cursors
+    name = "phinger-cursors-dark";
+    package = pkgs.phinger-cursors;
+
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
   hyprland = {
     enable = true;
     persistentWorkspaces = 5;
     vertical = true;
+    plugins = with pkgs.hyprlandPlugins; [ hypr-dynamic-cursors ];
   };
   hyprlock = {
     enable = false;
