@@ -71,6 +71,10 @@ in {
               enabled = true;
               mode = "stretch";
               threshhold = 2;
+
+              shake = {
+                enabled = false;
+              };
             };
           };
 
