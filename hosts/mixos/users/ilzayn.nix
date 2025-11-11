@@ -108,8 +108,9 @@
   starship.enable = true;
   fish.enable = true;
   fastfetch.enable = true;
-  walker.enable = true;
   neovim.enable = true;
   zen.enable = true;
   anki.enable = true;
+
+  programs.fuzzel.enable = true;
 }

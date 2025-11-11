@@ -35,6 +35,10 @@ in {
         dark-background = lib.removePrefix "#" colors.background.dark;
       in {
         settings = {
+          debug = {
+            disable_logs = false;
+          };
+
           # ---------- MONITORS ---------- #
           monitor = [
             "HDMI-A-2, 3840x2160@60, 0x0, 1.5"
@@ -45,7 +49,7 @@ in {
           # ---------- PROGRAMS ---------- #
           "$terminal" = "kitty";
           "$fileManager" = "dolphin";
-          "$appLauncher" = "walker --modules applications";
+          "$appLauncher" = "fuzzel";
           "$themeSwitcher" = "walker --modules themes";
           "$wallpaperSwitcher" = "walker --modules wallpapers";
           "$browser" = "zen-twilight";
