@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, inputs, ... }: let
   cfg = config.hyprland;
 in{
   options.hyprland = {
@@ -9,11 +9,8 @@ in{
     programs.hyprland = {
       enable = true;
       withUWSM = true;
-    };
-
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
   };
 }
