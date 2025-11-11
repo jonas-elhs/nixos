@@ -80,6 +80,9 @@
     enable = true;
     persistentWorkspaces = 5;
     vertical = true;
+    plugins = [
+      inputs.hypr-dynamic-cursors.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
+    ];
   };
   hyprlock = {
     enable = false;
