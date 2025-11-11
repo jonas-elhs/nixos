@@ -17,6 +17,7 @@
     cmake
 
     inputs.meshell.packages.x86_64-linux.cli
+    inputs.mevim.packages.x86_64-linux.nvim
   ];
 
   theme = {
@@ -60,6 +61,7 @@
     systemd.enable = true;
   };
   home.file.".config/quickshell/meshell".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/meshell;
+  home.file.".config/nixCats-nvim".source = config.lib.file.mkOutOfStoreSymlink /home/ilzayn/mevim;
 
   home.pointerCursor = {
     enable = true;
@@ -78,7 +80,6 @@
     enable = true;
     persistentWorkspaces = 5;
     vertical = true;
-    plugins = with pkgs.hyprlandPlugins; [ hypr-dynamic-cursors ];
   };
   hyprlock = {
     enable = false;
@@ -108,7 +109,6 @@
   starship.enable = true;
   fish.enable = true;
   fastfetch.enable = true;
-  neovim.enable = true;
   zen.enable = true;
   anki.enable = true;
 

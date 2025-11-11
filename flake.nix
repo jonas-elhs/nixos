@@ -16,16 +16,8 @@ Notes:
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    walker = {
-      url = "github:abenz1267/walker?ref=0.13.26";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nvf = {
-      url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-addons = {
@@ -37,6 +29,11 @@ Notes:
       url = "github:jonas-elhs/meshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mevim = {
+      url = "github:jonas-elhs/mevim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs: let
@@ -114,12 +111,6 @@ Notes:
                 "root"
                 "@wheel"
               ];
-              substituters = [
-                "https://walker-git.cachix.org"
-              ];
-              trusted-public-keys = [
-                "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
-              ];
             };
           })
 
@@ -136,9 +127,7 @@ Notes:
           (paths.userFile host user)
           (libx.listPaths paths.homeModulesDir)
 
-          inputs.walker.homeManagerModules.default
           inputs.zen-browser.homeModules.twilight
-          inputs.nvf.homeManagerModules.default
 
           ({ config, ... }: {
             # Themes
