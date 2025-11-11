@@ -18,6 +18,11 @@
 
     inputs.meshell.packages.x86_64-linux.cli
     inputs.mevim.packages.x86_64-linux.nvim
+
+    nasm
+    llvmPackages_latest.bintools-unwrapped
+
+    lazygit
   ];
 
   theme = {
