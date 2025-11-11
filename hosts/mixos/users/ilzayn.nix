@@ -115,10 +115,36 @@
   };
   kitty.enable = true;
   starship.enable = true;
-  fish.enable = true;
+  # fish.enable = true;
   fastfetch.enable = true;
   zen.enable = true;
   anki.enable = true;
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+
+    history = {
+      size = 10000;
+    };
+
+    initContent = ''
+      if ! [[ -o login ]]; then
+        eval "$(${pkgs.starship}/bin/starship init zsh)"
+      fi
+
+      ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+      ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+    '';
+
+    plugins = [
+      {
+        name = pkgs.zsh-vi-mode.pname;
+        src = pkgs.zsh-vi-mode.src;
+      }
+    ];
+  };
 
   programs.fuzzel.enable = true;
 }

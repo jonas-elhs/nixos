@@ -15,7 +15,8 @@ in {
   config = lib.mkIf cfg.enable {
     programs.starship = {
       enable = true;
-      enableFishIntegration = true;
+      enableZshIntegration = false;
+      # enableFishIntegration = true;
      } // {
       default = let
         directory = lib.elemAt colors.gradient3 0;

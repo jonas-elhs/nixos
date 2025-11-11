@@ -27,6 +27,9 @@
   };
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  programs.zsh.enable = true;
+  users.users.ilzayn.shell = pkgs.zsh;
+
   display-manager = {
     # sddm.enable = true;
     autologin = {

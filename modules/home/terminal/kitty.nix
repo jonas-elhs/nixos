@@ -18,7 +18,6 @@ in {
     } // {
       default = {
         shellIntegration = {
-          enableFishIntegration = true;
           mode = "no-rc no-cursor";
         };
         font = {
